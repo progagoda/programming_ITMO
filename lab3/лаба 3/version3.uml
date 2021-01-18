@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="666.9927489177489" y="270.0">PlaceAction</node>
+    <node x="347.4999999999999" y="281.0">NoLying</node>
+    <node x="1385.992153679654" y="585.0">Neznayka</node>
+    <node x="1059.3254870129872" y="281.0">PastAction</node>
+    <node x="1470.8254870129872" y="270.0">PhysAction</node>
+    <node x="843.7242965367967" y="225.0">Actors</node>
+    <node x="1173.992153679654" y="629.0">Talks</node>
+    <node x="1268.992153679654" y="281.0">NoGive</node>
+    <node x="768.9921536796538" y="618.0">Shorties</node>
+    <node x="969.9921536796538" y="629.0">Difference</node>
+    <node x="177.4999999999999" y="270.0">GiveName</node>
+    <node x="356.5344155844157" y="585.0">Gear</node>
+    <node x="205.11715367965388" y="0.0">Places</node>
+    <node x="21.5" y="281.0">BrainAction</node>
+    <node x="63.71569264069274" y="541.0">Room</node>
+    <node x="695.189015151515" y="1103.0">Main</node>
+    <node x="568.5344155844157" y="651.0">Prisoners</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Talks" target="Actors">
+      <point x="-64.0" y="-138.0" />
+      <point x="1205.992153679654" y="501.0" />
+      <point x="965.2242965367967" y="501.0" />
+      <point x="40.5" y="83.0" />
+    </edge>
+    <edge source="Gear" target="Actors">
+      <point x="80.0" y="-182.0" />
+      <point x="532.5344155844157" y="481.0" />
+      <point x="884.2242965367967" y="481.0" />
+      <point x="-40.5" y="83.0" />
+    </edge>
+    <edge source="Neznayka" target="Actors">
+      <point x="0.0" y="-182.0" />
+      <point x="1476.492153679654" y="471.0" />
+      <point x="999.9385822510825" y="471.0" />
+      <point x="75.21428571428578" y="83.0" />
+    </edge>
+    <edge source="Gear" target="GiveName">
+      <point x="-80.0" y="-182.0" />
+      <point x="372.5344155844157" y="441.0" />
+      <point x="251.9999999999999" y="441.0" />
+      <point x="0.0" y="38.0" />
+    </edge>
+    <edge source="Gear" target="NoLying">
+      <point x="-16.0" y="-182.0" />
+      <point x="436.5344155844157" y="441.0" />
+      <point x="410.4999999999999" y="441.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="Room" target="Places">
+      <point x="-67.19999999999993" y="-226.0" />
+      <point x="80.5156926406928" y="521.0" />
+      <point x="11.0" y="521.0" />
+      <point x="11.0" y="195.0" />
+      <point x="253.7171536796539" y="195.0" />
+      <point x="-32.39999999999998" y="82.5" />
+    </edge>
+    <edge source="Shorties" target="Actors">
+      <point x="60.33333333333337" y="-149.0" />
+      <point x="919.8254870129872" y="521.0" />
+      <point x="930.510010822511" y="521.0" />
+      <point x="5.785714285714334" y="83.0" />
+    </edge>
+    <edge source="Prisoners" target="Places">
+      <point x="-22.0" y="-116.0" />
+      <point x="634.5344155844157" y="411.0" />
+      <point x="568.6990259740261" y="411.0" />
+      <point x="568.6990259740261" y="205.0" />
+      <point x="350.9171536796539" y="205.0" />
+      <point x="64.80000000000001" y="82.5" />
+    </edge>
+    <edge source="Difference" target="Actors">
+      <point x="0.0" y="-138.0" />
+      <point x="1061.9921536796537" y="511.0" />
+      <point x="953.6528679653682" y="511.0" />
+      <point x="28.928571428571445" y="83.0" />
+    </edge>
+    <edge source="Neznayka" target="PhysAction">
+      <point x="60.33333333333326" y="-182.0" />
+      <point x="0.0" y="38.0" />
+    </edge>
+    <edge source="Main" target="Room">
+      <point x="-50.0" y="-27.0" />
+      <point x="720.189015151515" y="1063.0" />
+      <point x="189.71569264069274" y="1063.0" />
+      <point x="42.0" y="226.0" />
+    </edge>
+    <edge source="Main" target="Talks">
+      <point x="50.0" y="-27.0" />
+      <point x="820.189015151515" y="1063.0" />
+      <point x="1317.992153679654" y="1063.0" />
+      <point x="48.0" y="138.0" />
+    </edge>
+    <edge source="Shorties" target="PlaceAction">
+      <point x="-60.33333333333337" y="-149.0" />
+      <point x="799.1588203463205" y="441.0" />
+      <point x="772.7427489177489" y="441.0" />
+      <point x="35.25" y="38.0" />
+    </edge>
+    <edge source="Main" target="Shorties">
+      <point x="10.0" y="-27.0" />
+      <point x="780.189015151515" y="1023.0" />
+      <point x="904.7421536796538" y="1023.0" />
+      <point x="45.25" y="149.0" />
+    </edge>
+    <edge source="Gear" target="PlaceAction">
+      <point x="16.0" y="-182.0" />
+      <point x="468.5344155844157" y="441.0" />
+      <point x="702.2427489177489" y="441.0" />
+      <point x="-35.25" y="38.0" />
+    </edge>
+    <edge source="Difference" target="PastAction">
+      <point x="61.33333333333326" y="-138.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="Main" target="Difference">
+      <point x="30.0" y="-27.0" />
+      <point x="800.189015151515" y="1043.0" />
+      <point x="1107.9921536796537" y="1043.0" />
+      <point x="46.0" y="138.0" />
+    </edge>
+    <edge source="Gear" target="Places">
+      <point x="-48.0" y="-182.0" />
+      <point x="404.5344155844157" y="431.0" />
+      <point x="336.9999999999999" y="431.0" />
+      <point x="336.9999999999999" y="205.0" />
+      <point x="318.5171536796539" y="205.0" />
+      <point x="32.400000000000034" y="82.5" />
+    </edge>
+    <edge source="Main" target="Neznayka">
+      <point x="70.0" y="-27.0" />
+      <point x="840.189015151515" y="1083.0" />
+      <point x="1521.742153679654" y="1083.0" />
+      <point x="45.25" y="182.0" />
+    </edge>
+    <edge source="Room" target="GiveName">
+      <point x="0.0" y="-226.0" />
+      <point x="147.71569264069274" y="441.0" />
+      <point x="202.3333333333332" y="441.0" />
+      <point x="-49.666666666666686" y="38.0" />
+    </edge>
+    <edge source="Main" target="Prisoners">
+      <point x="-10.0" y="-27.0" />
+      <point x="760.189015151515" y="1023.0" />
+      <point x="700.5344155844157" y="1023.0" />
+      <point x="44.0" y="116.0" />
+    </edge>
+    <edge source="Room" target="Actors">
+      <point x="33.60000000000002" y="-226.0" />
+      <point x="181.31569264069276" y="451.0" />
+      <point x="849.510010822511" y="451.0" />
+      <point x="-75.21428571428567" y="83.0" />
+    </edge>
+    <edge source="Prisoners" target="GiveName">
+      <point x="-66.0" y="-116.0" />
+      <point x="590.5344155844157" y="421.0" />
+      <point x="301.6666666666665" y="421.0" />
+      <point x="49.66666666666663" y="38.0" />
+    </edge>
+    <edge source="Prisoners" target="Actors">
+      <point x="66.0" y="-116.0" />
+      <point x="722.5344155844157" y="501.0" />
+      <point x="907.3671536796538" y="501.0" />
+      <point x="-17.35714285714289" y="83.0" />
+    </edge>
+    <edge source="Talks" target="NoGive">
+      <point x="64.0" y="-138.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="Main" target="Gear">
+      <point x="-30.0" y="-27.0" />
+      <point x="740.189015151515" y="1043.0" />
+      <point x="500.5344155844157" y="1043.0" />
+      <point x="48.0" y="182.0" />
+    </edge>
+    <edge source="GiveName" target="Places">
+      <point x="0.0" y="-38.0" />
+      <point x="251.9999999999999" y="205.0" />
+      <point x="286.1171536796539" y="205.0" />
+      <point x="0.0" y="82.5" />
+    </edge>
+    <edge source="Room" target="BrainAction">
+      <point x="-33.599999999999966" y="-226.0" />
+      <point x="114.11569264069271" y="521.0" />
+      <point x="89.5" y="521.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="Main" target="Places">
+      <point x="-70.0" y="-27.0" />
+      <point x="700.189015151515" y="1083.0" />
+      <point x="0.0" y="1083.0" />
+      <point x="0.0" y="185.0" />
+      <point x="221.31715367965387" y="185.0" />
+      <point x="-64.80000000000001" y="82.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.6000000000000001" x="907.285714285714" y="530.9999999999997" />
+  <SelectedNodes>
+    <node>PlaceAction</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

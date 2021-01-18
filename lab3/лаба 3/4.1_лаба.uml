@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>person</OriginalElement>
+  <nodes>
+    <node x="3019.4905665280667" y="259.5">exceptions.NumException</node>
+    <node x="3017.8416666666667" y="608.0">person.Pipes</node>
+    <node x="1891.5342602217602" y="586.0">person.AnotherShorties</node>
+    <node x="157.5" y="236.5">interfaces.GiveName</node>
+    <node x="1716.5342602217602" y="608.0">person.Talks</node>
+    <node x="2660.4905665280667" y="236.5">interfaces.FunAction</node>
+    <node x="2475.4905665280667" y="247.5">interfaces.BakeAction</node>
+    <node x="612.4236832986833" y="586.0">person.Room</node>
+    <node x="2124.53426022176" y="586.0">person.Neznayka</node>
+    <node x="735.1249999999999" y="236.5">interfaces.BakerAction</node>
+    <node x="10.5" y="247.5">interfaces.NoLying</node>
+    <node x="1993.0342602217602" y="236.5">interfaces.TypicalAction</node>
+    <node x="2690.7916666666665" y="597.0">person.Someone2</node>
+    <node x="84.67377858627879" y="857.5">person.Gear.FishingRod</node>
+    <node x="1099.40284996535" y="608.0">person.Difference</node>
+    <node x="416.4236832986833" y="608.0">person.Prisoners</node>
+    <node x="326.5" y="236.5">interfaces.PlaceAction</node>
+    <node x="1066.0695166320165" y="247.5">interfaces.PastAction</node>
+    <node x="2208.53426022176" y="236.5">interfaces.PhysAction</node>
+    <node x="1441.1175935550937" y="225.0">person.Actors</node>
+    <node x="2454.9905665280667" y="608.0">person.Bake</node>
+    <node x="3183.4905665280667" y="247.5">interfaces.PipesAction</node>
+    <node x="792.4236832986833" y="575.0">person.Shorties</node>
+    <node x="1506.5695166320165" y="597.0">person.Anyone</node>
+    <node x="487.6736832986833" y="0.0">enums.Places</node>
+    <node x="75.29877858627879" y="564.0">person.Gear</node>
+    <node x="2831.4905665280667" y="259.5">exceptions.HistoryExeption</node>
+    <node x="1780.700926888427" y="247.5">interfaces.NoGive</node>
+    <node x="2126.53426022176" y="846.0">person.Neznayka.Hat</node>
+    <node x="1269.7361832986835" y="247.5">interfaces.SewAction</node>
+    <node x="570.9999999999999" y="236.5">interfaces.BrainAction</node>
+    <node x="1596.1175935550937" y="236.5">interfaces.PotatoAction</node>
+    <node x="1303.40284996535" y="597.0">person.Someone</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="person.Prisoners" target="enums.Places">
+      <point x="-66.0" y="-72.0" />
+      <point x="438.4236832986833" y="404.0" />
+      <point x="147.0" y="404.0" />
+      <point x="147.0" y="195.0" />
+      <point x="528.1736832986833" y="195.0" />
+      <point x="-40.5" y="82.5" />
+    </edge>
+    <edge source="person.Pipes" target="person.Actors">
+      <point x="-62.40000000000009" y="-72.0" />
+      <point x="3033.4416666666666" y="414.0" />
+      <point x="1568.3291320166322" y="414.0" />
+      <point x="59.71153846153857" y="49.5" />
+    </edge>
+    <edge source="person.Bake" target="interfaces.BakeAction">
+      <point x="20.5" y="-72.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="interfaces.GiveName" target="enums.Places">
+      <point x="0.0" y="-38.0" />
+      <point x="232.0" y="205.0" />
+      <point x="555.1736832986833" y="205.0" />
+      <point x="-13.5" y="82.5" />
+    </edge>
+    <edge source="person.Someone2" target="exceptions.HistoryExeption">
+      <point x="37.0" y="-83.0" />
+      <point x="2820.2916666666665" y="534.0" />
+      <point x="2873.4905665280667" y="534.0" />
+      <point x="-42.0" y="15.0" />
+    </edge>
+    <edge source="person.Room" target="person.Actors">
+      <point x="64.0" y="-94.0" />
+      <point x="756.4236832986833" y="484.0" />
+      <point x="1469.675285862786" y="484.0" />
+      <point x="-38.94230769230762" y="49.5" />
+    </edge>
+    <edge source="person.Pipes" target="interfaces.PipesAction">
+      <point x="62.40000000000009" y="-72.0" />
+      <point x="3158.241666666667" y="544.0" />
+      <point x="3251.4905665280667" y="544.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="person.Gear" target="interfaces.GiveName">
+      <point x="-12.75" y="-116.0" />
+      <point x="139.0487785862788" y="414.0" />
+      <point x="182.33333333333348" y="414.0" />
+      <point x="-49.66666666666663" y="38.0" />
+    </edge>
+    <edge source="person.Shorties" target="interfaces.PlaceAction">
+      <point x="-64.125" y="-105.0" />
+      <point x="813.7986832986833" y="354.0" />
+      <point x="432.25" y="354.0" />
+      <point x="35.25" y="38.0" />
+    </edge>
+    <edge source="person.Prisoners" target="person.Actors">
+      <point x="66.0" y="-72.0" />
+      <point x="570.4236832986833" y="464.0" />
+      <point x="1459.2906704781703" y="464.0" />
+      <point x="-49.326923076923094" y="49.5" />
+    </edge>
+    <edge source="person.Room" target="interfaces.GiveName">
+      <point x="-64.0" y="-94.0" />
+      <point x="628.4236832986833" y="384.0" />
+      <point x="281.6666666666665" y="384.0" />
+      <point x="49.66666666666663" y="38.0" />
+    </edge>
+    <edge source="person.Gear" target="interfaces.PlaceAction">
+      <point x="12.75" y="-116.0" />
+      <point x="164.5487785862788" y="424.0" />
+      <point x="361.75" y="424.0" />
+      <point x="-35.25" y="38.0" />
+    </edge>
+    <edge source="person.AnotherShorties" target="interfaces.TypicalAction">
+      <point x="71.0" y="-94.0" />
+      <point x="0.0" y="38.0" />
+    </edge>
+    <edge source="person.Pipes" target="exceptions.NumException">
+      <point x="0.0" y="-72.0" />
+      <point x="3095.8416666666667" y="394.0" />
+      <point x="3055.4905665280667" y="394.0" />
+      <point x="-36.0" y="15.0" />
+    </edge>
+    <edge source="person.AnotherShorties" target="person.Actors">
+      <point x="0.0" y="-94.0" />
+      <point x="1998.0342602217602" y="494.0" />
+      <point x="1531.982978170478" y="494.0" />
+      <point x="23.365384615384528" y="49.5" />
+    </edge>
+    <edge source="person.Neznayka.Hat" target="person.Neznayka">
+      <point x="0.0" y="-38.5" />
+      <point x="0.0" y="94.0" />
+    </edge>
+    <edge source="interfaces.BakeAction" target="enums.Places">
+      <point x="0.0" y="-27.0" />
+      <point x="2557.4905665280667" y="205.0" />
+      <point x="609.1736832986833" y="205.0" />
+      <point x="40.5" y="82.5" />
+    </edge>
+    <edge source="person.Someone" target="interfaces.SewAction">
+      <point x="-59.666666666666515" y="-83.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="person.Someone2" target="interfaces.FunAction">
+      <point x="0.0" y="-83.0" />
+      <point x="2783.2916666666665" y="424.0" />
+      <point x="2735.9905665280667" y="424.0" />
+      <point x="0.0" y="38.0" />
+    </edge>
+    <edge source="person.Someone2" target="person.Actors">
+      <point x="-37.0" y="-83.0" />
+      <point x="2746.2916666666665" y="434.0" />
+      <point x="1563.1368243243242" y="434.0" />
+      <point x="54.51923076923072" y="49.5" />
+    </edge>
+    <edge source="person.Neznayka" target="interfaces.PhysAction">
+      <point x="60.0" y="-94.0" />
+      <point x="0.0" y="38.0" />
+    </edge>
+    <edge source="person.Talks" target="person.Actors">
+      <point x="-51.66666666666674" y="-72.0" />
+      <point x="1742.3675935550934" y="524.0" />
+      <point x="1516.406055093555" y="524.0" />
+      <point x="7.7884615384614335" y="49.5" />
+    </edge>
+    <edge source="person.Gear" target="enums.Places">
+      <point x="-63.75" y="-116.0" />
+      <point x="88.04877858627879" y="544.0" />
+      <point x="0.0" y="544.0" />
+      <point x="0.0" y="185.0" />
+      <point x="501.1736832986833" y="185.0" />
+      <point x="-67.5" y="82.5" />
+    </edge>
+    <edge source="person.Anyone" target="interfaces.PotatoAction">
+      <point x="56.0" y="-83.0" />
+      <point x="1646.5695166320165" y="544.0" />
+      <point x="1675.1175935550937" y="544.0" />
+      <point x="0.0" y="38.0" />
+    </edge>
+    <edge source="person.Gear" target="person.Actors">
+      <point x="63.75" y="-116.0" />
+      <point x="215.5487785862788" y="444.0" />
+      <point x="1448.906055093555" y="444.0" />
+      <point x="-59.71153846153857" y="49.5" />
+    </edge>
+    <edge source="person.Gear.FishingRod" target="person.Gear">
+      <point x="-48.0" y="-27.0" />
+      <point x="100.67377858627879" y="821.0" />
+      <point x="94.42377858627879" y="821.0" />
+      <point x="-57.375" y="116.0" />
+    </edge>
+    <edge source="person.Talks" target="interfaces.NoGive">
+      <point x="51.66666666666674" y="-72.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="person.Bake" target="person.Actors">
+      <point x="-20.5" y="-72.0" />
+      <point x="2516.4905665280667" y="454.0" />
+      <point x="1552.752208939709" y="454.0" />
+      <point x="44.13461538461547" y="49.5" />
+    </edge>
+    <edge source="person.Prisoners" target="interfaces.GiveName">
+      <point x="-22.0" y="-72.0" />
+      <point x="482.4236832986833" y="394.0" />
+      <point x="232.0" y="394.0" />
+      <point x="0.0" y="38.0" />
+    </edge>
+    <edge source="person.Anyone" target="person.Actors">
+      <point x="0.0" y="-83.0" />
+      <point x="1590.5695166320165" y="534.0" />
+      <point x="1511.2137474012475" y="534.0" />
+      <point x="2.596153846153811" y="49.5" />
+    </edge>
+    <edge source="person.Room" target="interfaces.BrainAction">
+      <point x="0.0" y="-94.0" />
+      <point x="692.4236832986833" y="364.0" />
+      <point x="638.9999999999999" y="364.0" />
+      <point x="0.0" y="38.0" />
+    </edge>
+    <edge source="person.Bake" target="enums.Places">
+      <point x="61.500000000000114" y="-72.0" />
+      <point x="2598.4905665280667" y="544.0" />
+      <point x="2649.9905665280667" y="544.0" />
+      <point x="2649.9905665280667" y="195.0" />
+      <point x="636.1736832986833" y="195.0" />
+      <point x="67.5" y="82.5" />
+    </edge>
+    <edge source="person.Neznayka" target="person.Actors">
+      <point x="-60.0" y="-94.0" />
+      <point x="2154.53426022176" y="484.0" />
+      <point x="1537.175285862786" y="484.0" />
+      <point x="28.557692307692378" y="49.5" />
+    </edge>
+    <edge source="person.Gear" target="person.Gear.FishingRod">
+      <point x="19.125" y="116.0" />
+      <point x="170.9237785862788" y="821.0" />
+      <point x="164.6737785862788" y="821.0" />
+      <point x="16.0" y="-27.0" />
+    </edge>
+    <edge source="person.Difference" target="interfaces.PastAction">
+      <point x="-61.33333333333326" y="-72.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="person.Room" target="enums.Places">
+      <point x="-32.0" y="-94.0" />
+      <point x="660.4236832986833" y="374.0" />
+      <point x="560.4999999999999" y="374.0" />
+      <point x="560.4999999999999" y="205.0" />
+      <point x="582.1736832986833" y="205.0" />
+      <point x="13.5" y="82.5" />
+    </edge>
+    <edge source="person.Shorties" target="interfaces.BakerAction">
+      <point x="-21.375" y="-105.0" />
+      <point x="856.5486832986833" y="344.0" />
+      <point x="803.1249999999999" y="344.0" />
+      <point x="0.0" y="38.0" />
+    </edge>
+    <edge source="person.Difference" target="person.Actors">
+      <point x="61.333333333333485" y="-72.0" />
+      <point x="1252.7361832986835" y="524.0" />
+      <point x="1490.4445166320165" y="524.0" />
+      <point x="-18.173076923076906" y="49.5" />
+    </edge>
+    <edge source="person.Shorties" target="person.Actors">
+      <point x="21.375" y="-105.0" />
+      <point x="899.2986832986833" y="494.0" />
+      <point x="1474.8675935550937" y="494.0" />
+      <point x="-33.75" y="49.5" />
+    </edge>
+    <edge source="person.Gear" target="interfaces.NoLying">
+      <point x="-38.25" y="-116.0" />
+      <point x="113.54877858627879" y="534.0" />
+      <point x="73.5" y="534.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="person.Someone" target="person.Actors">
+      <point x="0.0" y="-83.0" />
+      <point x="1392.90284996535" y="534.0" />
+      <point x="1495.6368243243242" y="534.0" />
+      <point x="-12.980769230769283" y="49.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.34850299401197604" x="1660.0" y="461.5" />
+  <SelectedNodes>
+    <node>person.Gear.FishingRod</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>public</VISIBILITY>
+</Diagram>
+
