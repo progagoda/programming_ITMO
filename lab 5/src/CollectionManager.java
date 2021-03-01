@@ -7,13 +7,13 @@ public class CollectionManager {
     private PriorityQueue<StudyGroup> students;
     private File jsonCollection;
     private Date initDate;
-    private Gson serializer;
+
     private boolean wasStart;
     protected static HashMap<String, String> help;
 
     {
         wasStart = false;
-        serializer = new Gson();
+
         students = new PriorityQueue<>();
         help = new HashMap<>();
         help.put("info", "Информация о коллекции (тип, дата инициализации, количество элементов и т.д.)");
