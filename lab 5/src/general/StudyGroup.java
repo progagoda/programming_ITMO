@@ -24,5 +24,8 @@ public class StudyGroup {
         this.semesterEnum = semesterEnum;
         this.groupAdmin = groupAdmin;
     }
+    public ZonedDateTime getCreationDate() {
+        return creationDate;
+    }
 
 }
