@@ -14,6 +14,23 @@ public class Person {
         this.hairColor = hairColor;
         this.nationality = nationality;
     }
+
+    /**
+     * Геттер name
+     * @return name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Сеттер name
+     * @param name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         return "general.Person{" +

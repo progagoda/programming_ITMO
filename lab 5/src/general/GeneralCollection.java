@@ -69,11 +69,223 @@ public class GeneralCollection {
     /**
      * Добавляет новый элемент в коллекцию
      * @param key Ключ
+     * @throws IOException
      */
-    public  void add(int key){
-        StudyGroup humanBeing1 = new StudyGroup(scanName(), scanCoordinates(), scanRealHero(), scanHasToothpick(), scanImpactSpeed(), scanWeaponType(), scanMood(), scanCar());
+    public  void add(int key) throws IOException {
+        StudyGroup humanBeing1 = new StudyGroup(scanName(), scanCoordinates(), scanStudentsCount(), scanExpelledStudents(), scanFormOfEducation(), scanSemesterEnum(), scanGroupAdmin());
         getGenCollection().remove(key);
         getGenCollection().put(key, humanBeing1);
+    }
+    /**
+     * Считывает поле name
+     * @return name
+     */
+    public String scanName() {
+        System.out.println("Введите имя:");
+        Scanner in = new Scanner(System.in);
+        String go = in.nextLine();
+        while (go.isEmpty()) {
+            System.out.println("Имя не может быть пустым! Пожалуйста, введите имя:");
+            go = in.nextLine();
+        }
+        return go;
+    }
+    /**
+     * Считывает строку, введенную пользователем
+     * @return строка, введенная пользователем
+     */
+    public String scanLine() {
+        Scanner im = new Scanner(System.in);
+        String ups = im.nextLine();
+        while (ups.isEmpty()) {
+            System.out.println("Вы ввели пустую строку. Пожалуйста, повторите ввод.");
+            ups = im.nextLine();
+        }
+        return ups;
+    }
+    /**
+     * Считывает координаты
+     * @return координаты
+     */
+    public Coordinates scanCoordinates() {
+        Long inputX = null;
+        Float inputY = null;
+        while (inputX == null) {
+            System.out.println("Введите х координату: ");
+            try {
+                inputX = Long.parseLong(scanLine());
+            } catch (NullPointerException e) {
+                System.out.println("Координата х должна быть целым числом.");
+            }
+        }
+        System.out.println("Введите у координату: ");
+        while (inputY == null) {
+            try {
+                inputY = Float.parseFloat(scanLine());
+            } catch (NullPointerException e) {
+                System.out.println("Координата у должна быть целым числом.");
+            }
+        }
+        Coordinates coordinates = new Coordinates(inputX, inputY);
+        return coordinates;
+    }
+    /**
+     * Считывает поле studentsCount
+     * @return long (количество студентов)
+     */
+    public Long scanStudentsCount(){
+        System.out.println("Введите количество студентов в группе (`Должно быть >0): ");
+        long StudentsCount = 1;
+        boolean as = true;
+        while (as){
+            try{
+                StudentsCount = Long.parseLong(scanLine());
+                if (StudentsCount<1){
+                    System.out.println("Количество студентов в группе  должно быть больше 0.\nВведите количество студентов: ");
+                }
+                else {
+                    as=false;
+                }
+            }
+            catch (NullPointerException e){
+                System.out.println("Количество студентов должно быть введено .\\nВведите количество студентов:");
+            }
+        }
+        return StudentsCount;
+    }
+
+    /**
+     * Считывает поле ExpelledStudents
+     * @return long (количество исключенных студентов)
+     */
+    public Long scanExpelledStudents(){
+        System.out.println("Введите количество исключенных студентов в группе (`Должно быть >0): ");
+        long ExpelledStudents = 1;
+        boolean as = true;
+        while (as){
+            try{
+                ExpelledStudents = Long.parseLong(scanLine());
+                if (ExpelledStudents<1){
+                    System.out.println("Количество студентов в группе  должно быть больше 0.\nВведите количество студентов: ");
+                }
+                else {
+                    as=false;
+                }
+            }
+            catch (NullPointerException e){
+                System.out.println("Количество студентов должно быть введено .\\nВведите количество студентов:");
+            }
+        }
+        return ExpelledStudents;
+    }
+
+    /**
+     * Cчитывает форму обучения
+     * @return formofEducation
+     * @throws IOException
+     */
+    public FormOfEducation scanFormOfEducation() throws IOException {
+        FormOfEducation formofEducation = null;
+        boolean dw = true;
+        while (dw) {
+            System.out.println("Введите форму обучения:\n" + "distance_education\n" + "full_time_education\n" + "evening_classes\n");
+            InputStreamReader sr = new InputStreamReader(System.in); // создать экземпляр InputStreamReader
+            BufferedReader br = new BufferedReader(sr); // экземпляр класса буферизации
+            String s = br.readLine();
+            switch (s) {
+                case "distance_education":
+                    formofEducation = FormOfEducation.DISTANCE_EDUCATION;
+                    dw = false;
+                    break;
+                case "full_time_education":
+                    formofEducation = FormOfEducation.FULL_TIME_EDUCATION;
+                    dw = false;
+                    break;
+                case "evening_classes":
+                    formofEducation = FormOfEducation.EVENING_CLASSES;
+                    dw = false;
+                    break;
+                case "":
+                    formofEducation = null;
+                    dw = false;
+                    break;
+                default:
+                    System.out.println("Вы ввели некорректную форму обучения");
+                    break;
+
+            }
+
+
+        }
+        return formofEducation;
+    }
+
+    /**
+     *  Считывает номер семместра
+     * @return semesterEnum
+     * @throws IOException
+     */
+    public Semester scanSemesterEnum() throws IOException {
+        Semester semesterEnum= null;
+        boolean dw = true;
+        while (dw) {
+            System.out.println("Введите номер семместра :\n" + "first\n" + "second\n" + "third\n"+"eight\n");
+            InputStreamReader sr = new InputStreamReader(System.in); // создать экземпляр InputStreamReader
+            BufferedReader br = new BufferedReader(sr); // экземпляр класса буферизации
+            String s = br.readLine();
+            switch (s) {
+                case "first":
+                    semesterEnum = Semester.FIRST;
+                    dw = false;
+                    break;
+                case "second":
+                    semesterEnum  = Semester.SECOND;
+                    dw = false;
+                    break;
+                case "third":
+                    semesterEnum  = Semester.THIRD;
+                    dw = false;
+                    break;
+                case "eight":
+                    semesterEnum  = Semester.EIGHTH;
+                    dw = false;
+                    break;
+                case "":
+                    semesterEnum= null;
+                    dw = false;
+                    break;
+                default:
+                    System.out.println("Вы ввели некорректный номер семместра");
+                    break;
+
+            }
+
+
+        }
+        return semesterEnum;
+    }
+
+    public String scanGroupAdmin() throws IOException {
+        System.out.println("Введите имя старосты:");
+        InputStreamReader sr = new InputStreamReader(System.in); // создать экземпляр InputStreamReader
+        BufferedReader br = new BufferedReader(sr); // экземпляр класса буферизации
+        String s = br.readLine();
+        boolean as= true;
+        while(as){
+            try {
+                if (s.isEmpty()) {
+                    System.out.println("Имя не может быть пустым! Пожалуйста, введите имя:");
+                    s = br.readLine();
+                } else {
+                    as = false;
+                }
+            }
+            catch (NullPointerException e){
+                System.out.println("Имя не может быть null");
+            }
+
+    }
+        return s;
     }
     public  void updateId(int element){// метода для создания нового обьекта и помещение его в коллекцию
 
@@ -114,6 +326,5 @@ public class GeneralCollection {
     public  void min_by_id(){}
     public  void filter_by_group_admin(String groupAdmin){}
     public  void print_unique_semester_enum(){}
-
 
 }
