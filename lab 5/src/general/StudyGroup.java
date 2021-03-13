@@ -22,7 +22,7 @@ public class StudyGroup {
      * @param semesterEnum  номер семместра
      * @param groupAdmin староста группы
      */
-    public StudyGroup(String name, Coordinates coordinates, ZonedDateTime creationDate, Long studentsCount, long expelledStudents, FormOfEducation formOfEducation, Semester semesterEnum, Person groupAdmin) {
+    public StudyGroup(String name, Coordinates coordinates, Long studentsCount, long expelledStudents, FormOfEducation formOfEducation, Semester semesterEnum, Person groupAdmin) {
         this.id = id;
         this.name = name;
         this.coordinates = coordinates;

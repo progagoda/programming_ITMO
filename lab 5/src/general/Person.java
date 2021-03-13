@@ -7,13 +7,6 @@ public class Person {
     private Color hairColor; //Поле может быть null
     private Country nationality; //Поле не может быть null
 
-    public Person(String name, String passportID, Color eyeColor, Color hairColor, Country nationality) {
-        this.name = name;
-        this.passportID = passportID;
-        this.eyeColor = eyeColor;
-        this.hairColor = hairColor;
-        this.nationality = nationality;
-    }
 
     /**
      * Геттер name

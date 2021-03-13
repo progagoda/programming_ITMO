@@ -14,12 +14,12 @@ public class GeneralCollection {
     /**Поле genCollection, ключи - Integer, значения - HumanBeing*/
     private TreeMap<Integer, StudyGroup> genCollection = new TreeMap<>();
     /**
-     * Чтение данных из файла HumanBeing.json генерация id происходит автоматически в диапазоне от 0 до 10000
+     * Чтение данных из файла afterStudyGroup.json генерация id происходит автоматически в диапазоне от 0 до 10000
      * @throws IOException ошибка пользовательского ввода
      */
     public GeneralCollection() throws IOException {
         Gson gson = new Gson();
-        try (BufferedReader reader = new BufferedReader(new FileReader("StudyGroup.json"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("afterStudyGroup.json"))) {
             Type foundMap = new TypeToken<TreeMap<Integer, StudyGroup>>(){}.getType();
             genCollection = gson.fromJson(reader, foundMap);
         } catch (FileNotFoundException e) {
@@ -72,21 +72,21 @@ public class GeneralCollection {
      * @throws IOException
      */
     public  void add(int key) throws IOException {
-        StudyGroup humanBeing1 = new StudyGroup(scanName(), scanCoordinates(), scanStudentsCount(), scanExpelledStudents(), scanFormOfEducation(), scanSemesterEnum(), scanGroupAdmin());
+        StudyGroup studyGroup1 = new StudyGroup(scanName(),scanCoordinates(),scanStudentsCount(),scanExpelledStudents(),scanFormOfEducation(),scanSemesterEnum(),scanGroupAdmin());
         getGenCollection().remove(key);
-        getGenCollection().put(key, humanBeing1);
+        getGenCollection().put(key, studyGroup1);
     }
     /**
      * Считывает поле name
      * @return name
      */
-    public String scanName() {
+    public String scanName() throws IOException {
         System.out.println("Введите имя:");
-        Scanner in = new Scanner(System.in);
-        String go = in.nextLine();
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        String go = in.readLine();
         while (go.isEmpty()) {
             System.out.println("Имя не может быть пустым! Пожалуйста, введите имя:");
-            go = in.nextLine();
+            go = in.readLine();
         }
         return go;
     }
@@ -94,12 +94,12 @@ public class GeneralCollection {
      * Считывает строку, введенную пользователем
      * @return строка, введенная пользователем
      */
-    public String scanLine() {
-        Scanner im = new Scanner(System.in);
-        String ups = im.nextLine();
+    public String scanLine() throws IOException {
+        BufferedReader im = new BufferedReader(new InputStreamReader(System.in));
+        String ups = im.readLine();
         while (ups.isEmpty()) {
             System.out.println("Вы ввели пустую строку. Пожалуйста, повторите ввод.");
-            ups = im.nextLine();
+            ups = im.readLine();
         }
         return ups;
     }
@@ -114,7 +114,7 @@ public class GeneralCollection {
             System.out.println("Введите х координату: ");
             try {
                 inputX = Long.parseLong(scanLine());
-            } catch (NullPointerException e) {
+            } catch (NullPointerException | IOException e) {
                 System.out.println("Координата х должна быть целым числом.");
             }
         }
@@ -122,7 +122,7 @@ public class GeneralCollection {
         while (inputY == null) {
             try {
                 inputY = Float.parseFloat(scanLine());
-            } catch (NullPointerException e) {
+            } catch (NullPointerException | IOException e) {
                 System.out.println("Координата у должна быть целым числом.");
             }
         }
@@ -147,7 +147,7 @@ public class GeneralCollection {
                     as=false;
                 }
             }
-            catch (NullPointerException e){
+            catch (NullPointerException | IOException e){
                 System.out.println("Количество студентов должно быть введено .\\nВведите количество студентов:");
             }
         }
@@ -172,7 +172,7 @@ public class GeneralCollection {
                     as=false;
                 }
             }
-            catch (NullPointerException e){
+            catch (NullPointerException | IOException e){
                 System.out.println("Количество студентов должно быть введено .\\nВведите количество студентов:");
             }
         }
@@ -265,27 +265,17 @@ public class GeneralCollection {
         return semesterEnum;
     }
 
-    public String scanGroupAdmin() throws IOException {
+    public Person scanGroupAdmin() throws IOException {
+        Person person= new Person();
         System.out.println("Введите имя старосты:");
-        InputStreamReader sr = new InputStreamReader(System.in); // создать экземпляр InputStreamReader
-        BufferedReader br = new BufferedReader(sr); // экземпляр класса буферизации
-        String s = br.readLine();
-        boolean as= true;
-        while(as){
-            try {
-                if (s.isEmpty()) {
-                    System.out.println("Имя не может быть пустым! Пожалуйста, введите имя:");
-                    s = br.readLine();
-                } else {
-                    as = false;
-                }
-            }
-            catch (NullPointerException e){
-                System.out.println("Имя не может быть null");
-            }
-
-    }
-        return s;
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        String name = in.readLine();
+       while (name.isEmpty()){
+           System.out.println("Имя старосты не может быть пустым, введите пожалуйста имя");
+           name=scanLine();
+       }
+       person.setName(name);
+       return person;
     }
     public  void updateId(int element){// метода для создания нового обьекта и помещение его в коллекцию
 
@@ -312,19 +302,43 @@ public class GeneralCollection {
     } else {
         genCollection.clear();
     }}
-    public  void save(){}
-    public  void execute_script( String file_name){}
+
+    /**
+     * Сохраняет коллекцию в файл afterStudyGroup.json
+     */
+    public  void save(){
+        try (BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream("afterHumanBeing.json"))) {
+            Gson gson = new Gson();
+            String json = gson.toJson(genCollection);
+            stream.write(json.getBytes());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     /**
      * Завершает программу (без сохранения в файл)
      */
     public void exit() {
         System.exit(0);
     }
-    public  void head(){}
-    public  void add_if_min(String element){}
-    public  void remove_greater(String element){}
-    public  void min_by_id(){}
-    public  void filter_by_group_admin(String groupAdmin){}
-    public  void print_unique_semester_enum(){}
 
+    public  void head(){
+        if (!genCollection.isEmpty()) {
+         /* дописать */
+        } else {
+            System.out.println("Коллекция пуста.");
+        }
+    }
+    public  void add_if_min(String element){}
+    public  void remove_greater(Integer id){
+        List <Integer> keys =new ArrayList<>();
+        for(Integer key: getGenCollection().keySet()){
+
+        }
+    }
+    public  void min_by_id(){}
+    public  void filter_by_group_admin(String groupAdmin){
+    }
+    public  void print_unique_semester_enum(){}
 }
