@@ -71,7 +71,7 @@ public class GeneralCollection {
      * @param key Ключ
      * @throws IOException
      */
-    public  void add(int key) throws IOException {
+    public  void addStudyGroup(int key) throws IOException {
         StudyGroup studyGroup1 = new StudyGroup(scanName(),scanCoordinates(),scanStudentsCount(),scanExpelledStudents(),scanFormOfEducation(),scanSemesterEnum(),scanGroupAdmin());
         getGenCollection().remove(key);
         getGenCollection().put(key, studyGroup1);
@@ -264,7 +264,19 @@ public class GeneralCollection {
         }
         return semesterEnum;
     }
-
+    /**
+     * Получение ключа элемента по его id
+     * @param id id элемента
+     * @return ключ если существует элемент с данным id, если же наоборот то возвращается null
+     */
+    public Integer getKeyById(Integer id){
+        for (int key : genCollection.keySet()){
+            if (Objects.equals(genCollection.get(key).getId(), id)){
+                return key;
+            }
+        }
+        return null;
+    }
     public Person scanGroupAdmin() throws IOException {
         Person person= new Person();
         System.out.println("Введите имя старосты:");
@@ -334,7 +346,6 @@ public class GeneralCollection {
     public  void remove_greater(Integer id){
         List <Integer> keys =new ArrayList<>();
         for(Integer key: getGenCollection().keySet()){
-
         }
     }
     public  void min_by_id(){}
