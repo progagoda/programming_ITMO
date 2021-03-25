@@ -3,6 +3,8 @@ package general;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Iterator;
 import java.util.PriorityQueue;
 import java.io.*;
@@ -12,7 +14,7 @@ import java.util.Spliterator;
 import java.util.function.Consumer;
 
 /**
- * Класс для дерева с объектами StudyGroup и его управлением
+ * Класс для колекции с объектами StudyGroup и его управлением
  */
 public class GeneralCollection  implements IPriorityQueue{
     /**Поле genCollection, ключи - Integer, значения - HumanBeing*/
@@ -22,13 +24,16 @@ public class GeneralCollection  implements IPriorityQueue{
      * @throws IOException ошибка пользовательского ввода
      */
     public GeneralCollection() throws IOException {
-        Gson gson = new Gson();
-        try (BufferedReader reader = new BufferedReader(new FileReader("StudyGroup.json"))) {
-            Type foundMap = new TypeToken<PriorityQueue<StudyGroup>>(){}.getType();
-            genCollection = gson.fromJson(reader, foundMap);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        try {
+            setInitializationDate(LocalDate.parse(productCollectionTag.getNestedTagContent("initializationDate")));
+        } catch (DateTimeParseException e) {
+            throw new InvalidTagException("ProductCollection", "Неверно записана дата инициализации.");
+        } catch (NullPointerException e) {
+            throw new InvalidTagException("ProductCollection", " Отсутствует тег с датой инициализации.");
+        } catch (DuplicateTagException e) {
+            throw new InvalidTagException("ProductCollection", e.getMessage());
         }
+
     }
     /**
      * Выводит справку по доступным командам
