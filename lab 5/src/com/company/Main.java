@@ -22,15 +22,11 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         GeneralCollection generalCollection = new GeneralCollection();
-
-
-        Help help = new Help();
-        Info info = new Info();
-        Show show = new Show();
-        Clear clear = new Clear();
+        Info info= new Info();
+        Help help= new Help();
+        Add add= new Add();
         Save save = new Save();
-        Exit exit = new Exit();
-
+        Clear clear = new Clear();
         while (true) {
             System.out.println("Введите вашу команду, используйте \"help\" что бы получить список команд");
             System.out.print(">>>");

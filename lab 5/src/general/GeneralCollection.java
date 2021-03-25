@@ -3,24 +3,28 @@ package general;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.util.Iterator;
+import java.util.PriorityQueue;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.time.ZonedDateTime;
-import java.util.*;
+import java.util.Spliterator;
+import java.util.function.Consumer;
+
 /**
  * Класс для дерева с объектами StudyGroup и его управлением
  */
-public class GeneralCollection {
+public class GeneralCollection  implements IPriorityQueue{
     /**Поле genCollection, ключи - Integer, значения - HumanBeing*/
-    private TreeMap<Integer, StudyGroup> genCollection = new TreeMap<>();
+    private PriorityQueue<StudyGroup> genCollection = new PriorityQueue<>();
     /**
      * Чтение данных из файла afterStudyGroup.json генерация id происходит автоматически в диапазоне от 0 до 10000
      * @throws IOException ошибка пользовательского ввода
      */
     public GeneralCollection() throws IOException {
         Gson gson = new Gson();
-        try (BufferedReader reader = new BufferedReader(new FileReader("afterStudyGroup.json"))) {
-            Type foundMap = new TypeToken<TreeMap<Integer, StudyGroup>>(){}.getType();
+        try (BufferedReader reader = new BufferedReader(new FileReader("StudyGroup.json"))) {
+            Type foundMap = new TypeToken<PriorityQueue<StudyGroup>>(){}.getType();
             genCollection = gson.fromJson(reader, foundMap);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -352,4 +356,39 @@ public class GeneralCollection {
     public  void filter_by_group_admin(String groupAdmin){
     }
     public  void print_unique_semester_enum(){}
+
+    @Override
+    public PriorityQueue<StudyGroup> getProducts() {
+        return null;
+    }
+
+    @Override
+    public StudyGroup getStudyGroupId(long id) {
+        return null;
+    }
+
+    @Override
+    public boolean removeStudyGroupId() {
+        return false;
+    }
+
+    @Override
+    public String getInitializationDataString() {
+        return null;
+    }
+
+    @Override
+    public Iterator<StudyGroup> iterator() {
+        return null;
+    }
+
+    @Override
+    public void forEach(Consumer<? super StudyGroup> action) {
+
+    }
+
+    @Override
+    public Spliterator<StudyGroup> spliterator() {
+        return null;
+    }
 }
