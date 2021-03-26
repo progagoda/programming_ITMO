@@ -1,5 +1,4 @@
 package commands;
-
 import general.GeneralCollection;
 /**
         * Класс, реализующий программу save, которая сохраняет коллекцию в файл

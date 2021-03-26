@@ -1,5 +1,5 @@
 package commands;
-import general.GeneralCollection;
+import general.GeneralColl;
 import java.util.PriorityQueue;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +9,7 @@ import java.util.Map;
  */
 public class StartCommand {
     /** Карта команд. Ключ - строковое название команды. Значение - классы, реализующие интерфейс CommandDo*/
-    private static Map<String,CommandDo> commands= new HashMap<>();
+    private static final Map<String,CommandDo> commands= new HashMap<>();
     /** Массив для хранения истории ввода команд пользователем*/
     public static PriorityQueue<String> historyCommands = new PriorityQueue<>();
     /** Массив для хранения команд, которые обрабатываются командо execute_script*/
@@ -24,11 +24,11 @@ public class StartCommand {
         commands.put(name, commandDo);
     }
     /**
-     * Введенная строка пользователем разбивается на две строки по пробелу, если второй строка пустая то вызывается метод {@link CommandDo#execute(String, GeneralCollection)} с первым аргументом null, если вторая строка не пустая то так же запускается метод {@link CommandDo#execute(String, GeneralCollection)}  и в первый аргумент передается вторая строка
+     * Введенная строка пользователем разбивается на две строки по пробелу, если второй строка пустая то вызывается метод {@link CommandDo#execute(String, GeneralColl)} с первым аргументом null, если вторая строка не пустая то так же запускается метод {@link CommandDo#execute(String, GeneralColl)}  и в первый аргумент передается вторая строка
      * @param words строка введенная пользователем
      * @param generalCollection класс с коллекцией, над которой производятся действия
      */
-    public static void doing(String words, GeneralCollection generalCollection) {
+    public static void doing(String words, GeneralColl generalCollection) {
         String[] partsWords = words.split(" ");
         if (words.isEmpty()) {
             return;

@@ -5,36 +5,37 @@ import com.google.gson.reflect.TypeToken;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.Iterator;
-import java.util.PriorityQueue;
+import java.util.*;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.time.ZonedDateTime;
-import java.util.Spliterator;
-import java.util.function.Consumer;
 
 /**
  * Класс для колекции с объектами StudyGroup и его управлением
  */
-public class GeneralCollection  implements IPriorityQueue{
-    /**Поле genCollection, ключи - Integer, значения - HumanBeing*/
+public class GeneralCollection {
+    /**
+     * Поле genCollection, ключи - Integer, значения - HumanBeing
+     */
     private PriorityQueue<StudyGroup> genCollection = new PriorityQueue<>();
+
     /**
      * Чтение данных из файла afterStudyGroup.json генерация id происходит автоматически в диапазоне от 0 до 10000
+     *
      * @throws IOException ошибка пользовательского ввода
      */
     public GeneralCollection() throws IOException {
-        try {
-            setInitializationDate(LocalDate.parse(productCollectionTag.getNestedTagContent("initializationDate")));
-        } catch (DateTimeParseException e) {
-            throw new InvalidTagException("ProductCollection", "Неверно записана дата инициализации.");
-        } catch (NullPointerException e) {
-            throw new InvalidTagException("ProductCollection", " Отсутствует тег с датой инициализации.");
-        } catch (DuplicateTagException e) {
-            throw new InvalidTagException("ProductCollection", e.getMessage());
-        }
+        Gson gson = new Gson();
+        try (Reader reader = new FileReader("HumanBeing.json")) {
+            Type foundMap = new TypeToken<PriorityQueue>() {
+            }.getType();
+            genCollection = gson.fromJson(reader, foundMap);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
 
+        }
     }
+
     /**
      * Выводит справку по доступным командам
      */
@@ -57,16 +58,20 @@ public class GeneralCollection  implements IPriorityQueue{
                 "exit : завершить программу (без сохранения в файл) \n");
 
     }
+
     /**
      * Выводит информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)
      */
-    public  void info(){System.out.println("Тип: StudyGroup\n"
-            + "Дата инициализации: " + genCollection.get(0).getCreationDate().now() + '\n'
-            + "Количество элементов: " + genCollection.size());}
+    //public void info() {
+    //  System.out.println("Тип: StudyGroup\n"
+    //        + "Дата инициализации: " + genCollection.get(0).getCreationDate().now() + '\n'
+    //      + "Количество элементов: " + genCollection.size());
+    //}
+
     /**
      * Выводит все элементы коллекции в строковом представлении
      */
-    public  void show(){
+   /* public void show() {
         if (!genCollection.isEmpty()) {
             for (Integer key : genCollection.keySet()) {
                 System.out.println("Key: " + key + " Value: " + genCollection.get(key).toString());
@@ -75,20 +80,24 @@ public class GeneralCollection  implements IPriorityQueue{
             System.out.println("Коллекция пуста.");
         }
     }
-    /**
+
+    *//**
      * Добавляет новый элемент в коллекцию
+     *
      * @param key Ключ
      * @throws IOException
-     */
-    public  void addStudyGroup(int key) throws IOException {
-        StudyGroup studyGroup1 = new StudyGroup(scanName(),scanCoordinates(),scanStudentsCount(),scanExpelledStudents(),scanFormOfEducation(),scanSemesterEnum(),scanGroupAdmin());
+     *//*
+    public void addStudyGroup(int key) throws IOException {
+        StudyGroup studyGroup1 = new StudyGroup(scanName(), scanCoordinates(), scanStudentsCount(), scanExpelledStudents(), scanFormOfEducation(), scanSemesterEnum(), scanGroupAdmin());
         getGenCollection().remove(key);
         getGenCollection().put(key, studyGroup1);
     }
-    /**
+
+    *//**
      * Считывает поле name
+     *
      * @return name
-     */
+     *//*
     public String scanName() throws IOException {
         System.out.println("Введите имя:");
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -99,10 +108,12 @@ public class GeneralCollection  implements IPriorityQueue{
         }
         return go;
     }
-    /**
+
+    *//**
      * Считывает строку, введенную пользователем
+     *
      * @return строка, введенная пользователем
-     */
+     *//*
     public String scanLine() throws IOException {
         BufferedReader im = new BufferedReader(new InputStreamReader(System.in));
         String ups = im.readLine();
@@ -112,10 +123,12 @@ public class GeneralCollection  implements IPriorityQueue{
         }
         return ups;
     }
-    /**
+
+    *//**
      * Считывает координаты
+     *
      * @return координаты
-     */
+     *//*
     public Coordinates scanCoordinates() {
         Long inputX = null;
         Float inputY = null;
@@ -138,61 +151,61 @@ public class GeneralCollection  implements IPriorityQueue{
         Coordinates coordinates = new Coordinates(inputX, inputY);
         return coordinates;
     }
-    /**
+
+    *//**
      * Считывает поле studentsCount
+     *
      * @return long (количество студентов)
-     */
-    public Long scanStudentsCount(){
+     *//*
+    public Long scanStudentsCount() {
         System.out.println("Введите количество студентов в группе (`Должно быть >0): ");
         long StudentsCount = 1;
         boolean as = true;
-        while (as){
-            try{
+        while (as) {
+            try {
                 StudentsCount = Long.parseLong(scanLine());
-                if (StudentsCount<1){
+                if (StudentsCount < 1) {
                     System.out.println("Количество студентов в группе  должно быть больше 0.\nВведите количество студентов: ");
+                } else {
+                    as = false;
                 }
-                else {
-                    as=false;
-                }
-            }
-            catch (NullPointerException | IOException e){
+            } catch (NullPointerException | IOException e) {
                 System.out.println("Количество студентов должно быть введено .\\nВведите количество студентов:");
             }
         }
         return StudentsCount;
     }
 
-    /**
+    *//**
      * Считывает поле ExpelledStudents
+     *
      * @return long (количество исключенных студентов)
-     */
-    public Long scanExpelledStudents(){
+     *//*
+    public Long scanExpelledStudents() {
         System.out.println("Введите количество исключенных студентов в группе (`Должно быть >0): ");
         long ExpelledStudents = 1;
         boolean as = true;
-        while (as){
-            try{
+        while (as) {
+            try {
                 ExpelledStudents = Long.parseLong(scanLine());
-                if (ExpelledStudents<1){
+                if (ExpelledStudents < 1) {
                     System.out.println("Количество студентов в группе  должно быть больше 0.\nВведите количество студентов: ");
+                } else {
+                    as = false;
                 }
-                else {
-                    as=false;
-                }
-            }
-            catch (NullPointerException | IOException e){
+            } catch (NullPointerException | IOException e) {
                 System.out.println("Количество студентов должно быть введено .\\nВведите количество студентов:");
             }
         }
         return ExpelledStudents;
     }
 
-    /**
+    *//**
      * Cчитывает форму обучения
+     *
      * @return formofEducation
      * @throws IOException
-     */
+     *//*
     public FormOfEducation scanFormOfEducation() throws IOException {
         FormOfEducation formofEducation = null;
         boolean dw = true;
@@ -229,16 +242,17 @@ public class GeneralCollection  implements IPriorityQueue{
         return formofEducation;
     }
 
-    /**
-     *  Считывает номер семместра
+    *//**
+     * Считывает номер семместра
+     *
      * @return semesterEnum
      * @throws IOException
-     */
+     *//*
     public Semester scanSemesterEnum() throws IOException {
-        Semester semesterEnum= null;
+        Semester semesterEnum = null;
         boolean dw = true;
         while (dw) {
-            System.out.println("Введите номер семместра :\n" + "first\n" + "second\n" + "third\n"+"eight\n");
+            System.out.println("Введите номер семместра :\n" + "first\n" + "second\n" + "third\n" + "eight\n");
             InputStreamReader sr = new InputStreamReader(System.in); // создать экземпляр InputStreamReader
             BufferedReader br = new BufferedReader(sr); // экземпляр класса буферизации
             String s = br.readLine();
@@ -248,19 +262,19 @@ public class GeneralCollection  implements IPriorityQueue{
                     dw = false;
                     break;
                 case "second":
-                    semesterEnum  = Semester.SECOND;
+                    semesterEnum = Semester.SECOND;
                     dw = false;
                     break;
                 case "third":
-                    semesterEnum  = Semester.THIRD;
+                    semesterEnum = Semester.THIRD;
                     dw = false;
                     break;
                 case "eight":
-                    semesterEnum  = Semester.EIGHTH;
+                    semesterEnum = Semester.EIGHTH;
                     dw = false;
                     break;
                 case "":
-                    semesterEnum= null;
+                    semesterEnum = null;
                     dw = false;
                     break;
                 default:
@@ -273,61 +287,74 @@ public class GeneralCollection  implements IPriorityQueue{
         }
         return semesterEnum;
     }
+
+    */
+
     /**
      * Получение ключа элемента по его id
+     *
      * @param id id элемента
      * @return ключ если существует элемент с данным id, если же наоборот то возвращается null
-     */
-    public Integer getKeyById(Integer id){
-        for (int key : genCollection.keySet()){
-            if (Objects.equals(genCollection.get(key).getId(), id)){
+     *//*
+    public Integer getKeyById(Integer id) {
+        for (int key : genCollection.keySet()) {
+            if (Objects.equals(genCollection.get(key).getId(), id)) {
                 return key;
             }
         }
         return null;
     }
+
     public Person scanGroupAdmin() throws IOException {
-        Person person= new Person();
+        Person person = new Person();
         System.out.println("Введите имя старосты:");
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         String name = in.readLine();
-       while (name.isEmpty()){
-           System.out.println("Имя старосты не может быть пустым, введите пожалуйста имя");
-           name=scanLine();
-       }
-       person.setName(name);
-       return person;
+        while (name.isEmpty()) {
+            System.out.println("Имя старосты не может быть пустым, введите пожалуйста имя");
+            name = scanLine();
+        }
+        person.setName(name);
+        return person;
     }
-    public  void updateId(int element){// метода для создания нового обьекта и помещение его в коллекцию
+*/
+    public void updateId(int element) {// метода для создания нового обьекта и помещение его в коллекцию
 
     }
+
     /**
      * Удаляет элемент коллекции, id которого равен введенному
+     *
      * @param id ключ
      */
-    public  void remove_by_id(int id){
+    public void remove_by_id(int id) {
         genCollection.remove(id);
     }
+
     /**
      * Геттер genCollection
+     *
      * @return возвращает коллекцию
      */
-    public TreeMap<Integer, StudyGroup> getGenCollection() {
+    public PriorityQueue<StudyGroup> getGenCollection() {
         return genCollection;
     }
+
     /**
      * Удаляет все элементы из коллекции
      */
-    public  void clear(){if (genCollection.size() == 0) {
-        System.out.println("Коллекция уже пуста");
-    } else {
-        genCollection.clear();
-    }}
+    public void clear() {
+        if (genCollection.size() == 0) {
+            System.out.println("Коллекция уже пуста");
+        } else {
+            genCollection.clear();
+        }
+    }
 
     /**
      * Сохраняет коллекцию в файл afterStudyGroup.json
      */
-    public  void save(){
+    public void save() {
         try (BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream("afterHumanBeing.json"))) {
             Gson gson = new Gson();
             String json = gson.toJson(genCollection);
@@ -344,56 +371,29 @@ public class GeneralCollection  implements IPriorityQueue{
         System.exit(0);
     }
 
-    public  void head(){
+    public void head() {
         if (!genCollection.isEmpty()) {
-         /* дописать */
+            /* дописать */
         } else {
             System.out.println("Коллекция пуста.");
         }
     }
-    public  void add_if_min(String element){}
-    public  void remove_greater(Integer id){
-        List <Integer> keys =new ArrayList<>();
-        for(Integer key: getGenCollection().keySet()){
+
+    public void add_if_min(String element) {
+    }
+
+    public void remove_greater(Integer id) {
+        List<Integer> keys = new ArrayList<>();
+        for (StudyGroup key :getGenCollection()){
         }
     }
-    public  void min_by_id(){}
-    public  void filter_by_group_admin(String groupAdmin){
-    }
-    public  void print_unique_semester_enum(){}
 
-    @Override
-    public PriorityQueue<StudyGroup> getProducts() {
-        return null;
+    public void min_by_id() {
     }
 
-    @Override
-    public StudyGroup getStudyGroupId(long id) {
-        return null;
+    public void filter_by_group_admin(String groupAdmin) {
     }
 
-    @Override
-    public boolean removeStudyGroupId() {
-        return false;
-    }
-
-    @Override
-    public String getInitializationDataString() {
-        return null;
-    }
-
-    @Override
-    public Iterator<StudyGroup> iterator() {
-        return null;
-    }
-
-    @Override
-    public void forEach(Consumer<? super StudyGroup> action) {
-
-    }
-
-    @Override
-    public Spliterator<StudyGroup> spliterator() {
-        return null;
+    public void print_unique_semester_enum() {
     }
 }

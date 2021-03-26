@@ -2,7 +2,7 @@ package com.company;
 
 import commands.*;
 import commands.StartCommand;
-import general.GeneralCollection;
+import general.GeneralColl;
 
 
 import java.io.BufferedReader;
@@ -21,12 +21,12 @@ public class Main {
      */
 
     public static void main(String[] args) throws IOException {
-        GeneralCollection generalCollection = new GeneralCollection();
-        Info info= new Info();
+        GeneralColl generalCollection = new GeneralColl();
+       // Info info= new Info();
         Help help= new Help();
-        Add add= new Add();
-        Save save = new Save();
-        Clear clear = new Clear();
+       // Add add= new Add();
+       // Save save = new Save();
+        //Clear clear = new Clear();
         while (true) {
             System.out.println("Введите вашу команду, используйте \"help\" что бы получить список команд");
             System.out.print(">>>");

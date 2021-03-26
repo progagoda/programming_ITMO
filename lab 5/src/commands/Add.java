@@ -1,6 +1,6 @@
 package commands;
 
-import general.GeneralCollection;
+import general.GeneralColl;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -19,7 +19,7 @@ public class Add implements CommandDo {
      * @param generalCollection класс с коллекцией, над которой производятся действия
      */
     @Override
-    public void execute(String name, GeneralCollection generalCollection) {// сделать проверку, нет ли уже такого ключа в коллекции
+    public void execute(String name, GeneralColl generalCollection) {// сделать проверку, нет ли уже такого ключа в коллекции
         try {
             Integer ret = Integer.parseInt(name);
             boolean s = true;

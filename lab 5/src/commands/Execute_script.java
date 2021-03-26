@@ -1,6 +1,6 @@
 package commands;
 
-import general.GeneralCollection;
+import general.GeneralColl;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -15,12 +15,12 @@ public class Execute_script implements CommandDo {
         StartCommand.addCommand("execute_script",this);
     }
     /**
-     * Проверяется наличие команды вызова этого файла в {@link StartCommand#runScripts}, если команда обнаружена, то команда пропускается в целях защиты от рекурсии, если же она не обнаружена, то вызвается метод {@link StartCommand#doing(String, GeneralCollection)} (String, GeneralCollection)}. По завершению файл от туда удаляется
+     * Проверяется наличие команды вызова этого файла в {@link StartCommand#runScripts}, если команда обнаружена, то команда пропускается в целях защиты от рекурсии, если же она не обнаружена, то вызвается метод {@link StartCommand#doing(String, GeneralColl)} (String, GeneralCollection)}. По завершению файл от туда удаляется
      * @param name строковое значение, имя файла
      * @param generalCollection класс с коллекцией, над которой производятся действия
      */
     @Override
-    public void execute(String name, GeneralCollection generalCollection) {
+    public void execute(String name, GeneralColl generalCollection) {
         try (BufferedReader bufferedReader = new BufferedReader((new FileReader(name)))){
             StartCommand.runScripts.add("execute_script " + name);
             String inpurs = bufferedReader.readLine();
