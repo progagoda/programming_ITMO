@@ -1,5 +1,5 @@
 package commands;
-import general.GeneralCollection;
+import general.GeneralColl;
 /**
  * Класс, реализующий программу clear, очищающую коллекцию
  */
@@ -16,7 +16,7 @@ public class Clear  implements  CommandDo{
      * @param generalCollection класс с коллекцией над которой производятся действия
      */
     @Override
-    public void execute(String name, GeneralCollection generalCollection) {
+    public void execute(String name, GeneralColl generalCollection) {
         generalCollection.clear();
     }
 }

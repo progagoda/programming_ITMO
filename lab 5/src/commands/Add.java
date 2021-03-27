@@ -25,7 +25,7 @@ public class Add implements CommandDo {
             boolean s = true;
             if (generalCollection.getGenCollection().get(ret) != null) {
                 while (s) {
-                    System.out.println("Элемнет с данным ключом уже есть в коллекции, хотите заменить эелемент коллекции? yes/no ");
+                    System.out.println("Элеменет с данным ключом уже есть в коллекции, хотите заменить эелемент коллекции? yes/no ");
                     String tip = generalCollection.scanLine();
                     if (tip.equals("yes")) {
                         s = false;
