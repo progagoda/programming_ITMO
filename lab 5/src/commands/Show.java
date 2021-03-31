@@ -1,5 +1,5 @@
 package commands;
-import collection.GeneralColl;
+import general.GeneralColl;
 /**
  * Класс, реализующий программу show, которая выводит в стандартный поток вывода все элементы коллекции в строковом представлении
  */
@@ -12,13 +12,15 @@ public class Show implements CommandDo {
     }
 
     /**
-     * Обращение к методу {@link GeneralColl#show()}
+     * Обращение к методу {@link GeneralColl
+#show()}
      * @param name строковое значение, аргумент команды(null)
-     * @param generalCollection класс с коллекцией, над которой производятся действия
+     * @param generalColl
+ класс с коллекцией, над которой производятся действия
      */
     @Override
-    public void execute(String name, GeneralColl generalCollection) {
-        generalCollection.show();
+    public void execute(String name, GeneralColl generalColl){
+                GeneralColl.show();
     }
 }
 

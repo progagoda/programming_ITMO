@@ -1,6 +1,6 @@
 package com.company;
 
-import commands.*;
+import commands.Help;
 import commands.StartCommand;
 import collection.GeneralColl;
 
@@ -8,7 +8,7 @@ import collection.GeneralColl;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
+import general.*;
 /**
  * Класс Main
  */

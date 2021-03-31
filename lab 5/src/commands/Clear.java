@@ -1,5 +1,5 @@
 package commands;
-import collection.GeneralColl;
+import general.GeneralColl;
 /**
  * Класс, реализующий программу clear, очищающую коллекцию
  */
@@ -11,7 +11,7 @@ public class Clear  implements  CommandDo{
         StartCommand.addCommand("clear", this);
     }
     /**
-     * Обращение к методу {@link GeneralColl#clear()}
+     * Обращение к методу {@link GeneralCollection#clear()}
      * @param name строковое значение, аргумент команды (null)
      * @param generalCollection класс с коллекцией над которой производятся действия
      */
