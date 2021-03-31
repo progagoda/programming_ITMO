@@ -1,5 +1,10 @@
 package general;
 
+import general.Coordinates;
+import general.FormOfEducation;
+import general.Person;
+import general.Semester;
+
 import java.time.ZonedDateTime;
 import java.util.Random;
 public class StudyGroup {
@@ -23,10 +28,10 @@ public class StudyGroup {
      * @param groupAdmin староста группы
      */
     public StudyGroup(String name, Coordinates coordinates, Long studentsCount, long expelledStudents, FormOfEducation formOfEducation, Semester semesterEnum, Person groupAdmin) {
-        this.id = id;
+        this.id = randomId().longValue();
         this.name = name;
         this.coordinates = coordinates;
-        this.creationDate = creationDate;
+        this.creationDate =  ZonedDateTime.now();
         this.studentsCount = studentsCount;
         this.expelledStudents = expelledStudents;
         this.formOfEducation = formOfEducation;
@@ -71,7 +76,7 @@ public class StudyGroup {
      */
     public Integer randomId() {
         Random random = new Random();
-        Integer num = random.nextInt(10000);
+        Integer num = random.nextInt(100000);
         return num;
     }
 
@@ -209,7 +214,7 @@ public class StudyGroup {
      */
     @Override
     public String toString() {
-        return "HumanBeing{" +
+        return "StudyGroup{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", coordinates=" + coordinates +

@@ -1,6 +1,6 @@
 package commands;
 
-import general.GeneralCollection;
+import collection.GeneralColl;
 
 import java.util.Collection;
 
@@ -12,7 +12,7 @@ public class Add_if_min implements CommandDo {
     }
 
     @Override
-    public void execute(String name, GeneralCollection generalCollection) {
+    public void execute(String name, GeneralColl generalCollection) {
 
 
     }

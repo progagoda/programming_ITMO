@@ -1,6 +1,6 @@
 package commands;
 
-import general.GeneralColl;
+import collection.GeneralColl;
 
 public class Help implements  CommandDo{
     /**

@@ -1,5 +1,5 @@
 package commands;
-import general.GeneralColl;
+import collection.GeneralColl;
 
 /**
  * интерфейс для выполнения команд

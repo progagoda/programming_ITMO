@@ -1,5 +1,5 @@
 package commands;
-import general.GeneralCollection;
+import collection.GeneralColl;
 /**
         * Класс, реализующий программу save, которая сохраняет коллекцию в файл
         */
@@ -12,12 +12,12 @@ public class Save implements CommandDo {
     }
 
     /**
-     * Обращение к методу {@link GeneralCollection#save()}
+     * Обращение к методу {@link GeneralColl#save()}
      * @param name строковое значение, аргумент команды(null)
      * @param generalCollection класс с коллекцией, над которой производятся действия
      */
     @Override
-    public void execute(String name, GeneralCollection generalCollection) {
+    public void execute(String name, GeneralColl generalCollection) {
         generalCollection.save();
     }
 }

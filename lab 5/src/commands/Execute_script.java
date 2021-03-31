@@ -1,6 +1,6 @@
 package commands;
 
-import general.GeneralColl;
+import collection.GeneralColl;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

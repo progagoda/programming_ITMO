@@ -2,7 +2,7 @@ package com.company;
 
 import commands.*;
 import commands.StartCommand;
-import general.GeneralColl;
+import collection.GeneralColl;
 
 
 import java.io.BufferedReader;
@@ -24,7 +24,7 @@ public class Main {
         GeneralColl generalCollection = new GeneralColl();
        // Info info= new Info();
         Help help= new Help();
-       // Add add= new Add();
+        Add add= new Add();
        // Save save = new Save();
         //Clear clear = new Clear();
         while (true) {

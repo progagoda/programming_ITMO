@@ -1,1 +1,89 @@
-{}
+[{
+  "0": {
+    "id": 12,
+    "name": "Санек",
+    "coordinates": {
+      "x": 43,
+      "y": 27
+    },
+    "creationDate": {
+      "date": {
+        "year": 2020,
+        "month": 5,
+        "day": 21
+      },
+      "time": {
+        "hour": 23,
+        "minute": 27,
+        "second": 44,
+        "nano": 236000000
+      }
+    },
+    "realHero": true,
+    "hasToothpick": true,
+    "impactSpeed": 120,
+    "weaponType": "KNIFE",
+    "mood": "SORROW",
+    "car": {
+      "name": "Еволюшн"
+    }
+  },
+  "1": {
+    "id": 49,
+    "name": "Ромчик",
+    "coordinates": {
+      "x": 12,
+      "y": 77
+    },
+    "creationDate": {
+      "date": {
+        "year": 2020,
+        "month": 5,
+        "day": 21
+      },
+      "time": {
+        "hour": 23,
+        "minute": 27,
+        "second": 44,
+        "nano": 237000000
+      }
+    },
+    "realHero": false,
+    "hasToothpick": true,
+    "impactSpeed": 220,
+    "weaponType": "MACHINE_GAN",
+    "mood": "RAGE",
+    "car": {
+      "name": "Ваз 2107"
+    }
+  },
+  "2": {
+    "id": 78,
+    "name": "Тема-Волк",
+    "coordinates": {
+      "x": 98,
+      "y": 33
+    },
+    "creationDate": {
+      "date": {
+        "year": 2020,
+        "month": 5,
+        "day": 21
+      },
+      "time": {
+        "hour": 23,
+        "minute": 27,
+        "second": 44,
+        "nano": 237000000
+      }
+    },
+    "realHero": true,
+    "hasToothpick": true,
+    "impactSpeed": 345,
+    "weaponType": "PISTOL",
+    "mood": "FRENZY",
+    "car": {
+      "name": "Тесла"
+    }
+  }
+}]

@@ -1,5 +1,5 @@
 package commands;
-import general.GeneralColl;
+import collection.GeneralColl;
 import java.util.PriorityQueue;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,8 +10,6 @@ import java.util.Map;
 public class StartCommand {
     /** Карта команд. Ключ - строковое название команды. Значение - классы, реализующие интерфейс CommandDo*/
     private static final Map<String,CommandDo> commands= new HashMap<>();
-    /** Массив для хранения истории ввода команд пользователем*/
-    public static PriorityQueue<String> historyCommands = new PriorityQueue<>();
     /** Массив для хранения команд, которые обрабатываются командо execute_script*/
     public static PriorityQueue<String> runScripts = new PriorityQueue<>();
 
@@ -49,7 +47,7 @@ public class StartCommand {
                 System.out.println("Команды не существует");
             }
         } else {
-            System.out.println("Невенрный ввод команды");
+            System.out.println("Неверный ввод команды");
         }
 
     }

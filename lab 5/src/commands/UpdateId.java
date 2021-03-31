@@ -1,5 +1,5 @@
 package commands;
-import general.GeneralCollection;
+import collection.GeneralColl;
 
 import java.io.IOException;
 
@@ -15,19 +15,18 @@ public class UpdateId implements CommandDo{
     }
 
     /**
-     * Идет проверка на наличие элемента в коллекции {@link GeneralCollection#getGenCollection()} элемента с таким id, если элемент есть то идет обращение к методу {@link GeneralCollection#addStudyGroup(int)}
-     * @param name строковое значение, аргумент команды(id)
-     * @param generalCollection класс с коллекцией, над которой производятся действия
+     * Идет проверка на наличие элемента в коллекции {@link GeneralColl#getGeneralColl()} элемента с таким id, если элемент есть то идет обращение к методу {@link GeneralColl#addStudyGroup(int)}
+     * @param id - номер объекта в коллекции
+     * @param generalColl класс с коллекцией, над которой производятся действия
      */
     @Override
-    public void execute(String name, GeneralCollection generalCollection) {
+    public void execute(String id, GeneralColl generalColl) {
         try {
-            Integer id = Integer.parseInt(name);
-            Integer key = generalCollection.getKeyById(id);
-            if (key == null){
+            Integer id1 = Integer.parseInt(id);
+            if (id == null){
                 System.out.println("Элемента с таким id нету, для того что бы посмотреть обьекты коллекции испольщуете \"show\" команду.");
             }else {
-                generalCollection.addStudyGroup(key);
+                generalColl.addStudyGroup(id1);
                 System.out.println("Обьект перезаписан");
             }
         }catch(NumberFormatException | IOException e){

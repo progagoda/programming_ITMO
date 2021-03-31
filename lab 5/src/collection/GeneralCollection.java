@@ -1,14 +1,12 @@
-package general;
+package collection;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import general.StudyGroup;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.*;
 import java.io.*;
 import java.lang.reflect.Type;
-import java.time.ZonedDateTime;
 
 /**
  * Класс для колекции с объектами StudyGroup и его управлением
@@ -88,7 +86,7 @@ public class GeneralCollection {
      * @throws IOException
      *//*
     public void addStudyGroup(int key) throws IOException {
-        StudyGroup studyGroup1 = new StudyGroup(scanName(), scanCoordinates(), scanStudentsCount(), scanExpelledStudents(), scanFormOfEducation(), scanSemesterEnum(), scanGroupAdmin());
+        StudyGroup studyGroup1 = new StudyGroup(scanNameGroup(), scanCoordinates(), scanStudentsCount(), scanExpelledStudents(), scanFormOfEducation(), scanSemesterEnum(), scanGroupAdmin());
         getGenCollection().remove(key);
         getGenCollection().put(key, studyGroup1);
     }
@@ -98,7 +96,7 @@ public class GeneralCollection {
      *
      * @return name
      *//*
-    public String scanName() throws IOException {
+    public String scanNameGroup() throws IOException {
         System.out.println("Введите имя:");
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         String go = in.readLine();
