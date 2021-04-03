@@ -21,20 +21,14 @@ public class Main {
      */
 
     public static void main(String[] args) throws IOException {
-        GeneralColl generalCollection = new GeneralColl();
-       // Info info= new Info();
-        Help help= new Help();
-        Add add= new Add();
-       // Save save = new Save();
-        //Clear clear = new Clear();
-        while (true) {
-            System.out.println("Введите вашу команду, используйте \"help\" что бы получить список команд");
-            System.out.print(">>>");
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-            String pop = bufferedReader.readLine();
-            if (!pop.isEmpty()) {
-                StartCommand.doing(pop, generalCollection);
-                System.out.println();
+        String[] test = new String[1];
+        test[0] = "name";
+        GeneralColl collectionManager = new GeneralColl(new CSVFileReader().getFileNameFromArgs(test));
+
+        //CollectionManager collectionManager = new CollectionManager(new CSVFileReader().getFileNameFromArgs(args));
+
+        ProgramStarter programStarter = new ProgramStarter(collectionManager);
+        programStarter.start();
             }
         }
 

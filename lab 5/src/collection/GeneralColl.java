@@ -1,37 +1,44 @@
 package collection;
+import comparators.NameComparator;
 import general.*;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import helpers.Messages;
+import helpers.StudyGroupMaker;
 
 import java.util.*;
 import java.io.*;
-import java.lang.reflect.Type;
+
 /**
  * Класс для колекции с объектами StudyGroup и его управлением
  */
 public class GeneralColl {
+    private final File file;
+    private final PriorityQueue<StudyGroup> collection;
+    private final Date date;
     /**
-     * Поле genCollection, ключи - Integer, значения - HumanBeing
+     * Конструкотор.
+     * @param fileName название JSON файла, который будет считыватся для дальнейших действий
      */
-    private PriorityQueue<StudyGroup> genCollection = new PriorityQueue<>();
-
+    public GeneralColl(String fileName)  {
+        this.file = new File(fileName);
+        collection = new PriorityQueue<>(new NameComparator());
+        date = new Date();
+    }
     /**
-     * Чтение данных из файла HumanBeing.json генерация id происходит автоматически в диапазоне от 0 до 10000
-     *
-     * @throws IOException ошибка пользовательского ввода
+     * Геттер для файла
+     * @return файл
      */
-    public GeneralColl() throws IOException {
-        Gson gson = new Gson();
-        try (Reader reader = new FileReader("StudyGroup.json")) {
-            Type foundMap = new TypeToken<PriorityQueue>(){}.getType();
-            genCollection = gson.fromJson(reader, foundMap);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        HashSet<String> invalidID = new HashSet<>();
-        HashSet<String> newID = new HashSet<>();
+    public File getFile() {
+        return file;
     }
 
+    /**
+     * Геттер даты
+     * @return date
+     */
+    public Date getDate() {
+        return date;
+    }
     /**
      * Выводит справку по доступным командам
      */
@@ -61,9 +68,17 @@ public class GeneralColl {
      * @return возвращает коллекцию
      */
     public PriorityQueue<StudyGroup> getGeneralColl() {
-        return genCollection;
+        return collection;
     }
+    /**
+     * Метод - вывод информации об коллекции, команда info
+     */
+    public void printInfoAboutCollection() {
+        Messages.normalMessageOutput("Тип коллекции - " + getGeneralColl().getClass().getName() + "\n" +
+                "Дата иницализации - " + getDate() + "\n" +
+                "Кол-во элементов - " + getGeneralColl().size());
 
+    }
     /**
      * Считывает строку, введенную пользователем
      *
@@ -78,7 +93,21 @@ public class GeneralColl {
         }
         return ups;
     }
-
+    /**
+     * Реализация команды add
+     * @param scanner Сканнер
+     * @return true / false, если выполнилось добавление элемента
+     */
+    public boolean addElement(BufferedReader scanner) {
+        StudyGroup group = new StudyGroupMaker().makeGroup(scanner);
+        if (group != null) {
+            group.setId(IdManager.findUniq(Math.abs(new Random().nextLong())));
+            getGeneralColl().add(group);
+            return true;
+        } else {
+            return false;
+        }
+    }
     /**
      * Считывает поле studentsCount
      *
@@ -408,33 +437,51 @@ public class GeneralColl {
         return person;
     }
 
-        /**
-         * Добавляет новый элемент в коллекцию
-         */
-        public void addStudyGroup(int key) throws IOException {
-            {  // метода для создания нового обьекта и помещение его в коллекцию
-                StudyGroup studyGroup1 = new StudyGroup(scanNameGroup(), scanCoordinates(), scanStudentsCount(), scanExpelledStudents(), scanFormOfEducation(), scanSemesterEnum(),scanGroupAdmin());
-                getGeneralColl().remove(key);
-                getGeneralColl().add(studyGroup1);
-            }
-        }
     /**
-     * Удаляет все элементы из коллекции
+     * Выводит первый объект коллекции
+     * @return true / false, если размер коллекции больше 0
      */
-    public void clear() {
-        if (genCollection.size() == 0) {
-            System.out.println("Коллекция уже пуста");
+    public boolean getHeadOfCollection() {
+        if (getGeneralColl().size() > 0) {
+            Objects.requireNonNull(getGeneralColl().peek()).printInfoAboutElement();
+            return true;
         } else {
-            genCollection.clear();
+            return false;
         }
     }
+    /**
+     * Очистить коллекцию
+     * @return true / false, если размер коллекции больше 0
+     */
+    public boolean clearCollection() {
+        if (getGeneralColl().size() > 0) {
+            IdManager.clearSet();
+            getGeneralColl().clear();
+            return true;
+        } else {
+            return false;
+        }
+    }
+    /**
+     * Сортирует коллекцию
+     * @param comp компаратор для сортировки
+     * @return новую отсортировоннуб коллекцию
+     */
+    public PriorityQueue<StudyGroup> sortCollectionByComp(Comparator<StudyGroup> comp) {
+        List<StudyGroup> newList = new ArrayList<>(collection);
+        newList.sort(comp);
+        PriorityQueue<StudyGroup> newCollection = new PriorityQueue<>(comp);
+        newCollection.addAll(newList);
+        return newCollection;
+    }
+
     /**
      * Выводит информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)
      */
     public void info() {
       System.out.println("Тип: StudyGroup\n"
-            + "Дата инициализации: " + genCollection.peek().getCreationDate().now() + '\n'
-          + "Количество элементов: " + genCollection.size());
+            + "Дата инициализации: " + getGeneralColl().peek().getCreationDate().now() + '\n'
+          + "Количество элементов: " + getGeneralColl().size());
     }
     /**
      * Сохраняет коллекцию в файл afterHumanBeing.json
@@ -442,14 +489,14 @@ public class GeneralColl {
     public void save() {
         try (BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream("afterStudyGroup.json"))) {
             Gson gson = new Gson();
-            String json = gson.toJson(genCollection);
+            String json = gson.toJson(getGeneralColl());
             stream.write(json.getBytes());
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
     public void show() {
-        if (!genCollection.isEmpty()) {
+        if (!getGeneralColl().isEmpty()) {
             for (StudyGroup studyGroup : getGeneralColl()) {
                 System.out.println(studyGroup.toString());
             }

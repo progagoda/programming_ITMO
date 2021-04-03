@@ -4,10 +4,10 @@ import general.Coordinates;
 import general.FormOfEducation;
 import general.Person;
 import general.Semester;
-
+import helpers.Messages;
 import java.time.ZonedDateTime;
 import java.util.Random;
-public class StudyGroup {
+public class StudyGroup  implements  Comparable<StudyGroup>{
     private Long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
@@ -27,17 +27,7 @@ public class StudyGroup {
      * @param semesterEnum  номер семместра
      * @param groupAdmin староста группы
      */
-    public StudyGroup(String name, Coordinates coordinates, Long studentsCount, long expelledStudents, FormOfEducation formOfEducation, Semester semesterEnum, Person groupAdmin) {
-        this.id = randomId().longValue();
-        this.name = name;
-        this.coordinates = coordinates;
-        this.creationDate =  ZonedDateTime.now();
-        this.studentsCount = studentsCount;
-        this.expelledStudents = expelledStudents;
-        this.formOfEducation = formOfEducation;
-        this.semesterEnum = semesterEnum;
-        this.groupAdmin = groupAdmin;
-    }
+
     /**
      * Геттер id
      * @return id
@@ -100,8 +90,13 @@ public class StudyGroup {
      * Сеттер name
      * @param name name
      */
-    public void setName(String name) {
-        this.name = name;
+    public boolean setName(String name) {
+        if (name == null || name.equals("")) {
+            return false;
+        } else {
+            this.name = name;
+            return true;
+        }
     }
 
     /**
@@ -172,16 +167,26 @@ public class StudyGroup {
      * Сеттер studentsCount
      * @param  studentsCount studentsCount
      */
-    public void setStudentsCount(Long studentsCount) {
-        this.studentsCount = studentsCount;
+    public boolean setStudentsCount(Long studentsCount) {
+        if (studentsCount > 0) {
+            this.studentsCount = studentsCount;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
      * Сеттер expelledStudents
      * @param expelledStudents expelledStudents
      */
-    public void setExpelledStudents(long expelledStudents) {
-        this.expelledStudents = expelledStudents;
+    public boolean setExpelledStudents(long expelledStudents) {
+        if (expelledStudents> 0) {
+            this.expelledStudents = expelledStudents;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -225,6 +230,28 @@ public class StudyGroup {
                 ", semesterEnum=" + semesterEnum +
                 ", groupAdmin=" + groupAdmin +
                 '}';
+    }
+    /**
+     * Выводит информацию в строков виде об объекте
+     */
+    public void printInfoAboutElement() {
+        Messages.normalMessageOutput("id - " + id + "\n" +
+                "Имя - " + name + "\n" +
+                "Координаты x и y - " + coordinates.getX() + ", " + coordinates.getY() + "\n" +
+                "Дата создания - " + getCreationDate() + "\n" +
+                "Количество студентов - " +  studentsCount+ "\n" +
+                "Отчисленные студенты - " + expelledStudents+ "\n" +
+                "Форма обучения - " + formOfEducation + "\n" +
+                "Номер семместра - " + semesterEnum + "\n" +
+                "Староста группы - " + groupAdmin + "\n");
+    }
+
+    /**
+     * Метод сравнения 2 объектов класса Flat
+     */
+    @Override
+    public int compareTo(StudyGroup o) {
+        return this.getName().compareTo(o.getName());
     }
 }
 
