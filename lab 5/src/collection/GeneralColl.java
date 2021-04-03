@@ -2,7 +2,6 @@ package collection;
 import general.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import java.util.*;
 import java.io.*;
 import java.lang.reflect.Type;
