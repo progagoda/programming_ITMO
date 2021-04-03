@@ -291,7 +291,7 @@ public class GeneralCollection {
     /**
      * Получение ключа элемента по его id
      *
-     * @param id id элемента
+     * @param id элемента
      * @return ключ если существует элемент с данным id, если же наоборот то возвращается null
      *//*
     public Integer getKeyById(Integer id) {
@@ -328,7 +328,15 @@ public class GeneralCollection {
     public void remove_by_id(int id) {
         genCollection.remove(id);
     }
+    /**
+     * Метод - вывод информации об коллекции, команда info
+     */
+    public void printInfoAboutCollection() {
+        Messages.normalMessageOutput("Тип коллекции - " + getCollection().getClass().getName() + "\n" +
+                "Дата иницализации - " + getDate() + "\n" +
+                "Кол-во элементов - " + getCollection().size());
 
+    }
     /**
      * Геттер genCollection
      *
