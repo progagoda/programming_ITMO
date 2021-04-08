@@ -5,6 +5,8 @@ import general.FormOfEducation;
 import general.Person;
 import general.Semester;
 import helpers.Messages;
+
+import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
 import java.util.Random;
 public class StudyGroup  implements  Comparable<StudyGroup>{
@@ -69,13 +71,15 @@ public class StudyGroup  implements  Comparable<StudyGroup>{
         Integer num = random.nextInt(100000);
         return num;
     }
-
+    public Coordinates getCoordinates() {
+        return coordinates;
+    }
     /**
      * Геттер creationDate
      * @return creationDate
      */
-    public ZonedDateTime getCreationDate() {
-        return creationDate;
+    public String getCreationDate() {
+        return new SimpleDateFormat("HH:mm:ss.SSS dd-MM-yyyy").format(creationDate);
     }
 
     /**
@@ -175,6 +179,10 @@ public class StudyGroup  implements  Comparable<StudyGroup>{
             return false;
         }
     }
+    public boolean setCoordinates(Coordinates coordinates) {
+        this.coordinates = coordinates;
+        return true;
+    }
 
     /**
      * Сеттер expelledStudents
@@ -193,16 +201,26 @@ public class StudyGroup  implements  Comparable<StudyGroup>{
      * Сеттер formOfEducation
      * @param  formOfEducation formOfEducation
      */
-    public void setFormOfEducation(FormOfEducation formOfEducation) {
-        this.formOfEducation = formOfEducation;
+    public boolean setFormOfEducation(FormOfEducation formOfEducation) {
+        if (formOfEducation == null) {
+            return false;
+        } else {
+            this.formOfEducation= formOfEducation;
+            return true;
+        }
     }
 
     /**
      * Сеттер semesterEnum
      * @param semesterEnum semesterEnum
      */
-    public void setSemesterEnum(Semester semesterEnum) {
-        this.semesterEnum = semesterEnum;
+    public boolean setSemesterEnum(Semester semesterEnum) {
+        if (semesterEnum == null) {
+            return false;
+        } else {
+            this.semesterEnum= semesterEnum;
+            return true;
+        }
     }
 
     /**
@@ -211,25 +229,6 @@ public class StudyGroup  implements  Comparable<StudyGroup>{
      */
     public void setGroupAdmin(Person groupAdmin) {
         this.groupAdmin = groupAdmin;
-    }
-
-    /**
-     * Переопределение метода toString
-     * @return строковое представление объекта
-     */
-    @Override
-    public String toString() {
-        return "StudyGroup{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", coordinates=" + coordinates +
-                ", creationDate=" + creationDate +
-                ", studentCount=" + studentsCount +
-                ", expelledStudents=" + expelledStudents +
-                ", formOfEducation=" + formOfEducation +
-                ", semesterEnum=" + semesterEnum +
-                ", groupAdmin=" + groupAdmin +
-                '}';
     }
     /**
      * Выводит информацию в строков виде об объекте
@@ -247,7 +246,7 @@ public class StudyGroup  implements  Comparable<StudyGroup>{
     }
 
     /**
-     * Метод сравнения 2 объектов класса Flat
+     * Метод сравнения 2 объектов класса StudyGroup
      */
     @Override
     public int compareTo(StudyGroup o) {

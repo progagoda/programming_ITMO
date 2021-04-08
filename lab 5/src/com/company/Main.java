@@ -1,14 +1,8 @@
 package com.company;
-
-import commands.Help;
-import commands.StartCommand;
 import collection.GeneralColl;
-
-
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import general.*;
+import helpers.ProgramStarter;
+
 /**
  * Класс Main
  */
@@ -31,6 +25,3 @@ public class Main {
         programStarter.start();
             }
         }
-
-    }
-}

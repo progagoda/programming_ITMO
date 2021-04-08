@@ -1,22 +1,37 @@
 package commands;
-import general.GeneralColl;
+import collection.Receiver;
+import helpers.Messages;
+
+import java.util.Scanner;
+
 /**
  * Класс, реализующий программу clear, очищающую коллекцию
  */
-public class Clear  implements  CommandDo{
-    /**
-     * Конструктор по умолчанию, который добавляет объект класса команды в коллекцию команд
-     */
-    public Clear() {
-        StartCommand.addCommand("clear", this);
+public class Clear  extends Command{
+    public Clear(Receiver receiver) {
+        super(receiver);
     }
-    /**
-     * Обращение к методу {@link GeneralCollection#clear()}
-     * @param name строковое значение, аргумент команды (null)
-     * @param generalCollection класс с коллекцией над которой производятся действия
-     */
+
     @Override
-    public void execute(String name, GeneralColl generalCollection) {
-        generalCollection.clear();
+    public void printInfoAboutCommand() {
+        System.out.println("clear : очистить коллекцию");
+    }
+
+    @Override
+    public void execute(String[] args) {
+        if(args.length == 1){
+            if(receiver.clear()){
+                Messages.normalMessageOutput("Очистка коллекции прошла успешно!");
+            } else {
+                Messages.normalMessageOutput("Ну чистить нечего, так что я почистил пустоту");
+            }
+        } else {
+            Messages.normalMessageOutput("Неправильный ввод аргументов, давай по новой, все фигня");
+        }
+    }
+
+    @Override
+    public void execute(String[] args, Scanner scanner) {
+        this.execute(args);
     }
 }

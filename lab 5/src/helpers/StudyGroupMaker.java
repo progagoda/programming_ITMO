@@ -1,18 +1,12 @@
 package helpers;
 import general.*;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.Scanner;
+
 /**
- * Класс для создания Нового Flat из командной строки / файла
+ * Класс для создания Новой StudyGroup из командной строки / файла
  */
 public class StudyGroupMaker {
-    BufferedInputStream bf = new BufferedInputStream(System.in);
-    BufferedReader scanner = new BufferedReader(
-            new InputStreamReader(bf, StandardCharsets.UTF_8));
     /**
      * Создание новой Group
      *
@@ -20,14 +14,14 @@ public class StudyGroupMaker {
      * @return возвращает новую созданную Group
      */
 
-    public StudyGroup makeGroup(BufferedReader scanner) {
+    public StudyGroup makeGroup(Scanner scanner) {
         StudyGroup group = new StudyGroup();
         String line;
         while (true) {
             System.out.print("Введите значение для поля studentCount: ");
             try {
-                if (scanner.read()!=-1) {
-                    line = scanner.readLine().trim();
+                if (scanner.hasNextLine()) {
+                    line = scanner.nextLine().trim();
                 } else {
                     return null;
                 }
@@ -47,8 +41,8 @@ public class StudyGroupMaker {
         while (true) {
             System.out.print("Введите значение для поля name: ");
             try {
-                if (scanner.read()!=-1) {
-                    line = scanner.readLine().trim();
+                if (scanner.hasNextLine()) {
+                    line = scanner.nextLine().trim();
                 } else {
                     return null;
                 }
@@ -57,7 +51,7 @@ public class StudyGroupMaker {
                     System.out.println("Добавление элемента остановлено.");
                     return null;
                 }
-                if (StudyGroup.setName(line)) {
+                if (group.setName(line)) {
                     break;
                 }
             } catch (Exception e) {
@@ -66,28 +60,28 @@ public class StudyGroupMaker {
         }
 
         while (true) {
-            System.out.print("Введите значение для поля numberOfRooms: ");
+            System.out.print("Введите значение для поля expelledStudents: ");
             try {
-                if (scanner.read()!=-1) {
-                    line = scanner.readLine().trim();
+                if (scanner.hasNextLine()) {
+                    line = scanner.nextLine().trim();
                 } else {
                     return null;
                 }
                 System.out.println();
                 if (line.equals("end")) {
-                    System.out.println("Ну как скажите, тогда дальше не пойдем.");
+                    System.out.println("Добавление элемента остановлено.");
                     return null;
                 }
-                if (StudyGroup.setExpelledStudents(Long.valueOf(line))) {
+                if (group.setExpelledStudents(Long.valueOf(line))) {
                     break;
                 }
             } catch (Exception e) {
-                System.out.println("Ошибка ввода поля numberOfRooms, попробуйте еще раз или напишите end");
+                System.out.println("Ошибка ввода поля expelledStudents, попробуйте еще раз или напишите end");
             }
         }
 
-        House house = new House();
-        System.out.println("Теперь необходимо создать объект дома, для этого:");
+        Person  person = new Person();
+        System.out.println("Теперь необходимо создать объект старосты группы, для этого:");
         while (true) {
             System.out.print("Введите значение для поля name: ");
             try {
@@ -98,10 +92,10 @@ public class StudyGroupMaker {
                 }
                 System.out.println();
                 if (line.equals("end")) {
-                    System.out.println("Ну как скажите, тогда дальше не пойдем.");
+                    System.out.println("Добавление элемента остановлено.");
                     return null;
                 }
-                if (house.setName(line)) {
+                if (person.setName(line)) {
                     break;
                 }
             } catch (Exception e) {
@@ -110,7 +104,7 @@ public class StudyGroupMaker {
         }
 
         while (true) {
-            System.out.print("Введите значение для поля year: ");
+            System.out.print("Введите значение для поля passportID: ");
             try {
                 if (scanner.hasNextLine()) {
                     line = scanner.nextLine().trim();
@@ -119,19 +113,19 @@ public class StudyGroupMaker {
                 }
                 System.out.println();
                 if (line.equals("end")) {
-                    System.out.println("Ну как скажите, тогда дальше не пойдем.");
+                    System.out.println("Добавление элемента остановлено.");
                     return null;
                 }
-                if (house.setYear(Long.valueOf(line))) {
+                if (person.setPassportID(line)) {
                     break;
                 }
             } catch (Exception e) {
-                System.out.println("Ошибка ввода поля year, попробуйте еще раз или напишите end");
+                System.out.println("Ошибка ввода поля passportID, попробуйте еще раз или напишите end");
             }
         }
 
         while (true) {
-            System.out.print("Введите значение для поля numberOfFlatsOnFloor: ");
+            System.out.print("Введите значение для поля eyeColor, есть такие значения + " + Arrays.toString(Color.values()) + " : ");
             try {
                 if (scanner.hasNextLine()) {
                     line = scanner.nextLine().trim();
@@ -140,21 +134,60 @@ public class StudyGroupMaker {
                 }
                 System.out.println();
                 if (line.equals("end")) {
-                    System.out.println("Ну как скажите, тогда дальше не пойдем.");
+                    System.out.println("Добавление элемента остановлено.");
                     return null;
                 }
-                if (house.setNumberOfFlatsOnFloor(Long.valueOf(line))) {
+                if (person.setEyeColor(Color.valueOf(line))) {
                     break;
                 }
             } catch (Exception e) {
-                System.out.println("Ошибка ввода поля numberOfFlatsOnFloor, попробуйте еще раз или напишите end");
+                System.out.println("Ошибка ввода поля eyeColor, попробуйте еще раз или напишите end");
             }
         }
-
-        flat.setHouse(house);
+        while (true) {
+            System.out.print("Введите значение для поля hairColor, есть такие значения + " + Arrays.toString(Color.values()) + " : ");
+            try {
+                if (scanner.hasNextLine()) {
+                    line = scanner.nextLine().trim();
+                } else {
+                    return null;
+                }
+                System.out.println();
+                if (line.equals("end")) {
+                    System.out.println("Добавление элемента остановлено.");
+                    return null;
+                }
+                if (person.setHairColor(Color.valueOf(line))) {
+                    break;
+                }
+            } catch (Exception e) {
+                System.out.println("Ошибка ввода поля hairColor, попробуйте еще раз или напишите end");
+            }
+        }
+        while (true) {
+            System.out.print("Введите значение для поля nationality, есть такие значения + " + Arrays.toString(Country.values()) + " : ");
+            try {
+                if (scanner.hasNextLine()) {
+                    line = scanner.nextLine().trim();
+                } else {
+                    return null;
+                }
+                System.out.println();
+                if (line.equals("end")) {
+                    System.out.println("Добавление элемента остановлено.");
+                    return null;
+                }
+                if (person.setHairColor(Color.valueOf(line))) {
+                    break;
+                }
+            } catch (Exception e) {
+                System.out.println("Ошибка ввода поля nationality, попробуйте еще раз или напишите end");
+            }
+        }
+        group.setGroupAdmin(person);
 
         Coordinates coordinates = new Coordinates();
-        System.out.println("Теперь необходимо создать Координаты, для этого:");
+        System.out.println("Теперь необходимо создать Координаты, для группы:");
         while (true) {
             System.out.print("Введите значение для поля x: ");
             try {
@@ -165,10 +198,10 @@ public class StudyGroupMaker {
                 }
                 System.out.println();
                 if (line.equals("end")) {
-                    System.out.println("Ну как скажите, тогда дальше не пойдем.");
+                    System.out.println("Добавление элемента остановлено.");
                     return null;
                 }
-                if (coordinates.setX(Integer.valueOf(line))) {
+                if (coordinates.setX(Long.valueOf(line))) {
                     break;
                 }
             } catch (Exception e) {
@@ -186,7 +219,7 @@ public class StudyGroupMaker {
                 }
                 System.out.println();
                 if (line.equals("end")) {
-                    System.out.println("Ну как скажите, тогда дальше не пойдем.");
+                    System.out.println("Добавление элемента остановлено.");
                     return null;
                 }
                 if (coordinates.setY(Float.valueOf(line))) {
@@ -197,10 +230,10 @@ public class StudyGroupMaker {
             }
         }
 
-        flat.setCoordinates(coordinates);
+        group.setCoordinates(coordinates);
 
         while (true) {
-            System.out.print("Введите значение для поля transport, есть такие значения + " + Arrays.toString(Transport.values()) + " : ");
+            System.out.print("Введите значение для поля formOfEducation, есть такие значения + " + Arrays.toString(FormOfEducation.values()) + " : ");
             try {
                 if (scanner.hasNextLine()) {
                     line = scanner.nextLine().trim();
@@ -209,19 +242,19 @@ public class StudyGroupMaker {
                 }
                 System.out.println();
                 if (line.equals("end")) {
-                    System.out.println("Ну как скажите, тогда дальше не пойдем.");
+                    System.out.println("Добавление элемента остановлено.");
                     return null;
                 }
-                if (flat.setTransport(Transport.valueOf(line))) {
+                if (group.setFormOfEducation(FormOfEducation.valueOf(line))) {
                     break;
                 }
             } catch (Exception e) {
-                System.out.println("Ошибка ввода поля transport, попробуйте еще раз или напишите end");
+                System.out.println("Ошибка ввода поля formOfEducation, попробуйте еще раз или напишите end");
             }
         }
 
         while (true) {
-            System.out.print("Введите значение для поля view, есть такие значения + " + Arrays.toString(View.values()) + " : ");
+            System.out.print("Введите значение для поля semesterEnum, есть такие значения + " + Arrays.toString(Semester.values()) + " : ");
             try {
                 if (scanner.hasNextLine()) {
                     line = scanner.nextLine().trim();
@@ -230,39 +263,20 @@ public class StudyGroupMaker {
                 }
                 System.out.println();
                 if (line.equals("end")) {
-                    System.out.println("Ну как скажите, тогда дальше не пойдем.");
+                    System.out.println("Добавление элемента остановлено.");
                     return null;
                 }
-                if (flat.setView(View.valueOf(line))) {
+                if (group.setSemesterEnum(Semester.valueOf(line))) {
                     break;
                 }
             } catch (Exception e) {
-                System.out.println("Ошибка ввода поля view, попробуйте еще раз или напишите end");
+                System.out.println("Ошибка ввода поля semesterEnum, попробуйте еще раз или напишите end");
             }
         }
 
-        while (true) {
-            System.out.print("Введите значение для поля furnish, есть такие значения + " + Arrays.toString(Furnish.values()) + " : ");
-            try {
-                if (scanner.hasNextLine()) {
-                    line = scanner.nextLine().trim();
-                } else {
-                    return null;
-                }
-                System.out.println();
-                if (line.equals("end")) {
-                    System.out.println("Ну как скажите, тогда дальше не пойдем.");
-                    return null;
-                }
-                if (flat.setFurnish(Furnish.valueOf(line))) {
-                    break;
-                }
-            } catch (Exception e) {
-                System.out.println("Ошибка ввода поля furnish, попробуйте еще раз или напишите end");
-            }
-        }
 
-        return flat;
+
+        return group;
     }
 
     /**

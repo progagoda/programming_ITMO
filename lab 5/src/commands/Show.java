@@ -1,26 +1,35 @@
 package commands;
-import general.GeneralColl;
+import collection.Receiver;
+import helpers.Messages;
+
+import java.util.Scanner;
+
 /**
  * Класс, реализующий программу show, которая выводит в стандартный поток вывода все элементы коллекции в строковом представлении
  */
-public class Show implements CommandDo {
-    /**
-     * Конструктор по умолчанию, который добавляет объект класса команды в коллекцию команд
-     */
-    public Show() {
-        StartCommand.addCommand("show", this);
+public class Show extends Command {
+    public Show(Receiver receiver) {
+        super(receiver);
     }
 
-    /**
-     * Обращение к методу {@link GeneralColl
-#show()}
-     * @param name строковое значение, аргумент команды(null)
-     * @param generalColl
- класс с коллекцией, над которой производятся действия
-     */
     @Override
-    public void execute(String name, GeneralColl generalColl){
-                GeneralColl.show();
+    public void printInfoAboutCommand() {
+        System.out.println("show : вывести в стандартный поток вывода все элементы коллекции в строковом представлении");
+    }
+
+    @Override
+    public void execute(String[] args) {
+        if(args.length == 1){
+            if(!receiver.printAllElements()){
+                Messages.normalMessageOutput("В коллекции нет элементов, вывод недоступен");
+            }
+        } else {
+            Messages.normalMessageOutput("Непавильны ввод агрументов, попробуйте еще раз");
+        }
+    }
+
+    @Override
+    public void execute(String[] args, Scanner scanner) {
+        this.execute(args);
     }
 }
-

@@ -7,9 +7,7 @@ public class Receiver {
     private final Invoker invoker;
 
     /**
-     * Конструктор
-     * @param collectionManager добалвяет менеджер коллекции
-     * @param invoker добавляет исполнителя
+     * Класс ресивер (получатель), в котором описана логика некоторых команд
      */
     public Receiver(GeneralColl collectionManager, Invoker invoker) {
         this.collectionManager = collectionManager;
@@ -50,7 +48,12 @@ public class Receiver {
     public boolean getHead() {
         return collectionManager.getHeadOfCollection();
     }
-
+    /**
+     * Логика для show
+     */
+    public boolean printAllElements(){
+        return collectionManager.printAllElements();
+    }
     /**
      * Логика для add
      */

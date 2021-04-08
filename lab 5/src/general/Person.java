@@ -18,8 +18,9 @@ public class Person {
      * Сеттер name
      * @param name
      */
-    public void setName(String name) {
+    public boolean setName(String name) {
         this.name = name;
+        return true;
     }
     /**
      * Геттер  passportID
@@ -32,8 +33,9 @@ public class Person {
      * Сеттер  passportID
      * @param  passportID
      */
-    public void setPassportID(String passportID) {
-        this.passportID = passportID;
+    public boolean setPassportID(String passportID) {
+        this.passportID=passportID;
+        return true;
     }
     /**
      * Геттер  eyeColor
@@ -46,8 +48,13 @@ public class Person {
      * Сеттер  eyeColor
      * @param  eyeColor
      */
-    public void setEyeColor(Color eyeColor) {
-        this.eyeColor = eyeColor;
+    public boolean setEyeColor(Color eyeColor) {
+        if (eyeColor == null) {
+            return false;
+        } else {
+            this.eyeColor = eyeColor;
+            return true;
+        }
     }
     /**
      * Геттер  hairColor
@@ -60,8 +67,13 @@ public class Person {
      * Сеттер  hairColor
      * @param  hairColor
      */
-    public void setHairColor(Color hairColor) {
-        this.hairColor = hairColor;
+    public boolean setHairColor(Color hairColor) {
+        if (hairColor == null) {
+            return false;
+        } else {
+            this.hairColor = hairColor;
+            return true;
+        }
     }
     /**
      * Геттер  nationality
@@ -74,8 +86,13 @@ public class Person {
      * Сеттер  nationality
      * @param  nationality
      */
-    public void setNationality(Country nationality) {
-        this.nationality = nationality;
+    public boolean setNationality(Country nationality) {
+        if (nationality == null) {
+            return false;
+        } else {
+            this.nationality= nationality;
+            return true;
+        }
     }
 
     @Override

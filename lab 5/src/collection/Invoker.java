@@ -2,8 +2,6 @@ package collection;
 
 import commands.Command;
 import helpers.Messages;
-
-import java.io.BufferedInputStream;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -21,7 +19,7 @@ public class Invoker{
      *  @param scanner - сканер, которые считывает данные из командной строки / файла
      * @param args - аргументы, полученные при помощи сканнера
      */
-    public void executeCommand(BufferedInputStream scanner, String[] args) {
+    public void executeCommand(Scanner scanner, String[] args) {
         if (args.length > 0) {
             Command command = hashMap.get(args[0]);
             if (command == null) {

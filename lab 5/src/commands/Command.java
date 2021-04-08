@@ -1,7 +1,6 @@
 package commands;
 import collection.Receiver;
-
-import java.io.BufferedInputStream;
+import java.util.Scanner;
 
 /**
  * Абстрактный класс для команд
@@ -36,5 +35,5 @@ public abstract class Command {
      * @param args - аргументы для команды
      * @param scanner - сканнер
      */
-    public abstract void execute(String[] args, BufferedInputStream scanner);
+    public abstract void execute(String[] args, Scanner scanner);
 }

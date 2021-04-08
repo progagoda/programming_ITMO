@@ -4,6 +4,7 @@ import collection.GeneralColl;
 import collection.Receiver;
 import helpers.Messages;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Collection;
@@ -24,11 +25,11 @@ public class Add extends Command {
 
     @Override
     public void execute(String[] args) {
-        this.execute(args, new BufferedReader(in));
+        this.execute(args, new Scanner(System.in));
     }
 
     @Override
-    public void execute(String[] args,BufferedReader scanner) {
+    public void execute(String[] args, Scanner scanner) {
         if(args.length == 1){
             if (receiver.addElement(scanner)){
                 Messages.normalMessageOutput("Элемент успешно добавлен");
