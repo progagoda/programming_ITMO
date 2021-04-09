@@ -1,15 +1,11 @@
 package general;
 
-import general.Coordinates;
-import general.FormOfEducation;
-import general.Person;
-import general.Semester;
 import helpers.Messages;
 
 import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
 import java.util.Random;
-public class StudyGroup  implements  Comparable<StudyGroup>{
+public class StudyGroup implements  Comparable<StudyGroup>{
     private Long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
@@ -19,17 +15,6 @@ public class StudyGroup  implements  Comparable<StudyGroup>{
     private FormOfEducation formOfEducation; //Поле не может быть null
     private Semester semesterEnum; //Поле не может быть null
     private Person groupAdmin; //Поле не может быть null
-    /**
-     * Конструктор HumanBeing
-     * @param name имя
-     * @param coordinates координаты
-     * @param studentsCount число студентов
-     * @param expelledStudents отчисленные студенты
-     * @param formOfEducation вид обучения
-     * @param semesterEnum  номер семместра
-     * @param groupAdmin староста группы
-     */
-
     /**
      * Геттер id
      * @return id

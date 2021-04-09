@@ -1,10 +1,11 @@
 package collection;
 import comparators.NameComparator;
-import general.*;
+import helpers.FileManager;
 import helpers.Messages;
+import general.StudyGroup;
 import helpers.StudyGroupMaker;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
+import java.time.ZonedDateTime;
 import java.util.*;
 import java.io.*;
 
@@ -12,17 +13,18 @@ import java.io.*;
  * Класс для колекции с объектами StudyGroup и его управлением
  */
 public class GeneralColl {
-    private final File file;
-    private final PriorityQueue<StudyGroup> collection;
+    private  FileManager fileManager;
+    private  PriorityQueue<StudyGroup> collection;
     private final Date date;
+    private ZonedDateTime lastInitTime;
 
     /**
      * Конструкотор.
      *
-     * @param fileName название CSV файла, который будет считыватся для дальнейших действий
+     * @param fileName название Json файла, который будет считыватся для дальнейших действий
      */
-    public GeneralColl(String fileName) {
-        this.file = new File(fileName);
+    public GeneralColl(FileManager fileName) {
+        this.fileManager = fileManager;
         collection = new PriorityQueue<>(new NameComparator());
         date = new Date();
     }
@@ -74,8 +76,17 @@ public class GeneralColl {
      *
      * @return файл
      */
-    public File getFile() {
-        return file;
+    public FileManager getFile() {
+        return fileManager;
+    }
+    /**
+     * Читает коллекцию из файла
+     */
+    public void loadCollection() {
+        collection = fileManager.readCollection();
+        lastInitTime = ZonedDateTime.now();
+
+
     }
 
     /**

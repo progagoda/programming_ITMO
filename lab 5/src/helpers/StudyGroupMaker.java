@@ -177,7 +177,7 @@ public class StudyGroupMaker {
                     System.out.println("Добавление элемента остановлено.");
                     return null;
                 }
-                if (person.setHairColor(Color.valueOf(line))) {
+                if (person.setNationality(Country.valueOf(line))) {
                     break;
                 }
             } catch (Exception e) {

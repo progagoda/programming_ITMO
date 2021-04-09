@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.Scanner;
 
 /**
- * Класс, реализующий программу insert key, которая добавляет новый элемент с заданным ключом
+ * Класс, реализующий команду add, которая добавляет новый элемент
  */
 public class Add extends Command {
     public Add(Receiver receiver) {
