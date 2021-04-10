@@ -1,7 +1,6 @@
 package commands;
 import collection.Receiver;
 import helpers.Messages;
-
 import java.util.Scanner;
 
 /**
@@ -24,7 +23,7 @@ public class Show extends Command {
                 Messages.normalMessageOutput("В коллекции нет элементов, вывод недоступен");
             }
         } else {
-            Messages.normalMessageOutput("Непавильны ввод агрументов, попробуйте еще раз");
+            Messages.normalMessageOutput("Неправильный ввод агрументов, попробуйте еще раз");
         }
     }
 

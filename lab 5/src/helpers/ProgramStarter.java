@@ -52,10 +52,10 @@ public class ProgramStarter {
         invoker.registerNewCommand("show", new Show(receiver));
         invoker.registerNewCommand("add", new Add(receiver));
         invoker.registerNewCommand("help", new Help(receiver));
+        invoker.registerNewCommand("exit", new Exit(receiver));
        /* invoker.registerNewCommand("clear", new ClearCommand(receiver));
         invoker.registerNewCommand("count_less_than_number_of_rooms", new CountLessCommand(receiver));
         invoker.registerNewCommand("execute_script", new ExecuteScriptCommand(receiver));
-        invoker.registerNewCommand("exit", new ExitCommand(receiver));
         invoker.registerNewCommand("head", new HeadCommand(receiver));
         invoker.registerNewCommand("info", new InfoCommand(receiver));
         invoker.registerNewCommand("min_by_coordinates", new MinByCoordinatesCommand(receiver));

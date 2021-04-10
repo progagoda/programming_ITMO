@@ -15,6 +15,7 @@ public class StudyGroup implements  Comparable<StudyGroup>{
     private FormOfEducation formOfEducation; //Поле не может быть null
     private Semester semesterEnum; //Поле не может быть null
     private Person groupAdmin; //Поле не может быть null
+
     /**
      * Геттер id
      * @return id
@@ -63,8 +64,8 @@ public class StudyGroup implements  Comparable<StudyGroup>{
      * Геттер creationDate
      * @return creationDate
      */
-    public String getCreationDate() {
-        return new SimpleDateFormat("HH:mm:ss.SSS dd-MM-yyyy").format(creationDate);
+    public ZonedDateTime getCreationDate() {
+        return creationDate;
     }
 
     /**

@@ -16,7 +16,7 @@ public class FileManager {
     File file;
 
     public FileManager(String fileName) {
-        this.envVariable = "StudyGroup.json";
+        this.envVariable = fileName;
         try {
             this.file = new File(System.getenv(envVariable));
         } catch (NullPointerException e) {
@@ -29,7 +29,7 @@ public class FileManager {
      * @param collection -коллекция, которую нужно записать
      */
     public void writeCollection(PriorityQueue collection) {
-        if (System.getenv().get(envVariable) != null) {
+        if (System.getenv().get(envVariable)!= null) {
             if (!file.canWrite()) {
                 System.out.println("\u001B[37m" + "\u001B[31m" + "Недостаточно прав для записи в файл. Добавьте права на запись " + "\u001B[31m" + "\u001B[37m");
                 try (PrintWriter out = new PrintWriter(new PrintWriter(new File("/home/s285384/prog5/lib/file2")))) {

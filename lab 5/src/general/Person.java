@@ -97,8 +97,8 @@ public class Person {
 
     @Override
     public String toString() {
-        return "general.Person{" +
-                ", name = '" + name + '\'' +
+        return "{" +
+                "  name = '" + name + '\'' +
                 ", passportID = " + passportID +
                 ", eyeColor = " + eyeColor +
                 ", hairColor = " + hairColor +
