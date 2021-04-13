@@ -1,29 +1,33 @@
 package collection;
+
+import comparators.GroupAdmin_Comparator;
+import comparators.IdComparator;
 import comparators.NameComparator;
+import general.Country;
+import general.Semester;
 import helpers.FileManager;
 import helpers.Messages;
 import general.StudyGroup;
 import helpers.StudyGroupMaker;
 
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.io.*;
 
 /**
  * Класс для колекции с объектами StudyGroup и его управлением
  */
 public class GeneralColl {
-    private  FileManager fileManager;
-    private  PriorityQueue<StudyGroup> collection;
+    private FileManager fileManager;
     private final Date date;
     private ZonedDateTime lastInitTime;
-
+    public static PriorityQueue<StudyGroup> collection;
     /**
      * Конструкотор.
      *
-     * @param fileName название Json файла, который будет считыватся для дальнейших действий
+     * @param fileManager название Json файла, который будет считыватся для дальнейших действий
      */
-    public GeneralColl(FileManager fileName) {
+    public GeneralColl(FileManager fileManager) {
         this.fileManager = fileManager;
         collection = new PriorityQueue<>(new NameComparator());
         date = new Date();
@@ -79,6 +83,7 @@ public class GeneralColl {
     public FileManager getFile() {
         return fileManager;
     }
+
     /**
      * Читает коллекцию из файла
      */
@@ -97,6 +102,7 @@ public class GeneralColl {
     public Date getDate() {
         return date;
     }
+
     /**
      * Очистить коллекцию
      *
@@ -110,6 +116,101 @@ public class GeneralColl {
         } else {
             return false;
         }
+    }
+
+    /**
+     * Реализация команды update
+     *
+     * @param id      id по которому идет обновление элемента
+     * @param scanner Сканнер
+     * @return true / false, если выполнилось обновление элемента коллекции
+     */
+    public boolean updateElement(Long id, Scanner scanner) {
+        StudyGroup group;
+        if (!IdManager.checkUniq(id) && getCollection().size() > 0 && (group = new StudyGroupMaker().makeGroup(scanner)) != null) {
+            PriorityQueue<StudyGroup> queue = new PriorityQueue<>(new NameComparator());
+            while (!getCollection().peek().getId().equals(id)) {
+                queue.add(getCollection().poll());
+            }
+            ZonedDateTime date = ZonedDateTime.now();
+            group.setCreationDate(date);
+
+            group.setId(id);
+            getCollection().add(group);
+            while (queue.size() > 0) {
+                getCollection().add(queue.poll());
+            }
+        } else {
+            return false;
+        }
+        return true;
+    }
+    /**
+     * Реализация команды remove_greater
+     *
+     * @param scanner Сканнер
+     * @return true / false, если выполнилось удаление элементов коллекции
+     */
+    public boolean add_if_min(Scanner scanner) {
+        StudyGroup group;
+        if (getCollection().size() > 0) {
+            if ((group = new StudyGroupMaker().makeGroup(scanner)) != null) {
+                try {
+                    while (true) {
+                        if (getCollection().size() > 0 && getCollection().peek().compareTo(group) < 0) {
+                            IdManager.removeUsedId(getCollection().poll().getId());
+                        } else {
+                            break;
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return false;
+                }
+            } else {
+                Messages.normalMessageOutput("Не удалось получить элемент для сравнения.");
+                return false;
+            }
+        } else {
+            Messages.normalMessageOutput("В коллекции нет элементов, нечего удалять");
+            return false;
+        }
+        Messages.normalMessageOutput("Все элементы, меньше данного - удалены!");
+        return true;
+    }
+
+    /**
+     * Реализация команды remove_greater
+     *
+     * @param scanner Сканнер
+     * @return true / false, если выполнилось удаление элементов коллекции
+     */
+    public boolean removeGreatest(Scanner scanner) {
+        StudyGroup group;
+        if (getCollection().size() > 0) {
+            if ((group = new StudyGroupMaker().makeGroup(scanner)) != null) {
+                try {
+                    while (true) {
+                        if (getCollection().size() > 0 && getCollection().peek().compareTo(group) > 0) {
+                            IdManager.removeUsedId(getCollection().poll().getId());
+                        } else {
+                            break;
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return false;
+                }
+            } else {
+                Messages.normalMessageOutput("Не удалось получить элемент для сравнения.");
+                return false;
+            }
+        } else {
+            Messages.normalMessageOutput("В коллекции нет элементов, нечего удалять");
+            return false;
+        }
+        Messages.normalMessageOutput("Все элементы, меньше данного - удалены!");
+        return true;
     }
 
     /**
@@ -139,8 +240,10 @@ public class GeneralColl {
             return false;
         }
     }
+
     /**
      * Реализация команды show
+     *
      * @return true/false если команда выполнилась верно
      */
     public boolean printAllElements() {
@@ -151,6 +254,7 @@ public class GeneralColl {
             return false;
         }
     }
+
     /**
      * Реализация команды remove_by_id
      *
@@ -170,7 +274,68 @@ public class GeneralColl {
             return false;
         }
     }
-
+//    /**
+//     * Реалицаия команды printElementbySemester
+//     * @return true / false, если размер коллекции больше 0
+//     */
+//    public boolean printElementbySemester() {
+//        if (getCollection().size() > 0) {
+//            PriorityQueue<StudyGroup> newQueue = new PriorityQueue<>(getCollection());
+//            ArrayList<String> semester = new ArrayList<String>();
+//            while (newQueue.size() > 0) {
+//                if (Semester.valueOf(newQueue.poll().getSemesterEnum())) {
+//
+//                    System.out.println(newQueue);
+//                }
+//            }
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
+    /**
+     * Реалицаия команды print_field_descending_number_of_rooms
+     * @return true / false, если размер коллекции больше 0
+     */
+    public boolean printElementbyGroupAdmin(String groupAdmin) {
+        if (getCollection().size() > 0) {
+            PriorityQueue<StudyGroup> newQueue = new PriorityQueue<>(getCollection());
+            while (newQueue.size() > 0) {
+                if (newQueue.poll().getGroupAdmin().getName()==groupAdmin) {
+                    System.out.println(newQueue);
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+    /**
+     * Реализация метода filter_by_group_admin
+     * @return true / false, если размер коллекции больше 0
+     */
+    public boolean findElementbyGroupAdmin() {
+        if (getCollection().size() > 0) {
+            PriorityQueue<StudyGroup> queue = sortCollectionByComp(new GroupAdmin_Comparator());
+            Objects.requireNonNull(queue.peek()).printInfoAboutElement();
+            return true;
+        } else {
+            return false;
+        }
+    }
+    /**
+     * Реализация метода min_by_id
+     * @return true / false, если размер коллекции больше 0
+     */
+    public boolean findElementWithMinId() {
+        if (getCollection().size() > 0) {
+            PriorityQueue<StudyGroup> queue = sortCollectionByComp(new IdComparator());
+            Objects.requireNonNull(queue.peek()).printInfoAboutElement();
+            return true;
+        } else {
+            return false;
+        }
+    }
     /**
      * Реализация команды add
      *
@@ -180,6 +345,8 @@ public class GeneralColl {
     public boolean addElement(Scanner scanner) {
         StudyGroup group = new StudyGroupMaker().makeGroup(scanner);
         if (group != null) {
+            ZonedDateTime date = ZonedDateTime.now();
+            group.setCreationDate(date);
             group.setId(IdManager.findUniq(Math.abs(new Random().nextLong())));
             getCollection().add(group);
             return true;
@@ -188,70 +355,12 @@ public class GeneralColl {
         }
     }
 
-    /**
-     * Реализация команды update
-     *
-     * @param id      id по которому идет обновление элемента
-     * @param scanner Сканнер
-     * @return true / false, если выполнилось обновление элемента коллекции
-     */
-    public boolean updateId(Long id, Scanner scanner) {
-        StudyGroup group;
-        if (!IdManager.checkUniq(id) && getCollection().size() > 0 && (group = new StudyGroupMaker().makeGroup(scanner)) != null) {
-            PriorityQueue<StudyGroup> queue = new PriorityQueue<>(new NameComparator());
-            while (!getCollection().peek().getId().equals(id)) {
-                queue.add(getCollection().poll());
-            }
-            /*try {
-                group.setDate(new SimpleTimeZone(Format("HH:mm:ss.SSS dd-MM-yyyy").parse(getCollection().poll().getCreationDate()));
-            } catch (ParseException e) {
-                Messages.normalMessageOutput("Какая-то проблема с датой ?");
-                return false;
-            }*/
-
-            group.setId(id);
-            getCollection().add(group);
-            while (queue.size() > 0) {
-                getCollection().add(queue.poll());
-            }
-        } else {
-            return false;
-        }
-        return true;
-    }
 
     /**
-     * Реализация команды remove_greater
-     *
-     * @param scanner Сканнер
-     * @return true / false, если выполнилось удаление элементов коллекции
+     * Записывает коллекцию в файл
      */
-    public boolean remove_greater(Scanner scanner) {
-        StudyGroup group;
-        if (getCollection().size() > 0) {
-            if ((group = new StudyGroupMaker().makeGroup(scanner)) != null) {
-                try {
-                    while (true) {
-                        if (getCollection().size() > 0 && getCollection().peek().compareTo(group) > 0) {
-                            IdManager.removeUsedId(getCollection().poll().getId());
-                        } else {
-                            break;
-                        }
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    return false;
-                }
-            } else {
-                Messages.normalMessageOutput("Не удалось получить элемент для сравнения.");
-                return false;
-            }
-        } else {
-            Messages.normalMessageOutput("В коллекции нет элементов, нечего удалять");
-            return false;
-        }
-        Messages.normalMessageOutput("Все элементы, выше данного - удалены!");
-        return true;
+    public void saveToFile() {
+        fileManager.writeCollection(collection);
     }
 }
 

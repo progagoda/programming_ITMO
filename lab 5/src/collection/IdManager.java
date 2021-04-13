@@ -1,9 +1,10 @@
 package collection;
+
 import java.util.HashSet;
 import java.util.Random;
 
 /**
- * Класс, реализующий уникальность поля id у Flat.
+ * Класс, реализующий уникальность поля id у StudyGroup.
  */
 public class IdManager {
     /**
@@ -13,6 +14,7 @@ public class IdManager {
 
     /**
      * Метод - проверка уникальности
+     *
      * @param id номер для проверки
      * @return true/false, уникальный или нет
      */
@@ -22,6 +24,7 @@ public class IdManager {
 
     /**
      * Метод, который ищет уникальный id
+     *
      * @param id рекурсивный поиск уникального id
      * @return возвращеат уникальный id
      */
@@ -36,6 +39,7 @@ public class IdManager {
 
     /**
      * Метод - удалить id, который привязан к элементу колекции, которого больше нет
+     *
      * @param id удаляемы id номер
      */
     public static void removeUsedId(Long id) {

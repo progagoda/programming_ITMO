@@ -3,16 +3,16 @@ package helpers;
 import collection.GeneralColl;
 import collection.Invoker;
 import collection.Receiver;
-import  commands.*;
-import general.StudyGroup;
+import commands.*;
 
 import java.util.Scanner;
+
 /**
-        * Этот класс необходим для запуска основной работы программы,
-        * здесь задаются команды для Invoker,
-        * идет считывание json файла и запись структуры в коллекцию
-        * запускает LineReader для чтения данных из командной строки
-        */
+ * Этот класс необходим для запуска основной работы программы,
+ * здесь задаются команды для Invoker,
+ * идет считывание json файла и запись структуры в коллекцию
+ * запускает LineReader для чтения данных из командной строки
+ */
 public class ProgramStarter {
 
     private final GeneralColl collectionManager;
@@ -30,18 +30,18 @@ public class ProgramStarter {
      */
     public void start() {
         registerAllCommands();
-        addAllFlatsFromJson();
+        addAllFGroupsFromJson();
         LineReader lineReader = new LineReader();
         lineReader.readLine(new Scanner(System.in), invoker);
     }
 
     /**
-     * Считывает все данные из CVS файла и записывает их в коллекцию
+     * Считывает все данные из Json файла и записывает их в коллекцию
      */
-    public void addAllFlatsFromJson() {
-        String myfile="StudyGroup.json";
+    public void addAllFGroupsFromJson() {
+        String myfile = "StudyGroup.json";
         FileManager jsonParser = new FileManager(myfile);
-       jsonParser.readCollection();
+        jsonParser.readCollection();
 
     }
 
@@ -53,18 +53,20 @@ public class ProgramStarter {
         invoker.registerNewCommand("add", new Add(receiver));
         invoker.registerNewCommand("help", new Help(receiver));
         invoker.registerNewCommand("exit", new Exit(receiver));
-       /* invoker.registerNewCommand("clear", new ClearCommand(receiver));
+        invoker.registerNewCommand("clear", new Clear(receiver));
+        invoker.registerNewCommand("head", new Head(receiver));
+        invoker.registerNewCommand("info", new Info(receiver));
+        invoker.registerNewCommand("save", new Save(receiver));
+        invoker.registerNewCommand("update", new UpdateId(receiver));
+        invoker.registerNewCommand("remove_by_id", new Remove_by_id(receiver));
+        invoker.registerNewCommand("execute_script", new ExecuteScript(receiver));
+        invoker.registerNewCommand("min_by_id", new Min_by_id(receiver));
+        invoker.registerNewCommand("remove_greater", new Remove_greater(receiver));
+        invoker.registerNewCommand("filter", new Filter_by_group_admin(receiver));
+       /*
         invoker.registerNewCommand("count_less_than_number_of_rooms", new CountLessCommand(receiver));
-        invoker.registerNewCommand("execute_script", new ExecuteScriptCommand(receiver));
-        invoker.registerNewCommand("head", new HeadCommand(receiver));
-        invoker.registerNewCommand("info", new InfoCommand(receiver));
-        invoker.registerNewCommand("min_by_coordinates", new MinByCoordinatesCommand(receiver));
         invoker.registerNewCommand("print_field_descending_number_of_rooms", new PrintFieldNumberOfRoomsCommand(receiver));
-        invoker.registerNewCommand("remove_by_id", new RemoveByIdCommand(receiver));
         invoker.registerNewCommand("remove_first", new RemoveFirstCommand(receiver));
-        invoker.registerNewCommand("remove_lower", new RemoveLowerCommand(receiver));
-        invoker.registerNewCommand("save", new SaveCommand(receiver));
-        invoker.registerNewCommand("update", new UpdateByIdCommand(receiver));
         **/
 
     }

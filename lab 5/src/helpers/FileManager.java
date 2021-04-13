@@ -1,4 +1,6 @@
 package helpers;
+
+import collection.GeneralColl;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
@@ -18,22 +20,24 @@ public class FileManager {
     public FileManager(String fileName) {
         this.envVariable = fileName;
         try {
-            this.file = new File(System.getenv(envVariable));
+            this.file = new File(System.getenv("M:\\лабы прога\\programming_ITMO\\lab 5\\StudyGroup.json"));
         } catch (NullPointerException e) {
             System.out.println("\u001B[37m" + "\u001B[31m" + "Вам необходимо задать переменную окружения!!!" + "\u001B[31m" + "\u001B[37m");
         }
     }
+
     /**
      * Запись коллекции в файл
      *
      * @param collection -коллекция, которую нужно записать
      */
     public void writeCollection(PriorityQueue collection) {
-        if (System.getenv().get(envVariable)!= null) {
+        if (file != null) {
             if (!file.canWrite()) {
                 System.out.println("\u001B[37m" + "\u001B[31m" + "Недостаточно прав для записи в файл. Добавьте права на запись " + "\u001B[31m" + "\u001B[37m");
-                try (PrintWriter out = new PrintWriter(new PrintWriter(new File("/home/s285384/prog5/lib/file2")))) {
+                try (PrintWriter out = new PrintWriter(new PrintWriter(new File("M:\\лабы прога\\programming_ITMO\\lab 5\\StudyGroup1.json")))) {
                     out.write(gson.toJson(collection));
+                    out.close();
                     System.out.println("Не переживайте. Мы записали вашу коллекцию в новый файл: " + "/home/s285384/prog5/lib/file2");
                 } catch (Exception e) {
 
@@ -60,7 +64,7 @@ public class FileManager {
      * @return коллекция, которая была считана из файла
      */
     public PriorityQueue<StudyGroup> readCollection() {
-        if (System.getenv().get(envVariable) != null) {
+        if (System.getenv("M:\\лабы прога\\programming_ITMO\\lab 5\\StudyGroup.json") != null) {
             if (file.exists() & !file.canRead()) {
                 System.out.println("\u001B[37m" + "\u001B[31m" + "Недостаточно прав для чтения данных из файла. Добавьте права на чтение и запустите программу вновь" + "\u001B[31m" + "\u001B[37m");
                 System.exit(0);
@@ -86,6 +90,15 @@ public class FileManager {
         return new PriorityQueue<>();
 
     }
+
+//    public static void Writer() throws Exception{
+//        File file= new File("StudyGroup.json");
+//        PrintWriter writer= new PrintWriter(file,"UTF-8");
+//        writer.write(gson.toJson(collection);
+//        writer.println(stroka);
+//        writer.close();
+//
+//    }
 
     @Override
     public String toString() {

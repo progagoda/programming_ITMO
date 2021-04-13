@@ -1,13 +1,15 @@
 package general;
 
-public class Person {
+public class Person implements Comparable<Person> {
     private String name; //Поле не может быть null, Строка не может быть пустой
     private String passportID; //Длина строки не должна быть больше 44, Строка не может быть пустой, Значение этого поля должно быть уникальным, Поле не может быть null
     private Color eyeColor; //Поле может быть null
     private Color hairColor; //Поле может быть null
     private Country nationality; //Поле не может быть null
+
     /**
      * Геттер name
+     *
      * @return name
      */
     public String getName() {
@@ -16,37 +18,51 @@ public class Person {
 
     /**
      * Сеттер name
+     *
      * @param name
      */
     public boolean setName(String name) {
         this.name = name;
         return true;
     }
+
     /**
      * Геттер  passportID
+     *
      * @return passportID
      */
     public String getPassportID() {
         return passportID;
     }
+
     /**
      * Сеттер  passportID
-     * @param  passportID
+     *
+     * @param passportID
      */
     public boolean setPassportID(String passportID) {
-        this.passportID=passportID;
-        return true;
+        if (passportID.equals("") || passportID.length() > 44 || passportID == null) {
+            return false;
+        }
+        else {
+            this.passportID = passportID;
+            return true;
+        }
     }
+
     /**
      * Геттер  eyeColor
+     *
      * @return eyeColor
      */
     public Color getEyeColor() {
         return eyeColor;
     }
+
     /**
      * Сеттер  eyeColor
-     * @param  eyeColor
+     *
+     * @param eyeColor
      */
     public boolean setEyeColor(Color eyeColor) {
         if (eyeColor == null) {
@@ -56,16 +72,20 @@ public class Person {
             return true;
         }
     }
+
     /**
      * Геттер  hairColor
+     *
      * @return passportID
      */
     public Color getHairColor() {
         return hairColor;
     }
+
     /**
      * Сеттер  hairColor
-     * @param  hairColor
+     *
+     * @param hairColor
      */
     public boolean setHairColor(Color hairColor) {
         if (hairColor == null) {
@@ -75,34 +95,45 @@ public class Person {
             return true;
         }
     }
+
     /**
      * Геттер  nationality
+     *
      * @return nationality
      */
     public Country getNationality() {
         return nationality;
     }
+
     /**
      * Сеттер  nationality
-     * @param  nationality
+     *
+     * @param nationality
      */
     public boolean setNationality(Country nationality) {
         if (nationality == null) {
             return false;
         } else {
-            this.nationality= nationality;
+            this.nationality = nationality;
             return true;
         }
     }
 
     @Override
     public String toString() {
-        return "{" +
-                "  name = '" + name + '\'' +
-                ", passportID = " + passportID +
-                ", eyeColor = " + eyeColor +
-                ", hairColor = " + hairColor +
-                ", nationality = " + nationality +
-                '}';
+        return " " +
+                "  Имя = '" + name + '\'' +
+                ", номер паспорта = " + passportID +
+                ", цвет глаз = " + eyeColor +
+                ", цвет волос = " + hairColor +
+                ", национальность = " + nationality +
+                ' ';
+    }
+    /**
+     * Метод сравнения 2 объектов класса Person
+     */
+    @Override
+    public int compareTo(Person o) {
+        return this.getName().compareTo(o.getName());
     }
 }

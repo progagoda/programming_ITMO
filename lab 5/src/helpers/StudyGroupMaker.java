@@ -1,5 +1,7 @@
 package helpers;
+
 import general.*;
+
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -18,27 +20,6 @@ public class StudyGroupMaker {
         StudyGroup group = new StudyGroup();
         String line;
         while (true) {
-            System.out.print("Введите значение для поля studentCount: ");
-            try {
-                if (scanner.hasNextLine()) {
-                    line = scanner.nextLine().trim();
-                } else {
-                    return null;
-                }
-                System.out.println();
-                if (line.equals("end")) {
-                    System.out.println("Добавление элемента остановлено.");
-                    return null;
-                }
-                if (group.setStudentsCount(Long.valueOf(line))) {
-                    break;
-                }
-            } catch (Exception e) {
-                System.out.println("Ошибка ввода поля studentCount, попробуйте еще раз или напишите end");
-            }
-        }
-
-        while (true) {
             System.out.print("Введите значение для поля name: ");
             try {
                 if (scanner.hasNextLine()) {
@@ -56,6 +37,26 @@ public class StudyGroupMaker {
                 }
             } catch (Exception e) {
                 System.out.println("Ошибка ввода поля name, попробуйте еще раз или напишите end");
+            }
+        }
+        while (true) {
+            System.out.print("Введите значение для поля studentCount: ");
+            try {
+                if (scanner.hasNextLine()) {
+                    line = scanner.nextLine().trim();
+                } else {
+                    return null;
+                }
+                System.out.println();
+                if (line.equals("end")) {
+                    System.out.println("Добавление элемента остановлено.");
+                    return null;
+                }
+                if (group.setStudentsCount(Long.valueOf(line))) {
+                    break;
+                }
+            } catch (Exception e) {
+                System.out.println("Ошибка ввода поля studentCount, попробуйте еще раз или напишите end");
             }
         }
 
@@ -80,7 +81,7 @@ public class StudyGroupMaker {
             }
         }
 
-        Person  person = new Person();
+        Person person = new Person();
         System.out.println("Теперь необходимо создать объект старосты группы, для этого:");
         while (true) {
             System.out.print("Введите значение для поля name: ");
@@ -273,7 +274,6 @@ public class StudyGroupMaker {
                 System.out.println("Ошибка ввода поля semesterEnum, попробуйте еще раз или напишите end");
             }
         }
-
 
 
         return group;

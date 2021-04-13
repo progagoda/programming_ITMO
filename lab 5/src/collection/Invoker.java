@@ -2,13 +2,14 @@ package collection;
 
 import commands.Command;
 import helpers.Messages;
+
 import java.util.HashMap;
 import java.util.Scanner;
 
 /**
  * Исполнитель всех команд
  */
-public class Invoker{
+public class Invoker {
     /**
      * Поле, содержащее ключ - имя команды и значение - объект команды
      */
@@ -16,8 +17,9 @@ public class Invoker{
 
     /**
      * Выполнить команду по ключу - названию команды
-     *  @param scanner - сканер, которые считывает данные из командной строки / файла
-     * @param args - аргументы, полученные при помощи сканнера
+     *
+     * @param scanner - сканер, которые считывает данные из командной строки / файла
+     * @param args    - аргументы, полученные при помощи сканнера
      */
     public void executeCommand(Scanner scanner, String[] args) {
         if (args.length > 0) {
@@ -25,7 +27,7 @@ public class Invoker{
             if (command == null) {
                 Messages.normalMessageOutput("Неправильный ввод команды, попробуйте написать help и посмотреть доступные команды");
             } else {
-                if(scanner.equals(new Scanner(System.in))){
+                if (scanner.equals(new Scanner(System.in))) {
                     command.execute(args);
                 } else {
                     command.execute(args, scanner);
@@ -39,7 +41,7 @@ public class Invoker{
      * Добавить новую команду к списку имеющихся
      *
      * @param commandName имя команды
-     * @param command объект данной команды
+     * @param command     объект данной команды
      */
     public void registerNewCommand(String commandName, Command command) {
         hashMap.put(commandName, command);
@@ -47,6 +49,7 @@ public class Invoker{
 
     /**
      * Геттер коллекции команд
+     *
      * @return возвращает коллекцию команд
      */
     public HashMap<String, Command> getHashMap() {
