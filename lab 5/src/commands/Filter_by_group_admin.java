@@ -22,7 +22,7 @@ public class Filter_by_group_admin extends Command {
             if (args.length == 1) {
                 String admin = args[1];
                 if (!receiver.printFieldDescendingGroupAdmin(admin)) {
-                    Messages.normalMessageOutput("В коллекции нет эллементов, так что вывод пуст");
+                    Messages.normalMessageOutput("В коллекции нет элементов, так что вывод пуст");
                 }
             } else {
                 Messages.normalMessageOutput("Неправильный ввод агрументов, попробуйте еще раз");

@@ -3,15 +3,13 @@ package collection;
 import comparators.GroupAdmin_Comparator;
 import comparators.IdComparator;
 import comparators.NameComparator;
-import general.Country;
-import general.Semester;
+
 import helpers.FileManager;
 import helpers.Messages;
 import general.StudyGroup;
 import helpers.StudyGroupMaker;
 
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 /**
@@ -209,7 +207,7 @@ public class GeneralColl {
             Messages.normalMessageOutput("В коллекции нет элементов, нечего удалять");
             return false;
         }
-        Messages.normalMessageOutput("Все элементы, меньше данного - удалены!");
+        Messages.normalMessageOutput("Все элементы, больше данного - удалены!");
         return true;
     }
 
@@ -294,21 +292,18 @@ public class GeneralColl {
 //        }
 //    }
     /**
-     * Реалицаия команды print_field_descending_number_of_rooms
+     * Реалицаия команды filter_by_group_admin
      * @return true / false, если размер коллекции больше 0
      */
     public boolean printElementbyGroupAdmin(String groupAdmin) {
-        if (getCollection().size() > 0) {
-            PriorityQueue<StudyGroup> newQueue = new PriorityQueue<>(getCollection());
-            while (newQueue.size() > 0) {
-                if (newQueue.poll().getGroupAdmin().getName()==groupAdmin) {
-                    System.out.println(newQueue);
-                }
-            }
-            return true;
-        } else {
-            return false;
-        }
+        int i = 1;
+//    for(PriorityQueue<StudyGroup> e: collection){
+//        if(e.poll().getGroupAdmin().equals(groupAdmin)){
+//            System.out.println(e.poll().toString());
+//        }
+//
+//    }
+    return true;
     }
     /**
      * Реализация метода filter_by_group_admin

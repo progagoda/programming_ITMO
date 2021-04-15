@@ -121,9 +121,9 @@ public class Receiver {
     }
 
     /**
-     * Логика для remove_lower
+     * Логика для remove_greater
      */
-    public boolean removeLowerElements(Scanner scanner) {
+    public boolean removeGreaterElements(Scanner scanner) {
         return collectionManager.removeGreatest(scanner);
     }
 

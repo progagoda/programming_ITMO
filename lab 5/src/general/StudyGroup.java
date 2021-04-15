@@ -17,8 +17,6 @@ public class StudyGroup implements Comparable<StudyGroup> {
     private FormOfEducation formOfEducation; //Поле не может быть null
     private Semester semesterEnum; //Поле не может быть null
     private Person groupAdmin; //Поле не может быть null
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm");
-
     /**
      * Геттер id
      *

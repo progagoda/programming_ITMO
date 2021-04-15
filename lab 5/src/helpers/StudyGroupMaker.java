@@ -24,6 +24,7 @@ public class StudyGroupMaker {
             try {
                 if (scanner.hasNextLine()) {
                     line = scanner.nextLine().trim();
+                    System.out.println("Имя записано");
                 } else {
                     return null;
                 }

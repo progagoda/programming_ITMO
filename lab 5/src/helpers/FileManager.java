@@ -20,7 +20,7 @@ public class FileManager {
     public FileManager(String fileName) {
         this.envVariable = fileName;
         try {
-            this.file = new File(System.getenv("M:\\лабы прога\\programming_ITMO\\lab 5\\StudyGroup.json"));
+            this.file = new File(System.getenv(fileName));
         } catch (NullPointerException e) {
             System.out.println("\u001B[37m" + "\u001B[31m" + "Вам необходимо задать переменную окружения!!!" + "\u001B[31m" + "\u001B[37m");
         }
@@ -64,7 +64,7 @@ public class FileManager {
      * @return коллекция, которая была считана из файла
      */
     public PriorityQueue<StudyGroup> readCollection() {
-        if (System.getenv("M:\\лабы прога\\programming_ITMO\\lab 5\\StudyGroup.json") != null) {
+        if (System.getenv("M:\\лабы прога\\programming_ITMO\\lab 5\\STUDY_GROUP.json") != null) {
             if (file.exists() & !file.canRead()) {
                 System.out.println("\u001B[37m" + "\u001B[31m" + "Недостаточно прав для чтения данных из файла. Добавьте права на чтение и запустите программу вновь" + "\u001B[31m" + "\u001B[37m");
                 System.exit(0);
@@ -92,7 +92,7 @@ public class FileManager {
     }
 
 //    public static void Writer() throws Exception{
-//        File file= new File("StudyGroup.json");
+//        File file= new File("STUDY_GROUP.json");
 //        PrintWriter writer= new PrintWriter(file,"UTF-8");
 //        writer.write(gson.toJson(collection);
 //        writer.println(stroka);

@@ -28,7 +28,7 @@ public class Remove_greater extends Command {
         if (args.length != 1) {
             Messages.normalMessageOutput("Неправильные аргументы, попробуйте еще раз!");
         } else {
-            receiver.removeLowerElements(scanner);
+            receiver.removeGreaterElements(scanner);
         }
     }
 }
