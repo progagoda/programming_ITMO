@@ -18,11 +18,11 @@ public class FileManager {
     File file;
 
     public FileManager(String fileName) {
-        this.envVariable = fileName;
-        try {
+        this.envVariable = "STUDY_GROUP.json";
+       try {
             this.file = new File(System.getenv(fileName));
-        } catch (NullPointerException e) {
-            System.out.println("\u001B[37m" + "\u001B[31m" + "Вам необходимо задать переменную окружения!!!" + "\u001B[31m" + "\u001B[37m");
+       } catch (NullPointerException e) {
+           System.out.println("\u001B[37m" + "\u001B[31m" + "Вам необходимо задать переменную окружения!!!" + "\u001B[31m" + "\u001B[37m");
         }
     }
 
@@ -32,21 +32,20 @@ public class FileManager {
      * @param collection -коллекция, которую нужно записать
      */
     public void writeCollection(PriorityQueue collection) {
-        if (file != null) {
+        if (file!= null) {
             if (!file.canWrite()) {
                 System.out.println("\u001B[37m" + "\u001B[31m" + "Недостаточно прав для записи в файл. Добавьте права на запись " + "\u001B[31m" + "\u001B[37m");
-                try (PrintWriter out = new PrintWriter(new PrintWriter(new File("M:\\лабы прога\\programming_ITMO\\lab 5\\StudyGroup1.json")))) {
+                try (OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(new File("/home/s285384/PROGA/lib/file2")) {
+                })) {
                     out.write(gson.toJson(collection));
-                    out.close();
-                    System.out.println("Не переживайте. Мы записали вашу коллекцию в новый файл: " + "/home/s285384/prog5/lib/file2");
+                    System.out.println("Не переживайте. Мы записали вашу коллекцию в новый файл: " + "/home/s285384/PROGA/lib/file2");
                 } catch (Exception e) {
 
                 }
 
             } else {
-                try (PrintWriter pw = new PrintWriter(new PrintWriter(System.getenv().get(envVariable)))) {
+                try (OutputStreamWriter pw = new OutputStreamWriter(new FileOutputStream(System.getenv().get(envVariable)))) {
                     File file = new File(System.getenv().get(envVariable));
-
                     pw.write(gson.toJson(collection));
                     System.out.println("Коллекция успешно сохранена в файл!");
 
@@ -64,7 +63,7 @@ public class FileManager {
      * @return коллекция, которая была считана из файла
      */
     public PriorityQueue<StudyGroup> readCollection() {
-        if (System.getenv("M:\\лабы прога\\programming_ITMO\\lab 5\\STUDY_GROUP.json") != null) {
+        if ((System.getenv().get(envVariable)) != null) {
             if (file.exists() & !file.canRead()) {
                 System.out.println("\u001B[37m" + "\u001B[31m" + "Недостаточно прав для чтения данных из файла. Добавьте права на чтение и запустите программу вновь" + "\u001B[31m" + "\u001B[37m");
                 System.exit(0);

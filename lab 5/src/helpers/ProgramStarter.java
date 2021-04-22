@@ -63,6 +63,7 @@ public class ProgramStarter {
         invoker.registerNewCommand("min_by_id", new Min_by_id(receiver));
         invoker.registerNewCommand("remove_greater", new Remove_greater(receiver));
         invoker.registerNewCommand("filter_by_group_admin", new Filter_by_group_admin(receiver));
+        invoker.registerNewCommand("add_if_min", new Add_if_min(receiver));
        /*
         invoker.registerNewCommand("count_less_than_number_of_rooms", new CountLessCommand(receiver));
         invoker.registerNewCommand("print_field_descending_number_of_rooms", new PrintFieldNumberOfRoomsCommand(receiver));

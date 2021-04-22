@@ -1,5 +1,6 @@
 package collection;
 
+import commands.Add;
 import comparators.GroupAdmin_Comparator;
 import comparators.IdComparator;
 import comparators.NameComparator;
@@ -144,20 +145,25 @@ public class GeneralColl {
         return true;
     }
     /**
-     * Реализация команды remove_greater
+     * Реализация команды add_if_min
      *
      * @param scanner Сканнер
-     * @return true / false, если выполнилось удаление элементов коллекции
+     * @return true / false, если выполнилось добавился элемент в колле
      */
-    public boolean add_if_min(Scanner scanner) {
+    public boolean add_if_min(Scanner scanner) {//тут беда какая-то надо подправить
+        Add add;
         StudyGroup group;
         if (getCollection().size() > 0) {
-            if ((group = new StudyGroupMaker().makeGroup(scanner)) != null) {
+            group = new StudyGroupMaker().makeGroup(scanner);
+            group.setCreationDate(ZonedDateTime.now());
+            if (group!= null) {
                 try {
                     while (true) {
-                        if (getCollection().size() > 0 && getCollection().peek().compareTo(group) < 0) {
-                            IdManager.removeUsedId(getCollection().poll().getId());
+                        if (getCollection().size() > 0 && getCollection().peek().compareTo(group)>0) {
+                            collection.add(group);
+                            break;
                         } else {
+                            System.out.println("ПЛОХО");
                             break;
                         }
                     }
@@ -173,7 +179,7 @@ public class GeneralColl {
             Messages.normalMessageOutput("В коллекции нет элементов, нечего удалять");
             return false;
         }
-        Messages.normalMessageOutput("Все элементы, меньше данного - удалены!");
+        Messages.normalMessageOutput("Элемент не был минимальным.Добавление остановлено");
         return true;
     }
 

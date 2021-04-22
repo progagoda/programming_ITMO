@@ -18,7 +18,7 @@ public class Main {
      */
     public static void main(String[] args) throws Exception {
         FileManager fileManager;
-        final String myenv="STUDY_GROUP";
+        final String myenv="WC_FILE";
         fileManager=new FileManager(myenv);
         GeneralColl collectionManager = new GeneralColl(fileManager);
         ProgramStarter programStarter = new ProgramStarter(collectionManager);

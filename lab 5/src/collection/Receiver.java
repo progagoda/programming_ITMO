@@ -102,7 +102,7 @@ public class Receiver {
 //        return collectionManager.printElementbySemester();
 //    }
     /**
-     * Логика для print_field_descending_number_of_rooms
+     * Логика для print_field_descending_group_admin
      */
     public boolean printFieldDescendingGroupAdmin(String groupAdmin) {
         return collectionManager.printElementbyGroupAdmin(groupAdmin);
@@ -133,7 +133,12 @@ public class Receiver {
     public boolean removeById(Long id) {
         return collectionManager.removeElementById(id);
     }
-
+    /**
+     * Логика для remove_by_id
+     */
+    public boolean add_if_min(Scanner scanner) {
+        return collectionManager.add_if_min(scanner);
+    }
     /**
      * Логика для add
      */
