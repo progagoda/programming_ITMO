@@ -4,7 +4,7 @@ import commands.Add;
 import comparators.GroupAdmin_Comparator;
 import comparators.IdComparator;
 import comparators.NameComparator;
-
+import java.util.stream.Collectors;
 import helpers.FileManager;
 import helpers.Messages;
 import general.StudyGroup;
@@ -150,21 +150,22 @@ public class GeneralColl {
      * @param scanner Сканнер
      * @return true / false, если выполнилось добавился элемент в колле
      */
-    public boolean add_if_min(Scanner scanner) {//тут беда какая-то надо подправить
-        Add add;
+    public boolean add_if_min(Scanner scanner) {
         StudyGroup group;
         if (getCollection().size() > 0) {
             group = new StudyGroupMaker().makeGroup(scanner);
-            group.setCreationDate(ZonedDateTime.now());
-            if (group!= null) {
+            if (group != null) {
                 try {
                     while (true) {
                         if (getCollection().size() > 0 && getCollection().peek().compareTo(group)>0) {
-                            collection.add(group);
-                            break;
+                            group.setId(IdManager.findUniq(Math.abs(new Random().nextLong())));
+                            group.setCreationDate(ZonedDateTime.now());
+                            getCollection().add(group);
+                            Messages.normalMessageOutput("Элемент был добавлен в коллекцию");
+                            return  true;
                         } else {
-                            System.out.println("ПЛОХО");
-                            break;
+                            System.out.println("Элемент не был минимальным.Добавление остановлено");
+                            return false;
                         }
                     }
                 } catch (Exception e) {
@@ -179,8 +180,7 @@ public class GeneralColl {
             Messages.normalMessageOutput("В коллекции нет элементов, нечего удалять");
             return false;
         }
-        Messages.normalMessageOutput("Элемент не был минимальным.Добавление остановлено");
-        return true;
+
     }
 
     /**
@@ -302,15 +302,26 @@ public class GeneralColl {
      * @return true / false, если размер коллекции больше 0
      */
     public boolean printElementbyGroupAdmin(String groupAdmin) {
-        int i = 1;
-//    for(PriorityQueue<StudyGroup> e: collection){
-//        if(e.poll().getGroupAdmin().equals(groupAdmin)){
-//            System.out.println(e.poll().toString());
-//        }
-//
-//    }
-    return true;
-    }
+         int i=0;
+        if (getCollection().size()>0 && groupAdmin!=null) {
+            for (StudyGroup group : getCollection()) {
+                if (group.getGroupAdmin().getName().equals(groupAdmin)) {
+                    i=i+1;
+                    group.printInfoAboutElement();
+                }
+                else {
+                    i=i+1;
+                    System.out.println("Объект №"+i+" не подходит");
+                }
+            }
+        }
+        else{
+            Messages.normalMessageOutput("Ваша коллеция либо пуста либо вы не ввели некорретное имя искомого админа");
+        }
+        return  true;
+        }
+
+
     /**
      * Реализация метода filter_by_group_admin
      * @return true / false, если размер коллекции больше 0

@@ -17,20 +17,11 @@ public class Filter_by_group_admin extends Command {
 
     @Override
     public void execute(String[] args) {
-
-        try {
-            if (args.length == 1) {
-                String admin = args[1];
-                if (!receiver.printFieldDescendingGroupAdmin(admin)) {
-                    Messages.normalMessageOutput("В коллекции нет элементов, так что вывод пуст");
-                }
+            if (args.length != 2) {
+                Messages.normalMessageOutput("Неправильно введены аргументы, попробуйте еще раз!");
             } else {
-                Messages.normalMessageOutput("Неправильный ввод агрументов, попробуйте еще раз");
+                receiver.printFieldDescendingGroupAdmin(args[1]);
             }
-        }
-        catch (ArrayIndexOutOfBoundsException e){
-            Messages.normalMessageOutput("Нужно ввести аргумент - имя админа группы ");
-        }
         }
 
 

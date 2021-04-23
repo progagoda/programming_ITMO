@@ -74,7 +74,7 @@ public class StudyGroup implements Comparable<StudyGroup> {
      * @return creationDate
      */
     public String getCreationDate() {
-        return creationDate.toString().formatted();
+        return creationDate.toString();
     }
 
     /**
