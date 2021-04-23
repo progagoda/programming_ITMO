@@ -321,20 +321,6 @@ public class GeneralColl {
         return  true;
         }
 
-
-    /**
-     * Реализация метода filter_by_group_admin
-     * @return true / false, если размер коллекции больше 0
-     */
-    public boolean findElementbyGroupAdmin() {
-        if (getCollection().size() > 0) {
-            PriorityQueue<StudyGroup> queue = sortCollectionByComp(new GroupAdmin_Comparator());
-            Objects.requireNonNull(queue.peek()).printInfoAboutElement();
-            return true;
-        } else {
-            return false;
-        }
-    }
     /**
      * Реализация метода min_by_id
      * @return true / false, если размер коллекции больше 0

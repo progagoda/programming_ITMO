@@ -37,7 +37,12 @@ public class Receiver {
     public void getInfoAboutAllCommands() {
         invoker.getHashMap().forEach((name, command) -> command.printInfoAboutCommand());
     }
-
+    /**
+     * Логика для add_if_min
+     */
+    public boolean add_if_min(Scanner scanner) {
+        return  collectionManager.add_if_min(scanner);
+    }
     /**
      * Логика для info
      */
