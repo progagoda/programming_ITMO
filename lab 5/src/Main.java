@@ -17,9 +17,11 @@ public class Main {
      * @throws IOException ошибка ввода
      */
     public static void main(String[] args) throws Exception {
+     //   FileManager.Writer();
         FileManager fileManager;
-        final String myenv="WC_FILE";
+        final String myenv=System.getenv("StudyGroup.json");
         fileManager=new FileManager(myenv);
+
         GeneralColl collectionManager = new GeneralColl(fileManager);
         ProgramStarter programStarter = new ProgramStarter(collectionManager);
         fileManager.readCollection();

@@ -39,7 +39,7 @@ public class ProgramStarter {
      * Считывает все данные из Json файла и записывает их в коллекцию
      */
     public void addAllFGroupsFromJson() {
-        String myfile = "STUDY_GROUP.json";
+        String myfile = "StudyGroup.json";
         FileManager jsonParser = new FileManager(myfile);
         jsonParser.readCollection();
 
@@ -57,13 +57,12 @@ public class ProgramStarter {
         invoker.registerNewCommand("head", new Head(receiver));
         invoker.registerNewCommand("info", new Info(receiver));
         invoker.registerNewCommand("save", new Save(receiver));
-        invoker.registerNewCommand("update_id", new UpdateId(receiver));
+        invoker.registerNewCommand("update", new UpdateId(receiver));
         invoker.registerNewCommand("remove_by_id", new Remove_by_id(receiver));
         invoker.registerNewCommand("execute_script", new ExecuteScript(receiver));
         invoker.registerNewCommand("min_by_id", new Min_by_id(receiver));
         invoker.registerNewCommand("remove_greater", new Remove_greater(receiver));
-        invoker.registerNewCommand("filter_by_group_admin", new Filter_by_group_admin(receiver));
-        invoker.registerNewCommand("add_if_min", new Add_if_min(receiver));
+        invoker.registerNewCommand("filter", new Filter_by_group_admin(receiver));
        /*
         invoker.registerNewCommand("count_less_than_number_of_rooms", new CountLessCommand(receiver));
         invoker.registerNewCommand("print_field_descending_number_of_rooms", new PrintFieldNumberOfRoomsCommand(receiver));
