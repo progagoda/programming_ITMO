@@ -1,6 +1,7 @@
 package general;
 
 import helpers.Messages;
+import helpers.StudyGroupMaker;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -17,8 +18,6 @@ public class StudyGroup implements Comparable<StudyGroup> {
     private FormOfEducation formOfEducation; //Поле не может быть null
     private Semester semesterEnum; //Поле не может быть null
     private Person groupAdmin; //Поле не может быть null
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm");
-
     /**
      * Геттер id
      *
@@ -104,6 +103,7 @@ public class StudyGroup implements Comparable<StudyGroup> {
      */
     public boolean setName(String name) {
         if (name == null || name.equals("")) {
+            Messages.normalMessageOutput("Имя не может быть null либо пустой строкой");
             return false;
         } else {
             this.name = name;
@@ -181,10 +181,16 @@ public class StudyGroup implements Comparable<StudyGroup> {
      * @param studentsCount studentsCount
      */
     public boolean setStudentsCount(Long studentsCount) {
-        if (studentsCount > 0 || !studentsCount.equals("")) {
+        if (studentsCount > 0 && !studentsCount.equals("")) {
             this.studentsCount = studentsCount;
             return true;
         } else {
+            if(studentsCount < 0){
+                Messages.normalMessageOutput("Количество студентов в группе должно быть больше 0");
+            }
+            if(studentsCount.equals("")){
+                Messages.normalMessageOutput("Количество студентов не может быть null");
+            }
             return false;
         }
     }
@@ -200,13 +206,20 @@ public class StudyGroup implements Comparable<StudyGroup> {
      * @param expelledStudents expelledStudents
      */
     public boolean setExpelledStudents(long expelledStudents) {
-        if (expelledStudents > 0) {
+        if (expelledStudents > 0 && expelledStudents<getStudentsCount()) {
             this.expelledStudents = expelledStudents;
             return true;
         } else {
+            if (expelledStudents >= getStudentsCount()) {
+                Messages.normalMessageOutput("Количество отчисленных не должно превышать или равняться общему кол-ву студентов в группе");
+            }
+            if (expelledStudents <= 0){
+                Messages.normalMessageOutput("Количество отчисленных должно быть больше нуля");
+            }
             return false;
         }
-    }
+        }
+
 
     /**
      * Сеттер formOfEducation

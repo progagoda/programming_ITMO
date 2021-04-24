@@ -1,10 +1,8 @@
 package collection;
 
-import commands.Add;
-import comparators.GroupAdmin_Comparator;
 import comparators.IdComparator;
 import comparators.NameComparator;
-import java.util.stream.Collectors;
+import general.Semester;
 import helpers.FileManager;
 import helpers.Messages;
 import general.StudyGroup;
@@ -278,25 +276,30 @@ public class GeneralColl {
             return false;
         }
     }
-//    /**
-//     * Реалицаия команды printElementbySemester
-//     * @return true / false, если размер коллекции больше 0
-//     */
-//    public boolean printElementbySemester() {
-//        if (getCollection().size() > 0) {
-//            PriorityQueue<StudyGroup> newQueue = new PriorityQueue<>(getCollection());
-//            ArrayList<String> semester = new ArrayList<String>();
-//            while (newQueue.size() > 0) {
-//                if (Semester.valueOf(newQueue.poll().getSemesterEnum())) {
-//
-//                    System.out.println(newQueue);
-//                }
-//            }
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
+    /**
+     * Реалицаия команды printElementbySemester
+     * @return true / false, если размер коллекции больше 0
+     */
+    public boolean printElementbySemester() {
+        if (getCollection().size() > 0) {
+            ArrayList<Semester> uniq_semester = new ArrayList<Semester>();
+            for (StudyGroup group : getCollection()) {
+                uniq_semester.add(group.getSemesterEnum());
+            }
+            Set<Semester> set = new HashSet<>(uniq_semester);
+            uniq_semester.clear();
+            uniq_semester.addAll(set);
+            for(int i=0; i<uniq_semester.size();i++){
+                System.out.println(uniq_semester.get(i));
+            }
+        } else {
+            Messages.normalMessageOutput("Ваша коллекция пуста, выводить нечего");
+            return  false;
+        }
+        return  true;
+    }
+
+
     /**
      * Реалицаия команды filter_by_group_admin
      * @return true / false, если размер коллекции больше 0

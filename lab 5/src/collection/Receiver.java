@@ -70,6 +70,12 @@ public class Receiver {
     public boolean getHead() {
         return collectionManager.getHeadOfCollection();
     }
+    /**
+     * Логика для print_unique_semester
+     */
+    public boolean print_unique_semester() {
+        return collectionManager.printElementbySemester();
+    }
 
     /**
      * Логика для show

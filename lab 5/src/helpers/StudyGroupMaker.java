@@ -2,6 +2,7 @@ package helpers;
 
 import general.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -15,7 +16,6 @@ public class StudyGroupMaker {
      * @param scanner указывает откуда считывать
      * @return возвращает новую созданную Group
      */
-
     public StudyGroup makeGroup(Scanner scanner) {
         StudyGroup group = new StudyGroup();
         String line;
