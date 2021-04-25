@@ -2,9 +2,11 @@ package collection;
 
 import helpers.LineReader;
 import helpers.Messages;
-
+import exceptions.Sript_recurse_exception;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Receiver {
@@ -87,15 +89,35 @@ public class Receiver {
     /**
      * Логика для execute_script
      */
+    private List<String> scriptFileNames = new ArrayList<String>();
     public boolean executeScript(String args) {
         LineReader lineReader = new LineReader();
+        String[] userCommand = {"", ""};
+        scriptFileNames.add(args);// довалили это имя скрипта в List
         File file = null;
         try {
             file = new File(args);
             if (!file.exists() || !file.canRead() || !file.canWrite()) {
                 throw new IllegalAccessError();
             }
-            lineReader.readLine(new Scanner(file), invoker);
+            try {
+                Scanner scanner2 = new Scanner(file);//считываем скрипт
+                do{
+                userCommand = (scanner2.nextLine().trim() + " ").split(" ", 2);
+                userCommand[1] = userCommand[1].trim();
+                    if (userCommand[0].equals("execute_script")) {//если наша команда равна execute_script
+                        for (String name : scriptFileNames) {
+                            if (name.equals(userCommand[1])) throw new Sript_recurse_exception();
+                        }
+                    }
+                }
+                while (scanner2.hasNext());
+            }
+            catch (Sript_recurse_exception e){
+                Messages.normalMessageOutput("\u001B[37m" + "\u001B[33m" + " Здесь рекурсия запрещена \n удалите из вашего скрипта строчку execute_script имя_того_же_скрипта" + "\u001B[33m" + "\u001B[37m");
+                return false;
+            }
+            lineReader.readLine(new Scanner(file), invoker);//выполнятор всего скрипта
         } catch (IllegalAccessError | FileNotFoundException e) {
             Messages.normalMessageOutput("Невозможно работать с данным файлом, попробуйте еще раз");
             return false;
@@ -103,7 +125,7 @@ public class Receiver {
             Messages.normalMessageOutput("ЭЭЭЭЭ, куда, рекурся зло, вышел и зашел обратно!");
             return false;
         }
-        Messages.normalMessageOutput("Закончилось выполнение скрипта из файла");
+        Messages.normalMessageOutput("Выполнение скрипта закончено");
         return true;
     }
 //    /**

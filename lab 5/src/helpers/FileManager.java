@@ -14,11 +14,10 @@ public class FileManager {
     private Gson gson = new Gson();
     private String envVariable;
     File file;
-
     public FileManager(String fileName) {
         this.envVariable = fileName;
         try {
-            this.file = new File(System.getenv("M:\\лабы прога\\programming_ITMO\\lab 5\\StudyGroup.json"));
+            this.file = new File(System.getenv(envVariable));
         } catch (NullPointerException e) {
             System.out.println("\u001B[37m" + "\u001B[31m" + "Вам необходимо задать переменную окружения!!!" + "\u001B[31m" + "\u001B[37m");
         }
@@ -36,7 +35,7 @@ public class FileManager {
                 try (PrintWriter out = new PrintWriter(new PrintWriter(new File("M:\\лабы прога\\programming_ITMO\\lab 5\\StudyGroup1.json")))) {
                     out.write(gson.toJson(collection));
                     out.close();
-                    System.out.println("Не переживайте. Мы записали вашу коллекцию в новый файл: " + "/home/s285384/prog5/lib/file2");
+                    System.out.println("Не переживайте. Мы записали вашу коллекцию в новый файл: " + "/home/s285384/PROGA/lab5/file2");
                 } catch (Exception e) {
 
                 }
@@ -62,7 +61,7 @@ public class FileManager {
      * @return коллекция, которая была считана из файла
      */
     public PriorityQueue<StudyGroup> readCollection() {
-        if (System.getenv("M:\\лабы прога\\programming_ITMO\\lab 5\\StudyGroup.json") != null) {
+        if (System.getenv(envVariable) != null) {
             if (file.exists() & !file.canRead()) {
                 System.out.println("\u001B[37m" + "\u001B[31m" + "Недостаточно прав для чтения данных из файла. Добавьте права на чтение и запустите программу вновь" + "\u001B[31m" + "\u001B[37m");
                 System.exit(0);
