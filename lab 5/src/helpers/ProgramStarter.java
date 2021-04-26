@@ -5,6 +5,7 @@ import collection.Invoker;
 import collection.Receiver;
 import commands.*;
 
+import java.io.File;
 import java.util.Scanner;
 
 /**
@@ -25,12 +26,9 @@ public class ProgramStarter {
         this.receiver = new Receiver(this.collectionManager, invoker);
     }
 
-    /**
-     * Идет запуск основых функций программы
-     */
+
     public void start() {
         registerAllCommands();
-        addAllFGroupsFromJson();
         LineReader lineReader = new LineReader();
         lineReader.readLine(new Scanner(System.in), invoker);
     }

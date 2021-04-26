@@ -6,9 +6,7 @@ import helpers.Messages;
 import java.util.HashMap;
 import java.util.Scanner;
 
-/**
- * Исполнитель всех команд
- */
+
 public class Invoker {
     /**
      * Поле, содержащее ключ - имя команды и значение - объект команды

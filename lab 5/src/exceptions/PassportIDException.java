@@ -1,7 +1,5 @@
 package exceptions;
-/**
- * Исключение, связанное с невозможностью совпадения номеров паспорта у двух людей.
- */
+
 class PassportIDException extends RuntimeException {
     private String passportID;
 

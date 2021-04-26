@@ -6,6 +6,7 @@ import general.StudyGroup;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.PriorityQueue;
+import java.util.Scanner;
 
 /**
  * Класс загрузки/чтения коллекции из файла
@@ -32,7 +33,7 @@ public class FileManager {
         if (file != null) {
             if (!file.canWrite()) {
                 System.out.println("\u001B[37m" + "\u001B[31m" + "Недостаточно прав для записи в файл. Добавьте права на запись " + "\u001B[31m" + "\u001B[37m");
-                try (PrintWriter out = new PrintWriter(new PrintWriter(new File("M:\\лабы прога\\programming_ITMO\\lab 5\\StudyGroup1.json")))) {
+                try (PrintWriter out = new PrintWriter(new PrintWriter(new File("file2")))) {
                     out.write(gson.toJson(collection));
                     out.close();
                     System.out.println("Не переживайте. Мы записали вашу коллекцию в новый файл: " + "/home/s285384/PROGA/lab5/file2");
@@ -46,6 +47,7 @@ public class FileManager {
                     File file = new File(envVariable);
 
                     pw.write(gson.toJson(collection));
+                    pw.close();
                     System.out.println("Коллекция успешно сохранена в файл!");
 
                 } catch (Exception e) {
@@ -67,8 +69,10 @@ public class FileManager {
                 System.out.println("\u001B[37m" + "\u001B[31m" + "Недостаточно прав для чтения данных из файла. Добавьте права на чтение и запустите программу вновь" + "\u001B[31m" + "\u001B[37m");
                 System.exit(0);
             }
-            try (FileReader fileScanner = new FileReader(file)) {
+
+            try (FileReader fileScanner= new FileReader(file)) {
                 Type collectionType = new TypeToken<PriorityQueue<StudyGroup>>(){}.getType();
+
                 PriorityQueue<StudyGroup> collection = gson.fromJson(fileScanner, collectionType);
                 System.out.println("\u001B[37m" + "\u001B[33m" + "Коллекция успешно загружена!" + "\u001B[33m" + "\u001B[37m");
                 if (collection == null) return new PriorityQueue<>();
@@ -82,23 +86,14 @@ public class FileManager {
             } catch (JsonSyntaxException e) {
                 System.err.println("Формат файла не удовлетворяет условию");
             }
-            catch (RuntimeException e){
-                Messages.normalMessageOutput("\u001B[37m" + "\u001B[33m"+"Файл написан с ошибкой, перепроверьте файл и запустите программу снова"+ "\u001B[33m" + "\u001B[37m");
-            }
+//            catch (RuntimeException e){
+//                Messages.normalMessageOutput("\u001B[37m" + "\u001B[33m"+"Файл написан с ошибкой, перепроверьте файл и запустите программу снова"+ "\u001B[33m" + "\u001B[37m");
+//            }
         } else
             System.out.println("\u001B[37m" + "\u001B[31m" + "Системная переменная с загрузочным файлом не найдена!" + "\u001B[31m" + "\u001B[37m");
         return new PriorityQueue<>();
 
     }
-
-//    public static void Writer() throws Exception{
-//        File file= new File("StudyGroup.json");
-//        PrintWriter writer= new PrintWriter(file,"UTF-8");
-//        writer.write(gson.toJson(collection);
-//        writer.println(stroka);
-//        writer.close();
-//
-//    }
 
     @Override
     public String toString() {

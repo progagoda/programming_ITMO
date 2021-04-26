@@ -4,6 +4,7 @@ import helpers.Messages;
 import helpers.StudyGroupMaker;
 
 import java.sql.SQLOutput;
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
@@ -13,7 +14,7 @@ public class StudyGroup implements Comparable<StudyGroup> {
     private Long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
-    private ZonedDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
+    private LocalDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
     private Long studentsCount; //Значение поля должно быть больше 0, Поле не может быть null
     private long expelledStudents; //Значение поля должно быть больше 0
     private FormOfEducation formOfEducation; //Поле не может быть null
@@ -88,7 +89,7 @@ public class StudyGroup implements Comparable<StudyGroup> {
         this.id = id;
     }
 
-    public boolean setCreationDate(ZonedDateTime creationDate) {
+    public boolean setCreationDate(LocalDateTime creationDate) {
         if (creationDate == null) {
             return false;
         } else {
@@ -97,14 +98,10 @@ public class StudyGroup implements Comparable<StudyGroup> {
         }
     }
 
-    /**
-     * Сеттер name
-     *
-     * @param name name
-     */
+
     public boolean setName(String name) {
         if (name == null || name.equals("")) {
-            Messages.normalMessageOutput("Имя не может быть null либо пустой строкой");
+            Messages.normalMessageOutput("Name can't be null");
             return false;
         } else {
             this.name = name;
@@ -259,15 +256,13 @@ public class StudyGroup implements Comparable<StudyGroup> {
         this.groupAdmin = groupAdmin;
     }
 
-    /**
-     * Выводит информацию в строков виде об объекте
-     */
+
     public void printInfoAboutElement() {
        try {
            Messages.normalMessageOutput("id - " + id + "\n" +
-                   "Имя - " + name + "\n" +
+                   "Name- " + name + "\n" +
                    "Координаты x и y - " + coordinates.getX() + ", " + coordinates.getY() + "\n" +
-                   "Дата создания - " + creationDate.toOffsetDateTime().toZonedDateTime() + "\n" +
+                   "Дата создания - " + creationDate + "\n" +
                    "Количество студентов - " + studentsCount + "\n" +
                    "Отчисленные студенты - " + expelledStudents + "\n" +
                    "Форма обучения - " + formOfEducation + "\n" +

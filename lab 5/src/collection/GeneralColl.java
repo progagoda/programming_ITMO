@@ -8,6 +8,7 @@ import helpers.Messages;
 import general.StudyGroup;
 import helpers.StudyGroupMaker;
 
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.*;
 
@@ -87,8 +88,6 @@ public class GeneralColl {
     public void loadCollection() {
         collection = fileManager.readCollection();
         lastInitTime = ZonedDateTime.now();
-
-
     }
 
     /**
@@ -129,7 +128,7 @@ public class GeneralColl {
             while (!getCollection().peek().getId().equals(id)) {
                 queue.add(getCollection().poll());
             }
-            ZonedDateTime date = ZonedDateTime.now();
+            LocalDateTime date = LocalDateTime.now();
             group.setCreationDate(date);
 
             group.setId(id);
@@ -157,7 +156,7 @@ public class GeneralColl {
                     while (true) {
                         if (getCollection().size() > 0 && getCollection().peek().compareTo(group)>0) {
                             group.setId(IdManager.findUniq(Math.abs(new Random().nextLong())));
-                            group.setCreationDate(ZonedDateTime.now());
+                            group.setCreationDate(LocalDateTime.now());
                             getCollection().add(group);
                             Messages.normalMessageOutput("Элемент был добавлен в коллекцию");
                             return  true;
@@ -346,7 +345,7 @@ public class GeneralColl {
     public boolean addElement(Scanner scanner) {
         StudyGroup group = new StudyGroupMaker().makeGroup(scanner);
         if (group != null) {
-            ZonedDateTime date = ZonedDateTime.now();
+            LocalDateTime date = LocalDateTime.now();
             group.setCreationDate(date);
             group.setId(IdManager.findUniq(Math.abs(new Random().nextLong())));
             getCollection().add(group);

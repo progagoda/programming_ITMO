@@ -22,14 +22,10 @@ public class Person implements Comparable<Person> {
         return name;
     }
 
-    /**
-     * Сеттер name
-     *
-     * @param name
-     */
+
     public boolean setName(String name) {
         if (name.trim().equals("")){
-            Messages.normalMessageOutput("Имя не может быть null или пустой строкой");
+            Messages.normalMessageOutput("Name can't be null");
             return  false;
         }
         else {
@@ -160,7 +156,7 @@ public class Person implements Comparable<Person> {
     @Override
     public String toString() {
         return " " +
-                "  Имя = '" + name + '\'' +
+                "  Name = '" + name + '\'' +
                 ", номер паспорта = " + passportID +
                 ", цвет глаз = " + eyeColor +
                 ", цвет волос = " + hairColor +

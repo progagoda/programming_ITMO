@@ -18,12 +18,11 @@ public class Main {
      */
     public static void main(String[] args) throws Exception{
         FileManager fileManager;
-        final String myenv=System.getenv("GROUP_FILE");
+        final String myenv="E:\\файлы итмо лабы\\программирование\\programming_ITMO\\lab 5\\StudyGroup.json";
         fileManager=new FileManager(myenv);
         GeneralColl collectionManager = new GeneralColl(fileManager);
         collectionManager.loadCollection();
         ProgramStarter programStarter = new ProgramStarter(collectionManager);
-        fileManager.readCollection();
         programStarter.start();
 
             }
