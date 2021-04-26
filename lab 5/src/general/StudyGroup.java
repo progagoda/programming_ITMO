@@ -3,6 +3,7 @@ package general;
 import helpers.Messages;
 import helpers.StudyGroupMaker;
 
+import java.sql.SQLOutput;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
@@ -262,15 +263,20 @@ public class StudyGroup implements Comparable<StudyGroup> {
      * Выводит информацию в строков виде об объекте
      */
     public void printInfoAboutElement() {
-        Messages.normalMessageOutput("id - " + id + "\n" +
-                "Имя - " + name + "\n" +
-                "Координаты x и y - " + coordinates.getX() + ", " + coordinates.getY() + "\n" +
-                "Дата создания - " + getCreationDate() + "\n" +
-                "Количество студентов - " + studentsCount + "\n" +
-                "Отчисленные студенты - " + expelledStudents + "\n" +
-                "Форма обучения - " + formOfEducation + "\n" +
-                "Номер семместра - " + semesterEnum + "\n" +
-                "Староста группы - " + groupAdmin + "\n");
+       try {
+           Messages.normalMessageOutput("id - " + id + "\n" +
+                   "Имя - " + name + "\n" +
+                   "Координаты x и y - " + coordinates.getX() + ", " + coordinates.getY() + "\n" +
+                   "Дата создания - " + creationDate.toOffsetDateTime().toZonedDateTime() + "\n" +
+                   "Количество студентов - " + studentsCount + "\n" +
+                   "Отчисленные студенты - " + expelledStudents + "\n" +
+                   "Форма обучения - " + formOfEducation + "\n" +
+                   "Номер семместра - " + semesterEnum + "\n" +
+                   "Староста группы - " + groupAdmin + "\n");
+       }
+       catch (NullPointerException e){
+           System.out.println("Ваша коллекция загружена некорректно");
+       }
     }
 
     /**

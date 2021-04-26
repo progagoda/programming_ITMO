@@ -275,22 +275,7 @@ public class StudyGroupMaker {
             }
         }
 
-
         return group;
-    }
-
-    /**
-     * Узнать, сколько запятых используется в строке
-     *
-     * @param line сама строка
-     * @return количество запятых
-     */
-    private int checkAmountOfCommasInLine(String line) {
-        int amount = 0;
-        for (char x : line.toCharArray()) {
-            if (x == ',') amount++;
-        }
-        return amount;
     }
 }
 
