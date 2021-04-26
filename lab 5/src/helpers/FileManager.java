@@ -14,10 +14,10 @@ public class FileManager {
     private Gson gson = new Gson();
     private String envVariable;
     File file;
-    public FileManager(String fileName) {
+    public FileManager(String fileName)  {
         this.envVariable = fileName;
         try {
-            this.file = new File(System.getenv(envVariable));
+            this.file = new File(envVariable);
         } catch (NullPointerException e) {
             System.out.println("\u001B[37m" + "\u001B[31m" + "Вам необходимо задать переменную окружения!!!" + "\u001B[31m" + "\u001B[37m");
         }
@@ -37,18 +37,19 @@ public class FileManager {
                     out.close();
                     System.out.println("Не переживайте. Мы записали вашу коллекцию в новый файл: " + "/home/s285384/PROGA/lab5/file2");
                 } catch (Exception e) {
+                    Messages.normalMessageOutput("\u001B[37m" + "\u001B[31m"+"Не найдена локальная переменная"+ "\u001B[31m" + "\u001B[37m");
 
                 }
 
             } else {
-                try (PrintWriter pw = new PrintWriter(new PrintWriter(System.getenv().get(envVariable)))) {
-                    File file = new File(System.getenv().get(envVariable));
+                try (PrintWriter pw = new PrintWriter(new PrintWriter(envVariable))) {
+                    File file = new File(envVariable);
 
                     pw.write(gson.toJson(collection));
                     System.out.println("Коллекция успешно сохранена в файл!");
 
                 } catch (Exception e) {
-                    System.out.println();
+                    System.out.println("Коллекция не смогла сохраниться");
 
                 }
             }
@@ -61,7 +62,7 @@ public class FileManager {
      * @return коллекция, которая была считана из файла
      */
     public PriorityQueue<StudyGroup> readCollection() {
-        if (System.getenv(envVariable) != null) {
+        if (file!= null) {
             if (file.exists() & !file.canRead()) {
                 System.out.println("\u001B[37m" + "\u001B[31m" + "Недостаточно прав для чтения данных из файла. Добавьте права на чтение и запустите программу вновь" + "\u001B[31m" + "\u001B[37m");
                 System.exit(0);

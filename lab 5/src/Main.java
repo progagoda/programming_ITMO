@@ -16,14 +16,14 @@ public class Main {
      * @param args аргумент
      * @throws IOException ошибка ввода
      */
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception{
         FileManager fileManager;
-        final String myenv=System.getenv("E://GROUP_FILE");
+        final String myenv=System.getenv("GROUP_FILE");
         fileManager=new FileManager(myenv);
         GeneralColl collectionManager = new GeneralColl(fileManager);
-       // collectionManager.loadCollection();
+        collectionManager.loadCollection();
         ProgramStarter programStarter = new ProgramStarter(collectionManager);
-        //fileManager.readCollection();
+        fileManager.readCollection();
         programStarter.start();
 
             }
