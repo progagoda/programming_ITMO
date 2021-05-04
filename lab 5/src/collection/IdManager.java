@@ -22,6 +22,10 @@ public class IdManager {
         return !hashSetOfIds.contains(id);
     }
 
+    public static HashSet<Long> getHashSetOfIds() {
+        return hashSetOfIds;
+    }
+
     /**
      * Метод, который ищет уникальный id
      *

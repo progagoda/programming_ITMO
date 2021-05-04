@@ -18,7 +18,7 @@ public class Main {
      */
     public static void main(String[] args) throws Exception{
         FileManager fileManager;
-        final String myenv="E:\\файлы итмо лабы\\программирование\\programming_ITMO\\lab 5\\StudyGroup.json";
+        final String myenv="M:\\лабы прога\\programming_ITMO\\lab 5\\StudyGroup.json";
         fileManager=new FileManager(myenv);
         GeneralColl collectionManager = new GeneralColl(fileManager);
         collectionManager.loadCollection();

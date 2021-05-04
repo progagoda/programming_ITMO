@@ -264,8 +264,9 @@ public class GeneralColl {
      */
     public boolean removeElementById(Long id) {
         if (getCollection().size() > 0) {
+            IdManager.getHashSetOfIds().add(getCollection().peek().getId());
             if (!IdManager.checkUniq(id)) {
-                getCollection().removeIf(flat -> flat.getId().equals(id));
+                getCollection().removeIf(group-> group.getId().equals(id));
                 IdManager.removeUsedId(id);
                 return true;
             } else {

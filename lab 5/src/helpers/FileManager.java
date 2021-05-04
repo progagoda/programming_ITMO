@@ -69,11 +69,11 @@ public class FileManager {
                 System.out.println("\u001B[37m" + "\u001B[31m" + "Недостаточно прав для чтения данных из файла. Добавьте права на чтение и запустите программу вновь" + "\u001B[31m" + "\u001B[37m");
                 System.exit(0);
             }
-
             try (FileReader fileScanner= new FileReader(file)) {
+                BufferedInputStream reader= new BufferedInputStream(new FileInputStream((file)));
                 Type collectionType = new TypeToken<PriorityQueue<StudyGroup>>(){}.getType();
-
                 PriorityQueue<StudyGroup> collection = gson.fromJson(fileScanner, collectionType);
+                reader.readAllBytes();
                 System.out.println("\u001B[37m" + "\u001B[33m" + "Коллекция успешно загружена!" + "\u001B[33m" + "\u001B[37m");
                 if (collection == null) return new PriorityQueue<>();
                 return collection;
@@ -86,9 +86,10 @@ public class FileManager {
             } catch (JsonSyntaxException e) {
                 System.err.println("Формат файла не удовлетворяет условию");
             }
-//            catch (RuntimeException e){
-//                Messages.normalMessageOutput("\u001B[37m" + "\u001B[33m"+"Файл написан с ошибкой, перепроверьте файл и запустите программу снова"+ "\u001B[33m" + "\u001B[37m");
-//            }
+           catch (RuntimeException e){
+               Messages.normalMessageOutput("\u001B[37m" + "\u001B[33m"+"Файл написан с ошибкой, перепроверьте файл и запустите программу снова"+ "\u001B[33m" + "\u001B[37m");
+               Scanner file = new Scanner(file);
+           }
         } else
             System.out.println("\u001B[37m" + "\u001B[31m" + "Системная переменная с загрузочным файлом не найдена!" + "\u001B[31m" + "\u001B[37m");
         return new PriorityQueue<>();
