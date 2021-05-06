@@ -19,8 +19,14 @@ public class Coordinates {
             Messages.normalMessageOutput("X не может быть null");
             return false;
         } else {
-            this.x = x;
-            return true;
+            try {
+                this.x = x;
+                return true;
+            } catch (Exception e) {
+                Messages.normalMessageOutput("Поле x должно быть числом");
+                return false;
+            }
+
         }
     }
 
@@ -29,8 +35,14 @@ public class Coordinates {
             Messages.normalMessageOutput("Y  не может быть null или больше -345");
             return false;
         } else {
-            this.y = y;
-            return true;
+            try {
+                this.y = y;
+                return true;
+            }
+            catch (Exception e){
+                Messages.normalMessageOutput("Поле Y должно быть числом");
+                return false;
+            }
         }
     }
 }

@@ -207,6 +207,7 @@ public class StudyGroupMaker {
                 }
             } catch (Exception e) {
                 System.out.println("Ошибка ввода поля x, попробуйте еще раз или напишите end");
+                continue;
             }
         }
 

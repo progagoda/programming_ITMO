@@ -130,7 +130,6 @@ public class GeneralColl {
             }
             LocalDateTime date = LocalDateTime.now();
             group.setCreationDate(date);
-
             group.setId(id);
             getCollection().add(group);
             while (queue.size() > 0) {

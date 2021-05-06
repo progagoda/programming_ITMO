@@ -1,13 +1,11 @@
 package general;
 
+import collection.GeneralColl;
 import helpers.Messages;
-import helpers.StudyGroupMaker;
 
-import java.sql.SQLOutput;
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Random;
+import java.util.Scanner;
 
 
 public class StudyGroup implements Comparable<StudyGroup> {
@@ -79,8 +77,7 @@ public class StudyGroup implements Comparable<StudyGroup> {
     public String getCreationDate() {
         return creationDate.toString();
     }
-
-    /**
+        /**
      * Cеттер id
      *
      * @param id id
@@ -113,9 +110,11 @@ public class StudyGroup implements Comparable<StudyGroup> {
      * Сеттер для x
      *
      * @param x x
+     * @return
      */
-    public void setX(Long x) {
+    public boolean setX(Long x) {
         coordinates.setX(x);
+        return true;
     }
 
     /**
@@ -123,8 +122,9 @@ public class StudyGroup implements Comparable<StudyGroup> {
      *
      * @param y x
      */
-    public void setY(Float y) {
+    public boolean setY(Float y) {
         coordinates.setY(y);
+        return  true;
     }
 
 
@@ -179,10 +179,11 @@ public class StudyGroup implements Comparable<StudyGroup> {
      * @param studentsCount studentsCount
      */
     public boolean setStudentsCount(Long studentsCount) {
-        if (studentsCount > 0 && !studentsCount.equals("")) {
+       if (studentsCount > 0 && !studentsCount.equals("")) {
             this.studentsCount = studentsCount;
             return true;
-        } else {
+        }
+        else {
             if(studentsCount < 0){
                 Messages.normalMessageOutput("Количество студентов в группе должно быть больше 0");
             }
@@ -197,7 +198,14 @@ public class StudyGroup implements Comparable<StudyGroup> {
         this.coordinates = coordinates;
         return true;
     }
+    public boolean write_coordinatesX(Long x){
+      return   coordinates.setX(x);
 
+    }
+    public boolean write_coordinatesY(Float y){
+        return  coordinates.setY(y);
+
+    }
     /**
      * Сеттер expelledStudents
      *
@@ -218,6 +226,11 @@ public class StudyGroup implements Comparable<StudyGroup> {
         }
         }
 
+    /**
+     * Сеттер formOfEducation
+     *
+     * @param formOfEducation formOfEducation
+     */
 
     /**
      * Сеттер formOfEducation
@@ -270,8 +283,57 @@ public class StudyGroup implements Comparable<StudyGroup> {
                    "Староста группы - " + groupAdmin + "\n");
        }
        catch (NullPointerException e){
-           System.out.println("Ваша коллекция загружена некорректно");
+           System.out.println("Ваш объект с id="+getId()+" записан некорректно и поэтому был пропущен");
        }
+    }
+    public StudyGroup check_fields(StudyGroup group) {//это ерунда она нигде не используется
+        String line;
+        Scanner scanner = new Scanner(System.in);
+        if (getName().equals(null)) {
+            System.out.println("Незаполнено поле Name");
+        }
+        if (getStudentsCount().equals(null)) {
+            System.out.println("Незаполнено поле studentCount у группы с id " + getId());
+        }
+        if (getExpelledStudents() == 0) {
+            System.out.println("Незаполнено поле ExpelledStudents у группы с id " + getId());
+            while (true) {
+                System.out.println("Хотите заполнить данный объект?В ином случае он не загрузиться(true/false)");
+                try {
+                    if (scanner.hasNextLine()) {
+                        line = scanner.nextLine().trim();
+                    } else {
+                        return null;
+                    }
+                    if (line.equals("true")) {
+                        System.out.print("Введите значение для поля expelledStudents: ");
+                        line = scanner.nextLine().trim();
+                        if (line.equals("end")) {
+                            System.out.println("Добавление элемента остановлено.");
+                            return null;
+                        }
+                        if (setExpelledStudents(Long.valueOf(line))) {
+                            System.out.println("Поле expelledStudents дописано");
+                            break;
+                        }
+                    }
+                    if (line.equals("false")) {
+//                        StudyGroup group1=new StudyGroup();
+//                        group1.setId(getId());
+                        GeneralColl.collection.removeIf(group1 -> group.getId().equals(id));
+//                        IdManager.removeUsedId(id);
+//                        IdManager.getHashSetOfIds().add(GeneralColl.collection.element().getId());
+//                        IdManager.removeUsedId(GeneralColl.collection.element().getId());
+//                        GeneralColl.collection.remove(GeneralColl.collection.element());
+                    System.out.println("Тк вы не заполнили поле объект был пропущен");
+                    break;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Ошибка ввода поля expelledStudents, попробуйте еще раз или напишите end");
+                }
+            }
+        }
+        return group;
     }
 
     /**
@@ -279,7 +341,13 @@ public class StudyGroup implements Comparable<StudyGroup> {
      */
     @Override
     public int compareTo(StudyGroup o) {
-        return this.getName().compareTo(o.getName());
+        try {
+            return this.getName().compareTo(o.getName());
+        }
+        catch (NullPointerException e){
+            Messages.normalMessageOutput("Для сортировки должно быть введено поле Name");
+            return 0;
+        }
     }
 }
 
