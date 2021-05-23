@@ -36,8 +36,9 @@ public class Receiver {
     /**
      * выводит информацию о всех командах
      */
-    public void getInfoAboutAllCommands() {
+    public boolean getInfoAboutAllCommands() {
         invoker.getHashMap().forEach((name, command) -> command.printInfoAboutCommand());
+        return  true;
     }
     /**
      * Логика для add_if_min
@@ -48,15 +49,17 @@ public class Receiver {
     /**
      * Логика для info
      */
-    public void getInfoAboutCollection() {
+    public boolean getInfoAboutCollection() {
         collectionManager.printInfoAboutCollection();
+        return  true;
     }
 
     /**
      * Логика для exit
      */
-    public void exit() {
-        System.exit(0);
+    public boolean exit() {
+         System.exit(0);
+         return true;
     }
 
     /**
@@ -89,7 +92,7 @@ public class Receiver {
     /**
      * Логика для execute_script
      */
-    private List<String> scriptFileNames = new ArrayList<String>();
+    private List<String> scriptFileNames = new ArrayList<>();
     public boolean executeScript(String args) {
         LineReader lineReader = new LineReader();
         String[] userCommand = {"", ""};

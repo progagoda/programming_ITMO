@@ -108,10 +108,7 @@ public class FileManager {
                                             }
                                             if (group.setName(line)) {
                                                 System.out.println("Поле Name дописано");
-                                                if (group.getName() != null && group.getId() != null && group.getSemesterEnum() != null && group.getCreationDate() != null && group.getCoordinates() != null
-                                                        && group.getStudentsCount() != null && group.getExpelledStudents() != 0 && group.getGroupAdmin() != null) {
-                                                    break;
-                                                }
+                                                if (check(group)) break;
                                             }
                                         }
                                         if (line.equals("false")) {
@@ -213,10 +210,8 @@ public class FileManager {
                                             }
                                             if (group.setStudentsCount(Long.valueOf(line))) {
                                                 System.out.println("Поле StudentsCount дописано");
-                                                if (group.getName() != null && group.getId() != null && group.getSemesterEnum() != null && group.getCreationDate() != null && group.getCoordinates() != null
-                                                        && group.getStudentsCount() != null && group.getExpelledStudents() != 0 && group.getGroupAdmin() != null) {
-                                                    break;
-                                                }
+                                                //if (check(group))
+                                                  break;
                                             }
                                         }
                                         if (line.equals("false")) {
@@ -248,10 +243,7 @@ public class FileManager {
                                                 }
                                                 if (group.setExpelledStudents(Long.valueOf(line))) {
                                                     System.out.println("Поле expelledStudents дописано");
-                                                    if (group.getName() != null && group.getId() != null && group.getSemesterEnum() != null && group.getCreationDate() != null && group.getCoordinates() != null
-                                                            && group.getStudentsCount() != null && group.getExpelledStudents() != 0 && group.getGroupAdmin() != null) {
-                                                        break;
-                                                    }
+                                                    if (check(group)) break;
                                                 }
                                             }
                                             if (line.equals("false")) {
@@ -284,10 +276,7 @@ public class FileManager {
                                                 }
                                                 if (group.setFormOfEducation(FormOfEducation.valueOf(line))) {
                                                     System.out.println("Поле форма обучения дописано");
-                                                    if (group.getName() != null && group.getId() != null && group.getSemesterEnum() != null && group.getCreationDate() != null && group.getCoordinates() != null
-                                                            && group.getStudentsCount() != null && group.getExpelledStudents() != 0 && group.getGroupAdmin() != null) {
-                                                        break;
-                                                    }
+                                                    if (check(group)) break;
 
                                                 }
                                             }
@@ -320,10 +309,7 @@ public class FileManager {
                                                 }
                                                 if (group.getGroupAdmin().setName(line)) {
                                                     System.out.println("Поле groupAdmin дописано");
-                                                    if (group.getName() != null && group.getId() != null && group.getSemesterEnum() != null && group.getCreationDate() != null && group.getCoordinates() != null
-                                                            && group.getStudentsCount() != null && group.getExpelledStudents() != 0 && group.getGroupAdmin() != null) {
-                                                        break;
-                                                    }
+                                                    if (check(group)) break;
                                                 }
                                             }
                                             if (line.equals("false")) {
@@ -337,8 +323,8 @@ public class FileManager {
                                         }
                                     }
                                 }// проверка работает
-                                if (group.getCreationDate() == null) {//здесь Беда вылетает
-                                    System.out.println("Незаполнено поле CreationDate у группы с id " + group.getId());
+                                if (group.getCreationDate()== null) {//здесь Беда вылетает
+                                    System.out.println("Не заполнено поле CreationDate у группы с id " + group.getId());
                                     while (true) {
                                         System.out.println("Хотите заполнить данный объект?В ином случае он не загрузиться(true/false):");
                                         try {
@@ -351,10 +337,7 @@ public class FileManager {
                                                 System.out.print("Это поле генерируется автоматически");
                                                 if (group.setCreationDate(LocalDateTime.now())) {
                                                     System.out.println("Генерация CreationDate выполнена");
-                                                    if (group.getName() != null && group.getId() != null && group.getSemesterEnum() != null && group.getCreationDate() != null && group.getCoordinates() != null
-                                                            && group.getStudentsCount() != null && group.getExpelledStudents() != 0 && group.getGroupAdmin() != null) {
-                                                        break;
-                                                    }
+                                                    if (check(group)) break;
                                                 }
                                             }
                                             if (line.equals("false")) {
@@ -368,7 +351,7 @@ public class FileManager {
                                         }
                                     }
 
-                                }//вылетает Беда
+                                }//вылетает хз как фиксить если дату удалить из json
                                 if (group.getSemesterEnum() == null) {
                                     System.out.println("Незаполнено поле Номер семместра у группы с id " + group.getId());
                                     while (true) {
@@ -388,10 +371,7 @@ public class FileManager {
                                                 }
                                                 if (group.setSemesterEnum(Semester.valueOf(line))) {
                                                     System.out.println("Поле номер семместра дописано");
-                                                    if (group.getName() != null && group.getId() != null && group.getSemesterEnum() != null && group.getCreationDate() != null && group.getCoordinates() != null
-                                                            && group.getStudentsCount() != null && group.getExpelledStudents() != 0 && group.getGroupAdmin() != null) {
-                                                        break;
-                                                    }
+                                                    if (check(group)) break;
                                                 }
                                             }
                                             if (line.equals("false")) {
@@ -418,17 +398,11 @@ public class FileManager {
                                                 System.out.println("Данное поле генерируется автоматически");
                                                 group.setId(IdManager.findUniq(Math.abs(new Random().nextLong())));
                                                 System.out.println("Теперь id у данного объекта:" + group.getId());
-                                                if (group.getName() != null && group.getId() != null && group.getSemesterEnum() != null && group.getCreationDate() != null && group.getCoordinates() != null
-                                                        && group.getStudentsCount() != null && group.getExpelledStudents() != 0 && group.getGroupAdmin() != null) {
-                                                    break;
-                                                }
-                                                }
+                                                if (check(group)) break;
+                                            }
                                                 if (group.setSemesterEnum(Semester.valueOf(line))) {
                                                     System.out.println("Поле номер семместра дописано");
-                                                    if (group.getName() != null && group.getId() != null && group.getSemesterEnum() != null && group.getCreationDate() != null && group.getCoordinates() != null
-                                                            && group.getStudentsCount() != null && group.getExpelledStudents() != 0 && group.getGroupAdmin() != null) {
-                                                        break;
-                                                    }
+                                                    if (check(group)) break;
                                                 }
 
                                             if (line.equals("false")) {
@@ -443,7 +417,7 @@ public class FileManager {
                                     }
                                 }//проверка работает
                             } catch (NullPointerException e){
-                                System.out.println("Беда");
+                                System.out.println("Ошибка");
 
                             }
                         }
@@ -466,6 +440,14 @@ public class FileManager {
             System.out.println("\u001B[37m" + "\u001B[31m" + "Системная переменная с загрузочным файлом не найдена!" + "\u001B[31m" + "\u001B[37m");
         return new PriorityQueue<>();
 
+    }
+
+    private boolean check(StudyGroup group) {//метод который проверяет есть ли другие null значения
+        if (group.getName() != null && group.getId() != null && group.getSemesterEnum() != null && group.getCreationDate() != null && group.getCoordinates() != null
+                && group.getStudentsCount() != null && group.getExpelledStudents() != 0 && group.getGroupAdmin() != null) {
+            return true;
+        }
+        return false;
     }
 
     @Override
