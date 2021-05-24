@@ -11,12 +11,7 @@ public class Server {
         public static void main(String[] args) {
             System.out.println("Начало работы сервера:");
             int port = askPort();
-            FileManager fileManager;
-            final String myenv = System.getenv("GROUP_FILE");
-            fileManager=new FileManager(myenv);
-            GeneralColl collectionManager = new GeneralColl(fileManager);
-            collectionManager.loadCollection();
-            Controller controller = new Controller(port, collectionManager);
+            Controller controller = new Controller(port);
             controller.run();
         }
 

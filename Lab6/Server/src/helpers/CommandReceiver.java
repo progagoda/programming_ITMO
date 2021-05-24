@@ -17,7 +17,7 @@ public class CommandReceiver {
 
         FileManager fileManager;
          String path = "M:\\лабы прога\\lab6\\Server\\StudyGroup.json";
-//        if (System.getenv("tselikov") != null) path = System.getenv("tselikov");
+        if (System.getenv("GROUP_FILE") != null){ path = System.getenv("GROUP_FILE");}
         fileManager= new FileManager(path);
         collectionManager= new GeneralColl(fileManager);
         collectionManager.loadCollection();

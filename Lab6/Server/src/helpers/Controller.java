@@ -14,7 +14,7 @@ public class Controller {
     CommandReceiver commandReceiver;
     CommandInvoker commandInvoker;
 
-    public Controller(int port, GeneralColl collection){
+    public Controller(int port){
         connector = new Connector();
         channel = connector.connect(port);
 
