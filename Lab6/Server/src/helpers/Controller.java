@@ -1,12 +1,12 @@
 package helpers;
-import collection.GeneralColl;
-import commands.Command;
 
+import commands.Command;
 import java.io.*;
 import java.net.SocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.DatagramChannel;
-import java.util.Scanner;
+import java.nio.channels.SelectionKey;
+import java.nio.channels.Selector;
 
 public class Controller {
     Connector connector;
@@ -20,6 +20,9 @@ public class Controller {
 
         try {
             channel.configureBlocking(false);
+            Selector selector = Selector.open();
+            SelectionKey key = channel.register(selector, SelectionKey.OP_READ);
+            key.interestOps(SelectionKey.OP_WRITE);
         } catch (IOException e) {
             e.printStackTrace();
         }

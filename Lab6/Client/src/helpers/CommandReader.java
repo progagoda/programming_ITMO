@@ -87,7 +87,9 @@ public class CommandReader {
                 break;
             case "execute_script":
                 isExecuteScript = true;
-                ArrayList<String> script = readScript(ar[0]);
+                ArrayList<String> script = new ArrayList<>();
+                script.clear();
+                script=readScript(ar[0]);
                 scriptPaths.add(ar[0]);
                 if (checkRecurssionInScript(script, scriptPaths)) {
                     System.out.println("Рекурсия");
