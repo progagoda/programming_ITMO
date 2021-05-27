@@ -34,13 +34,10 @@ public class Client {
             System.out.println("Начало работы программы:");
             CommandReader commandReader1= new CommandReader();
             commandReader1.send(new CheckServer(),clientSocket, socketAddress);
-            commandReader1.receive(clientSocket);
-            //commandReader1.checkServer(clientSocket);
+            commandReader1.checkFeedback(clientSocket);
             while (true) {
                 try {
                     CommandReader commandReader = new CommandReader();
-                    //String  message="Check";
-                   // commandReader.sendToCheck(message,clientSocket,socketAddress);
                     System.out.print("Введите команду: ");
                     String inputCommand = consoleScanner.nextLine().trim();
                     if (input.isEmpty()) {

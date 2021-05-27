@@ -196,6 +196,23 @@ public class CommandReader {
         StudyGroup group = new StudyGroupMaker().makeGroup(scanner);
         return  group;
     }
+    public void checkFeedback(DatagramSocket socket){byte[] message = new byte[16384]; //Массив байт, который мы получаем
+        try {
+            DatagramPacket packet = new DatagramPacket(message, message.length);
+            socket.setSoTimeout(3000); //Задержка для возможности обработки запроса клиента
+            socket.receive(packet);
+            ByteArrayInputStream bis = new ByteArrayInputStream(message);
+            ObjectInput in = new ObjectInputStream(bis);
+            String received_message = (String) in.readObject();
+            System.out.println(received_message);
+        } catch (SocketTimeoutException e) {
+            Messages.normalMessageOutput("Проверьте ваш сервер на готовность к передаче информации",MessageColor.ANSI_RED);
+            System.exit(-1);
+            // Messages.normalMessageOutput("Cервер отключен",MessageColor.ANSI_RED);
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * Метод для получения пакета от Сервера
      * @param socket - сокет
@@ -212,8 +229,6 @@ public class CommandReader {
             System.out.println(received_message);
         } catch (SocketTimeoutException e) {
             Messages.normalMessageOutput("Время ожидания превышено",MessageColor.ANSI_RED);
-            Messages.normalMessageOutput("Проверьте ваш сервер на готовность к передаче информации",MessageColor.ANSI_RED);
-           // Messages.normalMessageOutput("Cервер отключен",MessageColor.ANSI_RED);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
