@@ -105,12 +105,8 @@ Controller {
     public void run() {
         Container container;
         String feedBack;
-//        Scanner reader = new Scanner(System.in);
-//        String stroka = reader.nextLine().trim().split(" ")[0];
-//        if (stroka.equals("save")) {
-//            System.out.println(commandReceiver.save());
-//        }
-        while (true) {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        while (true){
             container = receiveCommand();
             //execute
             try {
@@ -119,16 +115,19 @@ Controller {
                 send(channel, new Container(feedBack, container.getAddress()));
             } catch (NullPointerException e) {
             }
-            try{Scanner reader = new Scanner(System.in);
-                String stroka = reader.nextLine().trim().split(" ")[0];
-                if (stroka.equals("save")) {
-                    System.out.println(commandReceiver.save()); }}
-            catch (Exception e){
-
-            }
+            try {
+                if (reader.ready()) {
+                    String stroka = reader.readLine().trim().split(" ")[0];
+                    if (stroka.equals("save")) System.out.println(commandReceiver.save());
+                    if (stroka.equals("exit")) System.exit(-1);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (NullPointerException e) {
+                System.out.println("Завершение работы программы...");
             }
         }
-
+    }
 
     //Получаем команду с аргументами от клиента
     public Container receiveCommand() {
