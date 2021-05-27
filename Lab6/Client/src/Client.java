@@ -1,4 +1,6 @@
 import collection.GeneralColl;
+import commands.CheckServer;
+import commands.HelpCommand;
 import helpers.CommandReader;
 import helpers.FileManager;
 
@@ -30,14 +32,20 @@ public class Client {
             SocketAddress socketAddress = new InetSocketAddress(InetAddress.getByName("localhost"), port);
             DatagramSocket clientSocket = new DatagramSocket();
             System.out.println("Начало работы программы:");
+            CommandReader commandReader1= new CommandReader();
+            commandReader1.send(new CheckServer(),clientSocket, socketAddress);
+            commandReader1.receive(clientSocket);
+            //commandReader1.checkServer(clientSocket);
             while (true) {
                 try {
+                    CommandReader commandReader = new CommandReader();
+                    //String  message="Check";
+                   // commandReader.sendToCheck(message,clientSocket,socketAddress);
                     System.out.print("Введите команду: ");
                     String inputCommand = consoleScanner.nextLine().trim();
                     if (input.isEmpty()) {
                         continue;
                     }
-                    CommandReader commandReader = new CommandReader();
                     commandReader.parseCommand(inputCommand.split(" "), clientSocket, socketAddress, consoleScanner);
                 } catch (NoSuchElementException e) {
                     System.out.println("Завершение программы...");

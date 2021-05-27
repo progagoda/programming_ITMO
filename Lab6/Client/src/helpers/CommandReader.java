@@ -31,6 +31,7 @@ public class CommandReader {
     public void parseCommand(String[] input, DatagramSocket socket, SocketAddress address, Scanner scanner) {
         String commandKey = input[0];
         String[] ar = Arrays.copyOfRange(input, 1, input.length);
+
         switch (commandKey) {
             case "help":
                 send(new HelpCommand(), socket, address);
@@ -73,10 +74,11 @@ public class CommandReader {
                 receive(socket);
                 break;
             case "add":
-                if (isExecuteScript) send(new AddCommand(addGroup()), socket, address);
-                else send(new AddCommand(add(ar)), socket, address);
-                receive(socket);
-                break;
+                if (isExecuteScript) {send(new AddCommand(addGroup()), socket, address);}
+                  else{
+                    send(new AddCommand(add(ar)), socket, address);}
+                  receive(socket);
+                  break;
             case "addmin":
                 send(new AddMinCommand(add(ar)), socket, address);
                 receive(socket);
@@ -88,7 +90,7 @@ public class CommandReader {
             case "execute_script":
                 isExecuteScript = true;
                 ArrayList<String> script = new ArrayList<>();
-                script.clear();
+                //script.clear();
                 script=readScript(ar[0]);
                 scriptPaths.add(ar[0]);
                 if (checkRecurssionInScript(script, scriptPaths)) {
@@ -99,7 +101,7 @@ public class CommandReader {
                         readWholeScript(script); //Читаем полный скрипт и записываем в listOfCommands
                         for (int i = 0; i < listOfCommands.size(); i++) {
                             String[] in = listOfCommands.get(i).trim().split(" ");
-                            if (in[0].equals("add") || in[0].equals("update") || in[0].equals("remove_lower")) {
+                            if (in[0].equals("add") || in[0].equals("update")) {
 //                            if (!in[0].equals("remove_lower")) argument = in[1];
                                 if (listOfCommands.size() - i <= 12) {
                                     System.out.println("Недостаточно полей");
@@ -122,11 +124,13 @@ public class CommandReader {
                             }
                             parseCommand(in, socket, address, scanner); //Отправляем команду
                         }
+                        listOfCommands.clear();
                         Messages.normalMessageOutput("Выполнение скрипта закончено", MessageColor.ANSI_YELLOW);
                     } catch (FileNotFoundException e) {
                         Messages.normalMessageOutput("Файл не найден", MessageColor.ANSI_RED);
                     }
                 }
+                script.clear();
                   break;
             case "exit":
                 System.out.println("Завершение работы клиентского приложения");
@@ -165,7 +169,7 @@ public class CommandReader {
      * @param socket - сокет
      * @param address - адрес для отправки
      */
-    private void send(Command command, DatagramSocket socket, SocketAddress address) {
+    public void send(Command command, DatagramSocket socket, SocketAddress address) {
         byte[] sending;
         try {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -192,7 +196,6 @@ public class CommandReader {
         StudyGroup group = new StudyGroupMaker().makeGroup(scanner);
         return  group;
     }
-
     /**
      * Метод для получения пакета от Сервера
      * @param socket - сокет
@@ -208,7 +211,9 @@ public class CommandReader {
             String received_message = (String) in.readObject();
             System.out.println(received_message);
         } catch (SocketTimeoutException e) {
-            System.out.println("Время ожидания превышено");
+            Messages.normalMessageOutput("Время ожидания превышено",MessageColor.ANSI_RED);
+            Messages.normalMessageOutput("Проверьте ваш сервер на готовность к передаче информации",MessageColor.ANSI_RED);
+           // Messages.normalMessageOutput("Cервер отключен",MessageColor.ANSI_RED);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -239,6 +244,7 @@ public class CommandReader {
      * @return Изначальный список команд
      */
     private ArrayList<String> readScript(String path) {
+//        path= "E:\\файлы итмо лабы\\программирование\\programming_ITMO\\Lab6\\Client\\script";
         File file = new File(path);
         ArrayList<String> listOfCommands = new ArrayList<>();
         try {
@@ -252,8 +258,8 @@ public class CommandReader {
         return listOfCommands;
     }
     /**
-     * Метод для получения экземпляра класса Product
-     * @return product
+     * Метод для получения экземпляра класса StudyGroup
+     * @return Group
      */
     public StudyGroup addGroup() {
         Scanner scanner = new Scanner(System.in);
@@ -373,5 +379,6 @@ public class CommandReader {
             else listOfCommands.add(list.get(i));
         }
         return listOfCommands;
+       // listOfCommands.clear();
     }
 }

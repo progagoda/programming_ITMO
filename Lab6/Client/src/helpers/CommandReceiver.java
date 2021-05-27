@@ -3,6 +3,7 @@ package helpers;
 import general.StudyGroup;
 
 public class CommandReceiver {
+    public String checkServer(){return null;};
     public String help() { return null;}
     public String info() {return null;}
     public String show() {return null;}

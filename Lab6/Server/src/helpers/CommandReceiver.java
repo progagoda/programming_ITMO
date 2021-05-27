@@ -16,7 +16,7 @@ public class CommandReceiver {
     public CommandReceiver() {
 
         FileManager fileManager;
-         String path = "M:\\лабы прога\\lab6\\Server\\StudyGroup.json";
+         String path = "E:\\файлы итмо лабы\\программирование\\programming_ITMO\\Lab6\\Server\\StudyGroup.json";
         if (System.getenv("GROUP_FILE") != null){ path = System.getenv("GROUP_FILE");}
         fileManager= new FileManager(path);
         collectionManager= new GeneralColl(fileManager);
@@ -71,6 +71,7 @@ public class CommandReceiver {
     public String filterAdmin(String admin){return collectionManager.printElementbyGroupAdmin(admin);}
     public  String update(Long id,StudyGroup group){return collectionManager.updateElement(id,group);}
     public  String printSemester(){return collectionManager.printElementbySemester();}
+    public  String checkServer(){return Messages.unnormalMessageOutput("Cервер готов к передаче информации",MessageColor.ANSI_BLUE);}
     /**
      * Логика для add
      */

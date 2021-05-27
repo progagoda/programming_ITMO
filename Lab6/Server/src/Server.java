@@ -1,13 +1,18 @@
 
+import helpers.Connector;
+import helpers.Container;
 import helpers.Controller;
+
+import java.net.BindException;
+import java.nio.channels.DatagramChannel;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Server {
         public static void main(String[] args) {
             System.out.println("Начало работы сервера:");
-            int port = askPort();
-            Controller controller = new Controller(port);
+           // int port = askPort();
+            Controller controller = new Controller();
             controller.run();
         }
 
