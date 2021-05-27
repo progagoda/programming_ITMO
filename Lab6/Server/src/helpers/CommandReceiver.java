@@ -47,9 +47,8 @@ public class CommandReceiver {
 //                new PrintAscendingCommand(),
 //                new PrintDescendingCommand()
         );
-
     }
-
+    public  void exit(){ System.exit(-1);}
     public String help() {
         return collectionManager.help();
     }

@@ -11,6 +11,7 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.charset.Charset;
 import java.util.Iterator;
+import java.util.Scanner;
 
 public class
 Controller {
@@ -32,7 +33,7 @@ Controller {
 
 
     public Controller(){
-        
+
         connector= new Connector();
         channel= connector.connect(port1);
       //  send(channel,new Container(message, connector.getSocketAddress()));//вылетает ошибка
@@ -101,10 +102,14 @@ Controller {
             request = ByteBuffer.allocate(65535);
         }
     }
-    public void run(){
+    public void run() {
         Container container;
         String feedBack;
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+//        Scanner reader = new Scanner(System.in);
+//        String stroka = reader.nextLine().trim().split(" ")[0];
+//        if (stroka.equals("save")) {
+//            System.out.println(commandReceiver.save());
+//        }
         while (true) {
             container = receiveCommand();
             //execute
@@ -114,19 +119,16 @@ Controller {
                 send(channel, new Container(feedBack, container.getAddress()));
             } catch (NullPointerException e) {
             }
-            catch (ClassCastException e){
-                answer(channel,"I'm ready");
+            try{Scanner reader = new Scanner(System.in);
+                String stroka = reader.nextLine().trim().split(" ")[0];
+                if (stroka.equals("save")) {
+                    System.out.println(commandReceiver.save()); }}
+            catch (Exception e){
+
             }
-            try {
-                if (reader.ready())
-                    if (reader.readLine().trim().split(" ")[0].equals("save")) System.out.println(commandReceiver.save());
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (NullPointerException e) {
-                System.out.println("Завершение работы программы...");
             }
         }
-    }
+
 
     //Получаем команду с аргументами от клиента
     public Container receiveCommand() {

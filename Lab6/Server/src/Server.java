@@ -11,7 +11,6 @@ import java.util.Scanner;
 public class Server {
         public static void main(String[] args) {
             System.out.println("Начало работы сервера:");
-           // int port = askPort();
             Controller controller = new Controller();
             controller.run();
         }
