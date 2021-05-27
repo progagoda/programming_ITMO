@@ -12,7 +12,8 @@ import java.nio.channels.Selector;
 import java.nio.charset.Charset;
 import java.util.Iterator;
 
-public class Controller {
+public class
+Controller {
     Connector connector;
     DatagramChannel channel;
     CommandReceiver commandReceiver;
@@ -31,7 +32,7 @@ public class Controller {
 
 
     public Controller(){
-          String message="Cервер включен";
+        
         connector= new Connector();
         channel= connector.connect(port1);
       //  send(channel,new Container(message, connector.getSocketAddress()));//вылетает ошибка
