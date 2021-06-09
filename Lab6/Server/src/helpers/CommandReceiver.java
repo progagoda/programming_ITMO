@@ -36,8 +36,8 @@ public class CommandReceiver {
                 new PrintSemesterCommand(),
                 new RemoveGreatestCommand(null),
                 new MinByIdCommand(),
-                new FilterByGroupAdminCommand(null)
-
+                new FilterByGroupAdminCommand(null),
+                new CheckServer()
 //                new ExecuteScriptCommand(null),
 //                new ExitCommand(),
 //                new RemoveLowerCommand(null),

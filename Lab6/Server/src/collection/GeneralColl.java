@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Класс для колекции с объектами StudyGroup и его управлением
@@ -125,7 +126,7 @@ public class GeneralColl {
      * Реализация команды update
      *
      * @param id      id по которому идет обновление элемента
-     * @param scanner Сканнер
+     * @param
      * @return true / false, если выполнилось обновление элемента коллекции
      */
     public String updateElement(Long id, StudyGroup group) {
@@ -150,7 +151,6 @@ public class GeneralColl {
     /**
      * Реализация команды add_if_min
      *
-     * @param scanner Сканнер
      * @return true / false, если выполнилось добавился элемент в колле
      */
     public String add_if_min(StudyGroup group) {
@@ -185,7 +185,7 @@ public class GeneralColl {
     /**
      * Реализация команды remove_greater
      *
-     * @param scanner Сканнер
+     * @param
      * @return true / false, если выполнилось удаление элементов коллекции
      */
     public String removeGreatest(StudyGroup group) {
@@ -248,8 +248,10 @@ public class GeneralColl {
      * @return true/false если команда выполнилась верно
      */
     public String printAllElements() {
-      if (!collection.isEmpty())
-         return collection.stream().map(StudyGroup::printInfoAboutElement).collect(Collectors.joining("\n"));
+        StringBuilder s = new StringBuilder("");
+      if (!collection.isEmpty()){
+          Stream<StudyGroup> stream = collection.stream();
+         return collection.stream().map(StudyGroup::printInfoAboutElement).collect(Collectors.joining("\n"));}
       else return "Коллекция пуста";
     }
 
@@ -334,7 +336,7 @@ public class GeneralColl {
     /**
      * Реализация команды add
      *
-     * @param scanner Сканнер
+     * @param
      * @return true / false, если выполнилось добавление элемента
      */
     public String addElement(StudyGroup group) {

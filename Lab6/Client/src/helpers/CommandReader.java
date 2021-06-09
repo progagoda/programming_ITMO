@@ -125,6 +125,7 @@ public class CommandReader {
                             parseCommand(in, socket, address, scanner); //Отправляем команду
                         }
                         listOfCommands.clear();
+                        isExecuteScript=false;
                         Messages.normalMessageOutput("Выполнение скрипта закончено", MessageColor.ANSI_YELLOW);
                     } catch (FileNotFoundException e) {
                         Messages.normalMessageOutput("Файл не найден", MessageColor.ANSI_RED);

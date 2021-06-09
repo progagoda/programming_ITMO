@@ -1,6 +1,7 @@
 package helpers;
 
 import commands.Command;
+
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
@@ -19,8 +20,9 @@ Controller {
     DatagramChannel channel;
     CommandReceiver commandReceiver;
     CommandInvoker commandInvoker;
-     int port1 = 8340;
+    int port1 = 8340;
     static int BUF_SZ = 1024;
+
     class Con {
         ByteBuffer req;
         ByteBuffer resp;
@@ -32,11 +34,11 @@ Controller {
     }
 
 
-    public Controller(){
+    public Controller() {
 
-        connector= new Connector();
-        channel= connector.connect(port1);
-      //  send(channel,new Container(message, connector.getSocketAddress()));//вылетает ошибка
+        connector = new Connector();
+        channel = connector.connect(port1);
+        //  send(channel,new Container(message, connector.getSocketAddress()));//вылетает ошибка
         try {
             Selector selector = Selector.open();
             DatagramChannel channel = DatagramChannel.open();
@@ -81,18 +83,19 @@ Controller {
     }
 
     private void read(SelectionKey key) throws IOException {
-        DatagramChannel chan = (DatagramChannel)key.channel();
-        Con con = (Con)key.attachment();
+        DatagramChannel chan = (DatagramChannel) key.channel();
+        Con con = (Con) key.attachment();
         con.sa = chan.receive(con.req);
         System.out.println(new String(con.req.array(), "UTF-8"));
-        con.resp = Charset.forName( "UTF-8" ).newEncoder().encode(CharBuffer.wrap("send the same string"));
+        con.resp = Charset.forName("UTF-8").newEncoder().encode(CharBuffer.wrap("send the same string"));
     }
 
     private void write(SelectionKey key) throws IOException {
-        DatagramChannel chan = (DatagramChannel)key.channel();
-        Con con = (Con)key.attachment();
+        DatagramChannel chan = (DatagramChannel) key.channel();
+        Con con = (Con) key.attachment();
         chan.send(con.resp, con.sa);
     }
+
     class Connect {
         ByteBuffer request;
         ByteBuffer response;
@@ -102,30 +105,32 @@ Controller {
             request = ByteBuffer.allocate(65535);
         }
     }
+
     public void run() {
         Container container;
         String feedBack;
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        while (true){
-            container = receiveCommand();
+        Scanner reader = new Scanner(System.in);
+        while (true) {
             //execute
-            try {
+            try {//блок кода отправляющий результат клиенту
                 //send result
-                feedBack = commandInvoker.execute((Command) container.getObject());
-                send(channel, new Container(feedBack, container.getAddress()));
-            } catch (NullPointerException e) {
-            }
-            try {
-                if (reader.ready()) {
-                    String stroka = reader.readLine().trim().split(" ")[0];
+                if(reader.hasNext()) {
+                    String stroka = reader.nextLine().trim().split(" ")[0];
                     if (stroka.equals("save")) System.out.println(commandReceiver.save());
                     if (stroka.equals("exit")) System.exit(-1);
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (NullPointerException e) {
-                System.out.println("Завершение работы программы...");
+                container = receiveCommand();
+                feedBack = commandInvoker.execute((Command) container.getObject());
+                send(channel, new Container(feedBack, container.getAddress()));
+            } catch (NullPointerException  e) {
             }
+            String stroka;
+            //                if (receiveCommand() == null) {
+//                    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+//                    stroka = reader.readLine().trim().split(" ")[0];
+//                    if (stroka.equals("save")) System.out.println(commandReceiver.save());
+//                    if (stroka.equals("exit")) System.exit(-1);
+//                }
         }
     }
 
@@ -151,18 +156,7 @@ Controller {
         }
         return null;
     }
-    public void answer(DatagramChannel channel, String message){
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        try {
-            ObjectOutputStream out = new ObjectOutputStream(bos);
-            out.writeObject(message);
-            out.flush();
-            byte[] byteArray = bos.toByteArray();
-            ByteBuffer buffer = ByteBuffer.wrap(byteArray);
-            channel.send(buffer, connector.getSocketAddress());
-        } catch (Exception e) {
-        }
-    }
+
     public void send(DatagramChannel channel, Container container) {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         try {

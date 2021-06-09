@@ -18,38 +18,40 @@ public class Client {
         //String address = "127.0.0.1";
         int port = 0;
         String input;
-        try {
-            //System.out.println("Введите адресс:");
-            //address = consoleScanner.nextLine();
-            System.out.print("Введите порт: ");
-            input = consoleScanner.nextLine();
             try {
-                port = Integer.parseInt(input);
-            } catch (NumberFormatException e) {
-                System.out.println("Неправильный порт");
-                System.exit(1);
-            }
-            SocketAddress socketAddress = new InetSocketAddress(InetAddress.getByName("localhost"), port);
-            DatagramSocket clientSocket = new DatagramSocket();
-            System.out.println("Начало работы программы:");
-            CommandReader commandReader1= new CommandReader();
-            commandReader1.send(new CheckServer(),clientSocket, socketAddress);
-            commandReader1.checkFeedback(clientSocket);
-            while (true) {
+                //System.out.println("Введите адресс:");
+                //address = consoleScanner.nextLine();
+                System.out.print("Введите порт: ");
+                input = consoleScanner.nextLine();
                 try {
-                    CommandReader commandReader = new CommandReader();
-                    System.out.print("Введите команду: ");
-                    String inputCommand = consoleScanner.nextLine().trim();
-                    if (input.isEmpty()) {
-                        continue;
-                    }
-                    commandReader.parseCommand(inputCommand.split(" "), clientSocket, socketAddress, consoleScanner);
-                } catch (NoSuchElementException e) {
-                    System.out.println("Завершение программы...");
+                    port = Integer.parseInt(input);
+                } catch (NumberFormatException e) {
+                    System.out.println("Неправильный порт");
                     System.exit(1);
                 }
+                SocketAddress socketAddress = new InetSocketAddress(InetAddress.getByName("localhost"), port);
+                DatagramSocket clientSocket = new DatagramSocket();
+                System.out.println("Начало работы программы:");
+                CommandReader commandReader1 = new CommandReader();
+                commandReader1.send(new CheckServer(), clientSocket, socketAddress);
+                commandReader1.checkFeedback(clientSocket);
+                while (true) {
+                    try {
+                        CommandReader commandReader = new CommandReader();
+                        System.out.print("Введите команду: ");
+                        String inputCommand = consoleScanner.nextLine().trim();
+                        if (input.isEmpty()) {
+                            continue;
+                        }
+                        commandReader.parseCommand(inputCommand.split(" "), clientSocket, socketAddress, consoleScanner);
+                    } catch (NoSuchElementException e) {
+                        System.out.println("Завершение программы...");
+                        //System.exit(1);
+                    }
+                }
+            } catch (IOException e) {
             }
-        } catch (IOException e) {}
+
     }
 }
 
