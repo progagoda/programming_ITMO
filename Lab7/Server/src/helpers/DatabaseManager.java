@@ -15,8 +15,8 @@ import java.util.PriorityQueue;
 
 public class DatabaseManager {
     private final String url = "jdbc:postgresql://localhost:5432/postgres";
-    private final String user = "postgres";
-    private final String password = "Artem123456";
+    private final String user = "your_login";
+    private final String password = "your_password";
     private Connection connection;
 
     public String getUrl() {
