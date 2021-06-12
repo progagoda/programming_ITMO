@@ -10,11 +10,14 @@ public class AddCommand implements Command, Serializable {
     private final String key = "add";
     private final String helpText = "добавить элемент";
     private final StudyGroup group;
+    private String login;
     private static final long serialVersionUID = 6529685098267757690L;
 
-    public AddCommand(StudyGroup group) {
+    public AddCommand(StudyGroup group,String  login) {
         this.group = group;
+        this.login= login;
     }
+
 
     @Override
     public String execute(CommandReceiver commandReceiver) {

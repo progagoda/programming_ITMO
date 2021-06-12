@@ -21,6 +21,7 @@ public class StudyGroup implements Comparable<StudyGroup>, Serializable {
     private FormOfEducation formOfEducation; //Поле не может быть null
     private Semester semesterEnum; //Поле не может быть null
     private Person groupAdmin; //Поле не может быть null
+    private String login;
     private static final long serialVersionUID = -4333316296251054416L;
 
     /**
@@ -30,6 +31,14 @@ public class StudyGroup implements Comparable<StudyGroup>, Serializable {
      */
     public Long getId() {
         return id;
+    }
+
+    public String getCreator() {
+        return login;
+    }
+
+    public void setCreator(String  creator) {
+        this.login = creator;
     }
 
     /**
@@ -285,7 +294,8 @@ public class StudyGroup implements Comparable<StudyGroup>, Serializable {
                    "Отчисленные студенты - " + expelledStudents + "\n" +
                    "Форма обучения - " + formOfEducation + "\n" +
                    "Номер семместра - " + semesterEnum + "\n" +
-                   "Староста группы - " + groupAdmin + "\n", MessageColor.ANSI_CYAN);
+                   "Староста группы - " + groupAdmin+ "\n" +
+                   "Создатель объекта - "+ getCreator()+ "\n", MessageColor.ANSI_CYAN);
        }
        catch (NullPointerException e){
            return "Ваш объект с id="+getId()+" записан некорректно и поэтому был пропущен";

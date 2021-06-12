@@ -12,8 +12,10 @@ public class RemoveIdCommand implements Command, Serializable {
     private final String helpText = "удалить элемент из коллекции по его ключу";
     private final Long id;
     private static final long serialVersionUID = 6529685098267757693L;
-    public RemoveIdCommand(Long id) {
+    private  final String login;
+    public RemoveIdCommand(Long id, String login) {
         this.id = id;
+        this.login=login;
     }
     @Override
     public String execute(CommandReceiver commandReceiver) {

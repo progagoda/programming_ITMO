@@ -9,10 +9,15 @@ import java.io.Serializable;
 public class ClearCommand implements Command, Serializable {
     private final String key = "clear";
     private final String helpText = "очистить коллекцию";
+    private  final String login;
+
+    public ClearCommand(String login) {
+        this.login = login;
+    }
 
     @Override
     public String execute(CommandReceiver commandReceiver) {
-        return commandReceiver.clear();
+        return commandReceiver.clear(login);
     }
 
     @Override

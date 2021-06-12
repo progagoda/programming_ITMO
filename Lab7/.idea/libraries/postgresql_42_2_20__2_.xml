@@ -4,6 +4,8 @@
       <root url="jar://$PROJECT_DIR$/Server/lib/postgresql-42.2.20.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.ideaLibSources/postgresql-42.2.20-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

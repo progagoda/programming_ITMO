@@ -27,8 +27,9 @@ public class CommandReader {
      * Метод для парсинга и запуска команды
      *
      * @param input аргументы команды
+     * @param login
      */
-    public void parseCommand(String[] input, DatagramSocket socket, SocketAddress address, Scanner scanner) {
+    public void parseCommand(String[] input, DatagramSocket socket, SocketAddress address, Scanner scanner,String login) {
         String commandKey = input[0];
         String[] ar = Arrays.copyOfRange(input, 1, input.length);
         switch (commandKey) {
@@ -41,7 +42,7 @@ public class CommandReader {
                 receive(socket);
                 break;
             case "clear":
-                send(new ClearCommand(), socket, address);
+                send(new ClearCommand(login), socket, address);
                 receive(socket);
                 break;
             case "print_unique_semester":
@@ -53,8 +54,8 @@ public class CommandReader {
                     //Проверяем на execute_script
                     try {
                         //Проверяем на execute_script
-                        if (isExecuteScript) send(new UpdateCommand(Long.parseLong(argument), addGroup()), socket, address);
-                        else send(new UpdateCommand(Long.parseLong(ar[0]), add(ar)), socket, address);
+                        if (isExecuteScript) send(new UpdateCommand(Long.parseLong(argument), addGroup(login),login), socket, address);
+                        else send(new UpdateCommand(Long.parseLong(ar[0]), add(ar,login),login), socket, address);
                         receive(socket);
                     } catch (ArrayIndexOutOfBoundsException e) {
                         System.out.println("Недостаточно аргументов");
@@ -73,15 +74,14 @@ public class CommandReader {
                 receive(socket);
                 break;
             case "add":
-                if (isExecuteScript) {send(new AddCommand(addGroup()), socket, address);}
-                  else{
-                    send(new AddCommand(add(ar)), socket, address);}
-                  receive(socket);
-                  break;
-            case "addmin":
-                send(new AddMinCommand(add(ar)), socket, address);
+                if (isExecuteScript) {send(new AddCommand(addGroup(login),login), socket, address);}
+                else{
+                    send(new AddCommand(add(ar, login),login), socket, address);}
                 receive(socket);
                 break;
+            case "addmin":
+                send(new AddMinCommand(add(ar,login)), socket, address);
+                receive(socket);
             case "min_by_id":
                 send(new MinByIdCommand(), socket, address);
                 receive(socket);
@@ -90,7 +90,9 @@ public class CommandReader {
                 isExecuteScript = true;
                 ArrayList<String> script = new ArrayList<>();
                 //script.clear();
-                script=readScript(ar[0]);
+                try{
+                    script=readScript(ar[0]);
+
                 scriptPaths.add(ar[0]);
                 if (checkRecurssionInScript(script, scriptPaths)) {
                     System.out.println("Рекурсия");
@@ -121,7 +123,7 @@ public class CommandReader {
                                     i += 12;
                                 }
                             }
-                            parseCommand(in, socket, address, scanner); //Отправляем команду
+                            parseCommand(in, socket, address, scanner, login); //Отправляем команду
                         }
                         listOfCommands.clear();
                         isExecuteScript=false;
@@ -129,6 +131,9 @@ public class CommandReader {
                     } catch (FileNotFoundException e) {
                         Messages.normalMessageOutput("Файл не найден", MessageColor.ANSI_RED);
                     }
+                }}
+                catch (ArrayIndexOutOfBoundsException e){
+                    Messages.normalMessageOutput("Введите название файла скрипта", MessageColor.ANSI_RED);
                 }
                 script.clear();
                   break;
@@ -145,12 +150,12 @@ public class CommandReader {
                 receive(socket);
                 break;
             case "remove_greatest":
-                send(new RemoveGreatestCommand(add(ar)), socket, address);
+                send(new RemoveGreatestCommand(add(ar,login),login), socket, address);
                 receive(socket);
                 break;
             case "remove_id" :
                 try {
-                    send(new RemoveIdCommand(Long.parseLong(ar[0])), socket, address);
+                    send(new RemoveIdCommand(Long.parseLong(ar[0]),login), socket, address);
                     receive(socket);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println("Недостаточно аргументов");
@@ -158,7 +163,8 @@ public class CommandReader {
                     System.out.println("Неверный формат ключа");
                 }
                 break;
-
+            default:
+                if (!commandKey.equals("")) System.out.println("Неверная команда");
     }
 
 }
@@ -191,10 +197,14 @@ public class CommandReader {
             group = new StudyGroupMaker().makeGroup(scanner);
             return group;
     }
-    public StudyGroup add(String ar[]){
-        Scanner scanner = new Scanner(System.in);
+    public StudyGroup add(String ar[],String  login){
+        try{Scanner scanner = new Scanner(System.in);
         StudyGroup group = new StudyGroupMaker().makeGroup(scanner);
-        return  group;
+        group.setCreator(login);
+        return  group;}
+        catch (NullPointerException e){
+            return null;
+        }
     }
     public void checkFeedback(DatagramSocket socket){byte[] message = new byte[16384]; //Массив байт, который мы получаем
         try {
@@ -232,6 +242,9 @@ public class CommandReader {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+        catch (ClassCastException e ){
+        }
+
     }
     //TODO Проверить корректность работы
     public boolean checkServerUser(ServerUser serverUser, DatagramSocket socket, SocketAddress address){
@@ -258,7 +271,10 @@ public class CommandReader {
             ByteArrayInputStream bis = new ByteArrayInputStream(message);
             ObjectInput in = new ObjectInputStream(bis);
             return (Boolean) in.readObject();
-        } catch (SocketTimeoutException e) {
+        }
+        catch (ClassCastException e ){
+        }
+        catch (SocketTimeoutException e) {
             System.out.println("Время ожидания превышено");
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -308,7 +324,7 @@ public class CommandReader {
      * @return Изначальный список команд
      */
     private ArrayList<String> readScript(String path) {
-//        path= "E:\\файлы итмо лабы\\программирование\\programming_ITMO\\Lab6\\Client\\script";
+        path= "M:\\лабы прога\\Lab7\\Client\\script";
         File file = new File(path);
         ArrayList<String> listOfCommands = new ArrayList<>();
         try {
@@ -325,11 +341,11 @@ public class CommandReader {
      * Метод для получения экземпляра класса StudyGroup
      * @return Group
      */
-    public StudyGroup addGroup() {
+    public StudyGroup addGroup(String login) {
         Scanner scanner = new Scanner(System.in);
         String line = "";
         StudyGroup group = new StudyGroup();
-
+        group.setCreator(login);
         //Ввод product если execute_script
         if (isExecuteScript) {
             group.setName(fields[0]);
@@ -360,22 +376,22 @@ public class CommandReader {
             }
             switch (fields[6]) {
                 case ("BLACK"):
-                    admin.setEyeColor(Color.BLACK);
+                    admin.setHairColor(Color.BLACK);
                     break;
                 case ("BLUE"):
-                    admin.setEyeColor(Color.BLUE);
+                    admin.setHairColor(Color.BLUE);
                     break;
                 case ("BROWN"):
-                    admin.setEyeColor(Color.BROWN);
+                    admin.setHairColor(Color.BROWN);
                     break;
                 case ("GREEN"):
-                    admin.setEyeColor(Color.GREEN);
+                    admin.setHairColor(Color.GREEN);
                     break;
                 case ("ORANGE"):
-                    admin.setEyeColor(Color.ORANGE);
+                    admin.setHairColor(Color.ORANGE);
                     break;
                 case ("WHITE"):
-                    admin.setEyeColor(Color.WHITE);
+                    admin.setHairColor(Color.WHITE);
                     break;
             }
             switch (fields[7]) {

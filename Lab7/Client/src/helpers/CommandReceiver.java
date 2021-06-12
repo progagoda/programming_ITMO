@@ -14,7 +14,7 @@ public class CommandReceiver {
     public String filterAdmin(String admin){return  null; }
     public String minById(){return null;}
     public String removeKey(Long id) {return null;}
-    public String clear() {return null;}
+    public String clear(String login) {return null;}
     public String exit() {return null;}
     public String printSemester(){return null;}
 //    public String removeLower(Product product) {return null;}
@@ -22,6 +22,6 @@ public class CommandReceiver {
 //    public String removeLowerKey(int id) {return null;}
 //    public String removeAllByOwner(Person owner) {return null;}
       public String printHead() {return null;}
-      public  String removeGreatest(StudyGroup group) {return  null;}
+      public  String removeGreatest(StudyGroup group,String login) {return  null;}
 //    public String printDescending() {return null;}
 }

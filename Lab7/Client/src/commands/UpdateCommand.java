@@ -13,11 +13,13 @@ public class UpdateCommand implements Command, Serializable {
     private final String helpText = "обновить значение элемента коллекции, id которого равен заданному";
     private final Long id;
     private final StudyGroup group;
+    private  final String login;
     private static final long serialVersionUID = 6529685098267757690L;
 
-    public UpdateCommand(Long id, StudyGroup group) {
+    public UpdateCommand(Long id, StudyGroup group,String login) {
         this.id = id;
         this.group = group;
+        this.login=login;
     }
 
     @Override

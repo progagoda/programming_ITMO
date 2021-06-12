@@ -1,6 +1,5 @@
 package commands;
 
-import general.Person;
 import helpers.CommandReceiver;
 
 import java.io.Serializable;

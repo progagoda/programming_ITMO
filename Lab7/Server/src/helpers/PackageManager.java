@@ -1,4 +1,4 @@
-package utill;
+package helpers;
 
 import commands.Command;
 
@@ -12,7 +12,7 @@ public class PackageManager {
     DatagramChannel channel;
     Container container;
 
-    public PackageManager(int port){
+    public PackageManager(int port) {
         connector = new Connector();
         channel = connector.connect(port);
 
@@ -64,30 +64,30 @@ public class PackageManager {
         return container;
     }
 
-    public Container getPackage(){
-        this.container = receive(channel,connector.getSocketAddress());
+    public Container getPackage() {
+        this.container = receive(channel, connector.getSocketAddress());
         return this.container;
     }
 
-    public boolean isCommand(Container container){
-        try{
+    public boolean isCommand(Container container) {
+        try {
             Command command = (Command) container.getObject();
-        } catch (ClassCastException | NullPointerException e){
+        } catch (ClassCastException | NullPointerException e) {
             return false;
         }
         return true;
     }
 
-    public boolean isServerUser(Container container){
-        try{
+    public boolean isServerUser(Container container) {
+        try {
             ServerUser serverUser = (ServerUser) container.getObject();
-        } catch (ClassCastException | NullPointerException e){
+        } catch (ClassCastException | NullPointerException e) {
             return false;
         }
         return true;
     }
 
-    public String getLogin(Container container){
+    public String getLogin(Container container) {
         return (String) container.getObject();
     }
 

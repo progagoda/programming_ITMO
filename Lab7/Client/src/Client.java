@@ -8,6 +8,7 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.util.NoSuchElementException;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Client {
@@ -30,9 +31,9 @@ public class Client {
             SocketAddress socketAddress = new InetSocketAddress(InetAddress.getByName("localhost"), port);
             DatagramSocket clientSocket = new DatagramSocket();
             System.out.println("Начало работы программы:");
-//                CommandReader commandReader1 = new CommandReader();
-//                commandReader1.send(new CheckServer(), clientSocket, socketAddress);
-//                commandReader1.checkFeedback(clientSocket);
+                CommandReader commandReader1 = new CommandReader();
+                commandReader1.send(new CheckServer(), clientSocket, socketAddress);
+                commandReader1.checkFeedback(clientSocket);
             ServerUser serverUser = new ServerUser();
             CommandReader commandReader = new CommandReader();
             String answer;
@@ -78,7 +79,7 @@ public class Client {
                             //Регистрация
                             System.out.println("Запущен процесс регистрации ...");
                             serverUser.setAuthorized(false);
-
+                            serverUser.setId(Math.abs(new Random().nextInt()));
                             try {
                                 System.out.print("Введите логин: ");
                                 serverUser.setLogin(consoleScanner.nextLine());
@@ -96,10 +97,8 @@ public class Client {
                                 System.out.println("Пустой логин - плохо!");
                                 continue;
                             }
-
                             commandReader.registerServerUser(serverUser, clientSocket, socketAddress);
-
-                            System.out.println("Пользователь " + serverUser.getLogin() + " успешно зарегистрирован!");
+                            commandReader.receive(clientSocket);
                             continue;
                         } else if (answer.equals("n")){
                             continue;
@@ -117,7 +116,7 @@ public class Client {
                     if (input.isEmpty()) {
                         continue;
                     }
-                    commandReader.parseCommand(inputCommand.split(" "), clientSocket, socketAddress, consoleScanner);
+                    commandReader.parseCommand(inputCommand.split(" "), clientSocket, socketAddress, consoleScanner,serverUser.getLogin());
                 } catch (NoSuchElementException e) {
                     System.out.println("Завершение программы...");
                     System.exit(1);

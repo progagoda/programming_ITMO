@@ -11,13 +11,15 @@ public class RemoveIdCommand implements Command, Serializable {
     private final String key = "remove_key";
     private final String helpText = "удалить элемент из коллекции по его ключу";
     private final Long id;
+    private final String login;
     private static final long serialVersionUID = 6529685098267757693L;
-    public RemoveIdCommand(Long id) {
+    public RemoveIdCommand(Long id,String login) {
         this.id = id;
+        this.login= login;
     }
     @Override
     public String execute(CommandReceiver commandReceiver) {
-        return commandReceiver.removeKey(id);
+        return commandReceiver.removeKey(id,login);
     }
 
     @Override

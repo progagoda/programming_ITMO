@@ -12,7 +12,7 @@ public class ShowCommand implements Serializable,Command {
     private final String helpText = "вывести в стандартный поток вывода все элементы коллекции в строковом представлении";
 
     @Override
-    public String execute(CommandReceiver commandReceiver) {
+    public String execute(CommandReceiver commandReceiver) throws InterruptedException {
         return commandReceiver.show();
     }
 
